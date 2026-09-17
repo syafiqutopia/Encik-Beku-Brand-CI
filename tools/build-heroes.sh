@@ -27,6 +27,10 @@ sips -Z 1024 -s format png \
 sips -Z 1920 -s format jpeg -s formatOptions 80 \
      _source/encik-beku-about-hero.png --out "$OUT/about-hero.jpg" >/dev/null
 
+# What we do banner.
+sips -Z 1920 -s format jpeg -s formatOptions 80 \
+     _source/encik-beku-services-hero.png --out "$OUT/services-hero.jpg" >/dev/null
+
 printf 'home hero layers:\n'
 for f in hero-sky.jpg hero-crew.avif hero-crew.png; do
   printf '  %-16s %s\n' "$f" "$(du -h "$OUT/$f" | cut -f1)"
@@ -35,3 +39,5 @@ printf '  %-16s %s  (what the page actually downloads)\n' "combined" \
   "$(du -ch "$OUT"/hero-sky.jpg "$OUT"/hero-crew.avif | tail -1 | cut -f1)"
 printf 'who we are banner:\n'
 printf '  %-16s %s\n' "about-hero.jpg" "$(du -h "$OUT/about-hero.jpg" | cut -f1)"
+printf 'what we do banner:\n'
+printf '  %-16s %s\n' "services-hero.jpg" "$(du -h "$OUT/services-hero.jpg" | cut -f1)"

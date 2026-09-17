@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "locked": "2026-08-19",
   "owner": "Encik Beku Aircond Sdn Bhd (1561739-D)",
-  "fileCount": 184,
-  "totalBytes": 64849643,
+  "fileCount": 186,
+  "totalBytes": 66932413,
   "entries": [
     {
       "path": ".gitattributes",
@@ -197,6 +197,11 @@
       "path": "_source/encik-beku-home-hero.png",
       "bytes": 2769000,
       "sha256": "adcf5a68389c5b070ccb06279a3fa0e256ad3872ea599d0e8e57feabd6638313"
+    },
+    {
+      "path": "_source/encik-beku-services-hero.png",
+      "bytes": 1963512,
+      "sha256": "6dd73c318898c9ba346324bd8837b6ab87edc5f66a7453ea1cdeed1f9da6a728"
     },
     {
       "path": "code/README.md",
@@ -595,8 +600,8 @@
     },
     {
       "path": "tools/build-heroes.sh",
-      "bytes": 1683,
-      "sha256": "b54496ce63927a748d231fa0efbc7ae4ecc58cafc3a45962988ac8cf1e9ad227"
+      "bytes": 1957,
+      "sha256": "6876de1d29af72bdd16cb83e3ff3bc1edb85f5142123832421d8adc7188f983c"
     },
     {
       "path": "tools/build-logos.sh",
@@ -691,7 +696,7 @@
     {
       "path": "website/about.html",
       "bytes": 101034,
-      "sha256": "2125191ca9a233cba0b15976bb2de9ae91f16bf8f2c6729d02a1045e6618e6a4"
+      "sha256": "8ce800dad58f64fd7d3a5a4a7854b9ede9a32299a7b91c8b05def3a37229ced1"
     },
     {
       "path": "website/anim.js",
@@ -701,7 +706,7 @@
     {
       "path": "website/brand.html",
       "bytes": 28313,
-      "sha256": "cae34058abae571e6e8f5ca9c3026a09a4a77010f86f91aa1f0d4e6aa9648d11"
+      "sha256": "1c296dddd1db751da8f6c0c75924dc7e371df88bce557b24c1fb67544b419a9c"
     },
     {
       "path": "website/downloads/Encik-Beku-Brand-Guidelines-2026-v1.0.pdf",
@@ -904,9 +909,14 @@
       "sha256": "0d436ea625f4b639706a9883bdf1133acd2f15739612d9b5d446051336024210"
     },
     {
+      "path": "website/img/services-hero.jpg",
+      "bytes": 131657,
+      "sha256": "f184ae24b23fff5cf2b6920fbac325e8a106e67bf04bd1fe0daf1eb1aa260fa5"
+    },
+    {
       "path": "website/index.html",
       "bytes": 3785,
-      "sha256": "998a4b3dc7d8401516f85a5d94899032688b588c8882d8a0dcc6c95ba1bd34b1"
+      "sha256": "77857a0cb234bd65442ed53450510587959b2b81629f89700818bea0c61dc287"
     },
     {
       "path": "website/locations.js",
@@ -915,13 +925,13 @@
     },
     {
       "path": "website/services.html",
-      "bytes": 27333,
-      "sha256": "fb16254b35f9961b9b8b5b643cd5d99325ed6f319d926ff955957e5ded75527d"
+      "bytes": 33168,
+      "sha256": "84e2954b116b8b65609fd67b9ea41a1c3fb6c2c786be7a23a86a5575080c31f8"
     },
     {
       "path": "website/site-preview.html",
-      "bytes": 2666141,
-      "sha256": "46e289c277e48c006eba183d61385f906d177d7c504d280572b2a138f31ecdd7"
+      "bytes": 2647633,
+      "sha256": "59b66b0690b68c80f0de155d4f2c812bebb7ad3e44f676ab008e3401338066a3"
     },
     {
       "path": "website/site.css",

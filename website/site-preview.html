@@ -1693,24 +1693,84 @@ table { max-width: none; }
   @media (max-width: 940px) { .brandnav-bar { position: static; } section[id] { scroll-margin-top: 1.25rem; } }
 
 
-  .catnav-bar {
-    position: sticky; top: 4.5rem; z-index: 40;
-    background: var(--eb-bg-1); border-bottom: 1px solid var(--eb-border-1);
+  .sv-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .sv-body [hidden] { display: none !important; }
+  .sv-ico { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  .sv-hero img { display: block; width: 100%; height: clamp(11rem, 22vw, 20rem); object-fit: cover; object-position: 50% 16%; }
+
+  .sv-body { padding: var(--eb-space-2) 0 var(--eb-space-9); }
+
+  .sv-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--eb-space-2); }
+  .sv-tabs button {
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    min-height: 3.1rem; padding: 0 1rem; border: 0; border-radius: var(--eb-radius-sm);
+    background: var(--eb-bg-tint); color: var(--eb-fg-1);
+    font: inherit; font-size: var(--eb-text-sm); cursor: pointer; white-space: nowrap;
   }
-  .catnav { display: flex; gap: var(--eb-space-2); flex-wrap: wrap; padding: var(--eb-space-3) 0; overflow-x: auto; }
-  .catnav a {
-    font-size: var(--eb-text-sm); font-weight: var(--eb-fw-bold);
-    text-decoration: none; color: var(--eb-fg-2);
-    padding: 0.375rem 0.75rem; border-radius: var(--eb-radius-pill);
-    border: 1px solid var(--eb-border-1); white-space: nowrap;
+  .sv-tabs button[aria-pressed="true"] {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--eb-blue-400) 35%, var(--eb-bg-brand)), var(--eb-bg-brand));
+    color: var(--eb-fg-on-brand); box-shadow: var(--eb-shadow-brand);
   }
-  .catnav a:hover { color: var(--eb-fg-brand); background: var(--eb-bg-tint); border-color: transparent; }
-  .svcblock { padding: var(--eb-space-7) 0; border-bottom: 1px solid var(--eb-border-1); }
-  .svcblock:last-child { border-bottom: 0; }
-  .brands { display: flex; gap: var(--eb-space-2); flex-wrap: wrap; margin-top: var(--eb-space-2); }
-  .subhead { margin-top: var(--eb-space-6); margin-bottom: var(--eb-space-3); }
-  .svcblock[id] { scroll-margin-top: 8.75rem; }
-  @media (max-width: 940px) { .catnav-bar { position: static; } .svcblock[id] { scroll-margin-top: 1.25rem; } }
+  .sv-tabs .sv-ico { width: 1.25rem; height: 1.25rem; }
+
+  .sv-filters { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: var(--eb-space-4); margin-top: var(--eb-space-3); }
+  .sv-search, .sv-type { position: relative; }
+  .sv-search input, .sv-type select {
+    appearance: none; width: 100%; height: 2.9rem;
+    border: 1px solid var(--eb-border-1); border-radius: var(--eb-radius-sm);
+    background: var(--eb-bg-1); color: var(--eb-fg-1); font: inherit; font-size: var(--eb-text-sm);
+  }
+  .sv-search input { padding: 0 1rem 0 3rem; font-weight: var(--eb-fw-regular); }
+  .sv-search input::placeholder { color: var(--eb-fg-3); }
+  .sv-type select { padding: 0 3rem 0 1.25rem; cursor: pointer; }
+  .sv-search .sv-ico, .sv-type .sv-ico { position: absolute; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--eb-fg-1); }
+  .sv-search .sv-ico { left: 1rem; width: 1.25rem; height: 1.25rem; }
+  .sv-type .sv-ico { right: 1rem; width: 1.1rem; height: 1.1rem; stroke-width: 2.2; }
+
+  .sv-table-wrap { margin-top: var(--eb-space-3); border: 1px solid var(--eb-border-1); border-radius: var(--eb-radius-md); overflow: hidden; }
+  .sv-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: var(--eb-text-sm); line-height: 1.35; }
+  .sv-table thead th {
+    background: var(--eb-bg-tint); color: var(--eb-fg-brand); font-weight: var(--eb-fw-bold);
+    font-size: var(--eb-text-sm); letter-spacing: normal; text-transform: none; white-space: normal;
+    text-align: left; padding: 0.8rem 1.4rem;
+  }
+  .sv-table tbody tr { background: none; }
+  .sv-table tbody td, .sv-table tbody th { border-bottom: 0; white-space: normal; }
+  .sv-table thead th:nth-child(1) { width: 23.5%; }
+  .sv-table thead th:nth-child(2) { width: 28%; }
+  .sv-table tbody { border-top: 1px solid var(--eb-border-1); }
+  .sv-table th[scope="rowgroup"] {
+    position: relative; padding: 0.6rem 1.4rem 0.6rem 4.9rem; text-align: left; vertical-align: middle;
+    background: color-mix(in srgb, var(--eb-bg-tint) 45%, var(--eb-bg-1));
+    color: var(--eb-fg-brand); font-weight: var(--eb-fw-bold);
+  }
+  .sv-table th[scope="rowgroup"] .sv-ico { position: absolute; left: 1.4rem; top: 50%; width: 2.1rem; height: 2.1rem; transform: translateY(-50%); }
+  .sv-table td {
+    padding: 0.3rem 1.4rem; vertical-align: top; color: var(--eb-fg-1); font-weight: var(--eb-fw-regular);
+    border-left: 1px solid var(--eb-border-1);
+  }
+  .sv-table tr + tr td { border-top: 1px solid color-mix(in srgb, var(--eb-border-1) 55%, var(--eb-bg-1)); }
+
+  .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
+  .sv-note { margin-top: var(--eb-space-3); font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
+
+  @media (max-width: 760px) {
+    .sv-tabs {
+      grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto;
+      margin-inline: calc(var(--eb-space-6) / -2); padding-inline: calc(var(--eb-space-6) / 2);
+    }
+    .sv-filters { grid-template-columns: 1fr; gap: var(--eb-space-2); }
+    .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
+    .sv-table th[scope="rowgroup"] { padding: 0.8rem 1rem 0.8rem 3.6rem; }
+    .sv-table th[scope="rowgroup"] .sv-ico { left: 1rem; width: 1.7rem; height: 1.7rem; }
+    .sv-table td { border-left: 0; padding: 0 1rem; }
+    .sv-table td:nth-last-child(2) { padding-top: 0.55rem; font-weight: var(--eb-fw-medium); }
+    .sv-table td:last-child { padding-bottom: 0.55rem; color: var(--eb-fg-2); }
+    .sv-table tr + tr td { border-top: 0; }
+    .sv-table tr + tr { border-top: 1px solid color-mix(in srgb, var(--eb-border-1) 55%, var(--eb-bg-1)); }
+  }
 
 
 /* &#9472;&#9472; preview shell &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; */
@@ -1747,7 +1807,36 @@ table { max-width: none; }
 <g id="i-check" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L19 6"/></g>
 <g id="i-x" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></g>
 <g id="i-ext" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></g>
-<g id="i-cal" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></g>
+<g id="sv-all"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></g>
+<g id="sv-aircond"><path d="M12 2.5v19M3.77 7.25l16.46 9.5M3.77 16.75l16.46-9.5M9.53 4.53 12 7l2.47-2.47M9.53 19.47 12 17l2.47 2.47M6.77 6.12l.9 3.38-3.38.9M17.23 6.12l-.9 3.38 3.38.9M6.77 17.88l.9-3.38-3.38-.9M17.23 17.88l-.9-3.38 3.38-.9"/></g>
+<g id="sv-electrical"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z" fill="currentColor"/></g>
+<g id="sv-cctv"><path d="M3 8.5 16 5l1.6 6-13 3.5zM16 5l3-.8 1.6 6-3 .8M11 12.8l1 4.7H4.5M4.5 15v5"/></g>
+<g id="sv-renovation"><path d="M3.5 11 12 4l8.5 7M5.5 9.5V20h13V9.5M10 20v-5h4v5"/></g>
+<g id="sv-others"><circle cx="5.5" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="18.5" cy="12" r="1.9" fill="currentColor" stroke="none"/></g>
+<g id="sv-search"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g>
+<g id="sv-down"><path d="m6 9 6 6 6-6"/></g>
+<g id="sv-wall"><rect x="2.5" y="6" width="19" height="11" rx="2.5"/><path d="M5.5 13.5h13M5.5 9.5h2"/></g>
+<g id="sv-cassette"><path d="M12 5 21.5 10 12 15 2.5 10zM12 8l4 2-4 2-4-2zM2.5 10v2.5l9.5 5 9.5-5V10"/></g>
+<g id="sv-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></g>
+<g id="sv-truck"><path d="M13.5 16.5V6.5h-11v10h2.2M8.3 16.5h6.9M18.8 16.5h1.7V13l-3-3.5h-4"/><circle cx="6.5" cy="16.5" r="1.8"/><circle cx="17" cy="16.5" r="1.8"/></g>
+<g id="sv-gas"><rect x="6.5" y="8.5" width="11" height="12.5" rx="3"/><path d="M10 8.5v-3h4v3M8.5 3.5h7M9.5 13h5v4h-5z"/></g>
+<g id="sv-gear"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3.5V6M12 18v2.5M3.5 12H6M18 12h2.5M6 6l1.76 1.76M16.24 16.24 18 18M6 18l1.76-1.76M16.24 7.76 18 6"/></g>
+<g id="sv-swap"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></g>
+<g id="sv-pipe"><path d="M3 6h9a6 6 0 0 1 6 6v9M3 11h9a1 1 0 0 1 1 1v9M6.5 5v7M12 17.5h7"/></g>
+<g id="sv-remote"><rect x="7.5" y="2.5" width="9" height="19" rx="2.5"/><rect x="10" y="5.5" width="4" height="3" rx=".6"/><path d="M10.5 12h.01M13.5 12h.01M10.5 15h.01M13.5 15h.01M10.5 18h.01M13.5 18h.01"/></g>
+<g id="sv-switch"><rect x="4.5" y="3.5" width="15" height="17" rx="2.5"/><rect x="9.5" y="7.5" width="5" height="9" rx="1.2"/><path d="M9.5 12h5"/></g>
+<g id="sv-db"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M3.5 8.5h17M7 12v4M10.3 12v4M13.7 12v4M17 12v4"/></g>
+<g id="sv-breaker"><rect x="7" y="2.5" width="10" height="19" rx="1.5"/><rect x="10" y="8" width="4" height="7" rx="1"/><path d="M12 8v3.5M9.5 5h5M9.5 18.5h5"/></g>
+<g id="sv-cable"><path d="M9 3v4M15 3v4M6.5 7h11v3a5.5 5.5 0 0 1-11 0zM12 15.5v3a2.5 2.5 0 0 0 2.5 2.5H20"/></g>
+<g id="sv-meter"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M7.5 13a4.5 4.5 0 0 1 9 0M12 13l2-2.5M8 17h8"/></g>
+<g id="sv-heater"><rect x="6" y="2.5" width="12" height="15" rx="3"/><path d="M9.5 17.5V21M14.5 17.5V21M12 6.5c1.5 1.8 2.2 2.9 2.2 4a2.2 2.2 0 0 1-4.4 0c0-1.1.7-2.2 2.2-4z"/></g>
+<g id="sv-fan"><circle cx="12" cy="12" r="1.8"/><path d="M12 10.2C11 6 12.5 3 15.5 3.5c2.5.4 2 3.8-2 6.2M13.8 12.3c4.2-1 7.2.5 6.7 3.5-.4 2.5-3.8 2-6.2-2M10.4 13c-2.8 3.3-6.1 3.8-7.1 1-.9-2.4 2.3-3.7 6.6-2.4"/></g>
+<g id="sv-hook"><path d="M4 3.5h16M12 3.5V12a3.5 3.5 0 1 1-3.5 3.5"/></g>
+<g id="sv-bulb"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></g>
+<g id="sv-tv"><rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M8 20.5h8M12 16.5v4"/></g>
+<g id="sv-cabinet"><path d="M2.5 6.5h19"/><rect x="4" y="6.5" width="16" height="14" rx="1"/><path d="M12 6.5v14M10 11v2.5M14 11v2.5"/></g>
+<g id="sv-roller"><rect x="3" y="3.5" width="15" height="5.5" rx="1.5"/><path d="M18 6.25h2.5v5.25H11V15M9.5 15h3v6h-3z"/></g>
+<g id="sv-drop"><path d="M12 3c3.6 4.3 6 7.6 6 10.5a6 6 0 0 1-12 0C6 10.6 8.4 7.3 12 3z"/></g>
 </defs></svg>
 
 <header class="site">
@@ -2670,7 +2759,7 @@ table { max-width: none; }
         <h4>Design tokens</h4>
         <p class="muted small">The whole palette, type scale, spacing, radii and shadows as ready-to-use code &#8212; the same values this site is built from.</p>
         <div class="dl-links" style="margin-top:var(--eb-space-3)">
-          <a href="../tokens/tokens.css?v=mtwgk8ze" download>tokens.css</a>
+          <a href="../tokens/tokens.css?v=mu4zmonw" download>tokens.css</a>
           <a href="../code/tokens/tokens.ts" download>tokens.ts</a>
           <a href="../code/tokens/tailwind.preset.ts" download>tailwind.preset.ts</a>
         </div>
@@ -2713,374 +2802,231 @@ table { max-width: none; }
 </section>
 <section class="panel" id="panel-services" hidden>
 
-<section class="pagehead">
-  <div class="wrap">
-    <div class="eyebrow">What we do</div>
-    <h1 data-anim="lines">Everything we do, in one place</h1>
-    <p class="lede">Our air-conditioning, technical, property and renovation services, with the scope of each and current pricing where it is published.</p>
-  </div>
-</section>
+<h1 class="sv-vh">What we do</h1>
 
-<div class="catnav-bar">
-  <nav class="wrap catnav" aria-label="Service categories">
-    <a href="#aircon">Air-conditioning</a>
-    <a href="#electrical">Electrical &amp; security</a>
-    <a href="#water">Water &amp; property protection</a>
-    <a href="#interior">Interior &amp; renovation</a>
-    <a href="#flooring">Flooring &amp; exterior</a>
-  </nav>
+<div class="sv-hero">
+  <img src="img/services-hero.jpg" alt="An Encik Beku technician servicing a wall-mounted aircond" width="1920" height="1059">
 </div>
 
-<section class="section tight">
-  <div class="wrap">
-    <span class="stamp"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cal"/></svg>Pricing effective 20 August 2026</span>
-    <p class="note" style="margin-top:var(--eb-space-4)">Prices below are published for guidance and are not a quotation. Final pricing depends on site conditions, access and materials. Where a service requires inspection before a firm price can be given, that is stated in the service scope.</p>
-  </div>
-</section>
-
-<div class="wrap">
-
-<!-- &#9552;&#9552; 1 &#183; AIR-CONDITIONING &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
-<section class="svcblock" id="aircon">
-  <div class="catband">
-    <img src="img/services/aircond-service.jpg" alt="A technician opening a ceiling cassette air conditioner for servicing" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Air-conditioning</h2>
-    <p>Supply and installation, servicing, repair and preventive maintenance for wall-mounted and cassette units, in homes and commercial premises.</p>
-  </div>
+<div class="wrap sv-body">
+  <div class="sv-tabs" role="group" aria-label="Service category">
+    <button type="button" data-tab="all" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-all"/></svg>All Services</button>
+    <button type="button" data-tab="aircond" aria-pressed="true"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-aircond"/></svg>Aircond</button>
+    <button type="button" data-tab="electrical" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-electrical"/></svg>Electrical</button>
+    <button type="button" data-tab="cctv" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV</button>
+    <button type="button" data-tab="renovation" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-renovation"/></svg>Renovation</button>
+    <button type="button" data-tab="others" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-others"/></svg>Others</button>
   </div>
 
-  <div class="brands">
-    <span class="chip tint">Daikin</span><span class="chip tint">Panasonic</span>
-    <span class="chip tint">Midea</span><span class="chip tint">AUX</span>
-  </div>
-
-  <h3 class="subhead">Supply &amp; installation &#8212; wall mounted</h3>
-  <div class="svc-head">
-    <span class="from-label">Inverter from</span><span class="from-price">RM1,500</span>
-    <span class="from-label">Non-inverter from</span><span class="from-price">RM1,300</span>
-  </div>
-
-  <div class="tablewrap">
-    <table>
-      <caption>Supply + install &#183; inverter</caption>
-      <thead><tr><th>Capacity</th><th class="num">Daikin</th><th class="num">Panasonic</th><th class="num">Midea</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 1,900</td><td class="num">RM 1,900</td><td class="num">RM 1,500</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 2,300</td><td class="num">RM 2,300</td><td class="num">RM 1,800</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 3,400</td><td class="num">RM 3,500</td><td class="num">RM 2,500</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 3,700</td><td class="num">RM 3,600</td><td class="num">RM 3,100</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Supply + install &#183; non-inverter</caption>
-      <thead><tr><th>Capacity</th><th class="num">Daikin</th><th class="num">Panasonic</th><th class="num">Midea</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 1,600</td><td class="num">RM 1,500</td><td class="num">RM 1,300</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 2,000</td><td class="num">RM 2,000</td><td class="num">RM 1,700</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 2,800</td><td class="num">RM 2,800</td><td class="num">RM 2,400</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 3,200</td><td class="num">RM 3,100</td><td class="num">RM 2,900</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 3,700</td><td class="num">RM 3,900</td><td class="num">&#8212;</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Installation only &#8212; pasang wall aircond</caption>
-      <thead><tr><th>Capacity</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 320</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 360</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 390</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 440</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 480</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="grid g2" style="margin-top:var(--eb-space-4)">
-    <div class="card">
-      <h4>Included</h4>
-      <p class="muted small">Standard installation work &#183; 6 ft of copper piping &#183; drainage &#183; testing and commissioning.</p>
+  <div class="sv-filters">
+    <div class="sv-search">
+      <label class="sv-vh" for="sv-q">Search services</label>
+      <svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-search"/></svg>
+      <input id="sv-q" type="search" placeholder="Search service or product&#8230;" autocomplete="off">
     </div>
-    <div class="card">
-      <h4>Not included</h4>
-      <p class="muted small">Additional copper piping beyond 6 ft, charged per foot and rising with capacity (RM20/ft at 1.0 HP to RM34/ft at 3.0 HP) &#183; concealed piping &#183; additional wiring &#183; dismantling of old equipment &#183; difficult or high-rise access.</p>
+    <div class="sv-type">
+      <label class="sv-vh" for="sv-type">Service type</label>
+      <select id="sv-type"><option value="">All Service Types</option></select>
+      <svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-down"/></svg>
     </div>
   </div>
 
-  <h3 class="subhead">Supply &amp; installation &#8212; cassette ceiling</h3>
-  <div class="svc-head"><span class="from-label">From</span><span class="from-price">RM3,000</span></div>
-  <div class="tablewrap">
-    <table>
-      <caption>Supply + install &#183; ceiling cassette</caption>
-      <thead><tr><th>Capacity</th><th class="num">Daikin</th><th class="num">Panasonic</th><th class="num">Midea</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 3,700</td><td class="num">RM 3,600</td><td class="num">RM 3,000</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 3,900</td><td class="num">RM 3,800</td><td class="num">RM 3,400</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 4,500</td><td class="num">RM 4,400</td><td class="num">RM 4,100</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Installation only &#8212; pasang cassette ceiling</caption>
-      <thead><tr><th>Capacity</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 490</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 540</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 590</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 640</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 690</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3 class="subhead">Servicing &amp; maintenance</h3>
-  <div class="svc-head">
-    <span class="from-label">Aircond from</span><span class="from-price">RM99</span>
-    <span class="from-label">Cassette from</span><span class="from-price">RM200</span>
-  </div>
-  <p class="muted small">Per unit, for 4 units and above. Standard, chemical and overhaul cleaning are available for both wall-mounted and cassette units.</p>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Servis aircond &#183; wall mounted</caption>
-      <thead><tr><th>Service</th><th class="num">1&#8211;3 units</th><th class="num">4 units &amp; above</th></tr></thead>
-      <tbody>
-        <tr><th>Standard</th><td class="num">RM 130</td><td class="num">RM 99</td></tr>
-        <tr><th>Chemical</th><td class="num">RM 180</td><td class="num">RM 150</td></tr>
-        <tr><th>Overhaul</th><td class="num">RM 250</td><td class="num">RM 200</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Servis cassette</caption>
-      <thead><tr><th>Service</th><th class="num">1&#8211;3 units</th><th class="num">4 units &amp; above</th></tr></thead>
-      <tbody>
-        <tr><th>Standard</th><td class="num">RM 250</td><td class="num">RM 200</td></tr>
-        <tr><th>Chemical</th><td class="num">RM 370</td><td class="num">RM 320</td></tr>
-        <tr><th>Overhaul</th><td class="num">RM 480</td><td class="num">RM 400</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Relocation &#8212; tempat lama, pindah baru</caption>
-      <thead><tr><th>Item</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th>Buka aircond (removal)</th><td class="num">RM 100</td></tr>
-        <tr><th>Pasang aircond (refit)</th><td class="num">By horsepower</td></tr>
-        <tr><th>Overhaul service</th><td class="num">RM 250</td></tr>
-        <tr><th>Transport 5 km &#8211; 15 km</th><td class="num">RM 100</td></tr>
-        <tr><th>Transport 15 km &#8211; 30 km</th><td class="num">RM 150</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3 class="subhead">Repair &amp; troubleshooting</h3>
-  <div class="svc-head"><span class="from-label">Full diagnostic</span><span class="from-price">RM450</span></div>
-  <div class="tablewrap">
-    <table>
-      <caption>Repairs &amp; others</caption>
-      <thead><tr><th>Item</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th>Top-up gas 150 PSI <span class="hp">1&#8211;3 HP</span></th><td class="num">RM 120</td></tr>
-        <tr><th>Top-up gas 10 PSI <span class="hp">1&#8211;3 HP</span></th><td class="num">RM 20</td></tr>
-        <tr><th>Top-up gas 150 PSI <span class="hp">4&#8211;5 HP</span></th><td class="num">RM 600</td></tr>
-        <tr><th>Top-up gas 10 PSI <span class="hp">4&#8211;5 HP</span></th><td class="num">RM 40</td></tr>
-        <tr><th>Capacitor replacement (indoor / outdoor)</th><td class="num">RM 150</td></tr>
-        <tr><th>Check &amp; troubleshoot</th><td class="num">RM 450</td></tr>
-        <tr><th>Install new PC board (depends on brand)</th><td class="num">RM 400 &#8211; RM 1,200</td></tr>
-        <tr><th>Checking aircond</th><td class="num">RM 100 / unit</td></tr>
-        <tr><th>Site visit</th><td class="num">RM 100 / trip</td></tr>
-        <tr><th>Trade in (indoor + outdoor)</th><td class="num">RM 70 / set</td></tr>
-        <tr><th>Trade in (outdoor compressor)</th><td class="num">RM 30</td></tr>
-        <tr><th>Universal remote</th><td class="num">RM 50</td></tr>
-        <tr><th>Original remote</th><td class="num">RM 50 &#8211; RM 100</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Conceal work</caption>
-      <thead><tr><th>Wall type</th><th class="num">Under 18 ft</th><th class="num">Over 18 ft</th></tr></thead>
-      <tbody>
-        <tr><th>Brick &amp; cement wall</th><td class="num">RM 300</td><td class="num">RM 15 / ft</td></tr>
-        <tr><th>Concrete wall</th><td class="num">RM 500</td><td class="num">RM 20 / ft</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- &#9552;&#9552; 2 &#183; ELECTRICAL & SECURITY &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
-<section class="svcblock" id="electrical">
-  <div class="catband">
-    <img src="img/services/electrical-testing.jpg" alt="Testing a distribution board with a multimeter" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Electrical &amp; security</h2>
-    <p>Electrical work, wiring, distribution boards, fans and lighting, plus CCTV supply, installation and maintenance.</p>
-  </div>
-  </div>
-
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Switches &amp; plug points</h4><p class="muted small">New switch from a socket or direct from the DB box, aircond and heater points, extra wiring per foot.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM150</p></div>
-    <div class="card"><h4>DB box &amp; protection</h4><p class="muted small">1-, 2- and 3-row distribution boards, MCB, RCCB, ELCB and SPD in single or three phase.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM180</p></div>
-    <div class="card"><h4>Meters</h4><p class="muted small">Timer meter and split meter, supplied and installed.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM300</p></div>
-    <div class="card"><h4>Ceiling &amp; wall fans</h4><p class="muted small">Fan supply and installation, fan hooks in concrete or plaster ceiling, dismantling of old units.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM150</p></div>
-    <div class="card"><h4>Water heater &amp; exhaust</h4><p class="muted small">Water heater supply and installation, flexible hose, old unit removal, exhaust fan installation.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM150</p></div>
-    <div class="card"><h4>Lighting &amp; TV bracket</h4><p class="muted small">Surface LED lighting, and TV brackets up to 60 inch including adjustable arms.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM80</p></div>
-  </div>
-  <p class="note">We use <strong>SIRIM-certified components</strong> and MS IEC 60227 wire on every electrical installation. Item-by-item pricing is in the Service Catalogue.</p>
-
-  <h3 class="subhead">CCTV installation</h3>
-  <div class="svc-head">
-    <span class="from-label">Installation only from</span><span class="from-price">RM80</span>
-    <span class="chip ok">1 year warranty</span>
-  </div>
-  <p class="muted small">HIKVision and Dahua systems. All supply-and-install packages include a 1 TB hard disk and a 22-inch monitor.</p>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Supply + install &#183; 2-way audio</caption>
-      <thead><tr><th>System</th><th class="num">HIKVision</th><th class="num">Dahua</th></tr></thead>
-      <tbody>
-        <tr><th>4 channel</th><td class="num">RM 3,399</td><td class="num">RM 2,899</td></tr>
-        <tr><th>8 channel</th><td class="num">RM 4,399</td><td class="num">RM 3,599</td></tr>
-        <tr><th>16 channel</th><td class="num">RM 8,399</td><td class="num">RM 6,399</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Supply + install &#183; 1-way audio</caption>
-      <thead><tr><th>System</th><th class="num">HIKVision</th><th class="num">Dahua</th></tr></thead>
-      <tbody>
-        <tr><th>4 channel</th><td class="num">RM 2,899</td><td class="num">RM 2,599</td></tr>
-        <tr><th>8 channel</th><td class="num">RM 3,899</td><td class="num">RM 3,099</td></tr>
-        <tr><th>16 channel</th><td class="num">RM 7,899</td><td class="num">RM 5,899</td></tr>
-        <tr><th>Additional wiring</th><td class="num" colspan="2">RM 500 / 200 m</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Installation only</caption>
-      <thead><tr><th>Item</th><th class="num">1&#8211;3 units</th><th class="num">3 units &amp; above</th></tr></thead>
-      <tbody>
-        <tr><th>Pasang CCTV sahaja</th><td class="num">RM 100</td><td class="num">RM 80</td></tr>
-        <tr><th>Wiring to plug point</th><td class="num">RM 150</td><td class="num">RM 120</td></tr>
-        <tr><th>Wireless C300 / C302 &#8212; near (&lt;40 ft)</th><td class="num">RM 450</td><td class="num">RM 360</td></tr>
-        <tr><th>Wireless C300 / C302 &#8212; far (20&#8211;40 ft)</th><td class="num">RM 500</td><td class="num">RM 400</td></tr>
-        <tr><th>Wireless CW300 &#8212; near (&lt;40 ft)</th><td class="num">RM 600</td><td class="num">RM 480</td></tr>
-        <tr><th>Wireless CW300 &#8212; far (&gt;40 ft)</th><td class="num">RM 650</td><td class="num">RM 550</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="note">For warranty purposes, please keep the <strong>CCTV box and the SD card box</strong> &#8212; both are required for returns and warranty claims.</p>
-</section>
-
-<!-- &#9552;&#9552; 3 &#183; WATER & PROPERTY PROTECTION &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
-<section class="svcblock" id="water">
-  <div class="catband">
-    <img src="img/services/water-protection.jpg" alt="Sealing and finishing a wall surface by hand" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Water &amp; property protection</h2>
-    <p>Plumbing, water pumps and waterproofing &#8212; the work that keeps water where it belongs.</p>
-  </div>
-  </div>
-
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Install shower set</h4><p class="muted small">Shower sets and WC flush, supplied and fitted.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM300</p></div>
-    <div class="card"><h4>Unclog sink</h4><p class="muted small">Blocked sinks, traps and drainage lines cleared.</p><p class="from-price" style="font-size:var(--eb-text-lg)">RM300</p></div>
-    <div class="card"><h4>Install water pump</h4><p class="muted small">Water pump supply and installation, including tank connection.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM1,800</p></div>
-  </div>
-
-  <h3 class="subhead">Toilet waterproofing</h3>
-  <div class="tablewrap">
-    <table>
-      <caption>Toilet waterproofing &#8212; standard and premium</caption>
-      <thead><tr><th>Toilet size</th><th class="num">Standard</th><th class="num">Premium</th></tr></thead>
-      <tbody>
-        <tr><th>Small &#8212; under 60 sqft</th><td class="num">RM 950</td><td class="num">RM 1,500</td></tr>
-        <tr><th>Medium &#8212; 60&#8211;100 sqft</th><td class="num">RM 1,300</td><td class="num">RM 2,050</td></tr>
-        <tr><th>Large &#8212; over 100 sqft</th><td class="num">RM 15 / sqft</td><td class="num">RM 25 / sqft</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- &#9552;&#9552; 4 &#183; INTERIOR & RENOVATION &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
-<section class="svcblock" id="interior">
-  <div class="catband">
-    <img src="img/services/plaster-ceiling.jpg" alt="Skim-coating a ceiling with a trowel" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Interior &amp; renovation</h2>
-    <p>Cabinets, painting, ceilings, partitions and wall panels &#8212; improvement work for homes and commercial interiors.</p>
-  </div>
+  <div class="sv-table-wrap">
+  <table class="sv-table">
+    <caption class="sv-vh">Encik Beku services and details</caption>
+    <thead><tr><th scope="col">Service Category</th><th scope="col">Service / Product</th><th scope="col">Details</th></tr></thead>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-wall"/></svg>Wall Mounted</th><td>Wall-Mounted Aircond Installation</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP, 3.0 HP &#8226; Includes first 6 ft of piping</td></tr>
+      <tr><td>Supply + Install Aircond (Inverter)</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP &#8226; Daikin, Panasonic, Midea</td></tr>
+      <tr><td>Supply + Install Aircond (Non-Inverter)</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP, 3.0 HP &#8226; Daikin, Panasonic, Midea</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cassette"/></svg>Cassette</th><td>Ceiling Cassette Installation</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP, 3.0 HP &#8226; Includes first 6 ft of piping</td></tr>
+      <tr><td>Supply + Install Ceiling Cassette Aircond</td><td>2.0 HP, 2.5 HP, 3.0 HP &#8226; Daikin, Panasonic, Midea</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-wrench"/></svg>Aircond Service</th><td>Wall-Mounted Aircond Service</td><td>Standard &#8226; Chemical &#8226; Overhaul</td></tr>
+      <tr><td>Cassette Aircond Service</td><td>Standard &#8226; Chemical &#8226; Overhaul</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-truck"/></svg>Aircond Relocation</th><td>Aircond Relocation Service</td><td>Dismantling &#8226; Reinstallation &#8226; Overhaul &#8226; Transport 5&#8211;15 km &#8226; Transport 15&#8211;30 km</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-gas"/></svg>Gas Top-Up</th><td>Aircond Gas Top-Up</td><td>1&#8211;3 HP / 4&#8211;5 HP &#8226; 10 PSI / 150 PSI</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="5"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-gear"/></svg>Repair &amp; Others</th><td>Capacitor Replacement</td><td>Indoor / Outdoor</td></tr>
+      <tr><td>Check &amp; Troubleshoot</td><td>Aircond troubleshooting and inspection</td></tr>
+      <tr><td>New PC Board Installation</td><td>Depending on aircond brand</td></tr>
+      <tr><td>Aircond Inspection</td><td>General aircond checking</td></tr>
+      <tr><td>Site Visit</td><td>On-site inspection</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-swap"/></svg>Trade-In</th><td>Indoor + Outdoor Unit Trade-In</td><td>Aircond trade-in</td></tr>
+      <tr><td>Outdoor Compressor Trade-In</td><td>Compressor trade-in</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-pipe"/></svg>Concealed Work</th><td>Brick Wall &amp; Cement Wall</td><td>Below 18 ft / Above 18 ft</td></tr>
+      <tr><td>Concrete Wall</td><td>Below 18 ft / Above 18 ft</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-remote"/></svg>Aircond Remote</th><td>Universal Remote</td><td>Universal aircond remote control</td></tr>
+      <tr><td>Original Remote</td><td>Original aircond remote control</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-switch"/></svg>Electrical Switch</th><td>New Switch Point Installation</td><td>From socket to new switch point &#8226; Below 18 ft</td></tr>
+      <tr><td>New Switch Point Installation from DB</td><td>From DB to new switch point &#8226; Below 18 ft</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-db"/></svg>Electrical DB Box</th><td>1-Row DB Box</td><td>Suitable for small houses</td></tr>
+      <tr><td>2-Row DB Box</td><td>Distribution board installation</td></tr>
+      <tr><td>3-Row DB Box</td><td>Distribution board installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="7"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-breaker"/></svg>MCB / RCCB / ELCB / SPD</th><td>Single Phase MCB</td><td>EPS brand</td></tr>
+      <tr><td>3 Phase MCB</td><td>EPS brand</td></tr>
+      <tr><td>Single Phase RCCB</td><td>EPS brand</td></tr>
+      <tr><td>3 Phase RCCB</td><td>EPS brand</td></tr>
+      <tr><td>Single Phase ELCB</td><td>EPS brand</td></tr>
+      <tr><td>3 Phase ELCB</td><td>EPS brand</td></tr>
+      <tr><td>SPD</td><td>EPS brand</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cable"/></svg>2.5 mm Wiring</th><td>Plug Loop Wiring Installation</td><td>From nearest point &#8226; Surface wiring &#8226; Below 18 ft</td></tr>
+      <tr><td>Plug to Direct DB Wiring</td><td>Surface wiring &#8226; Below 18 ft</td></tr>
+      <tr><td>Extra Wire</td><td>Additional wiring</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cable"/></svg>4 mm Wiring</th><td>Plug to Direct DB Wiring</td><td>Surface wiring &#8226; Below 18 ft</td></tr>
+      <tr><td>Aircond Point to Direct DB Wiring</td><td>Surface wiring &#8226; Below 18 ft</td></tr>
+      <tr><td>Water Heater Point to Direct DB Wiring</td><td>Surface wiring &#8226; Below 18 ft</td></tr>
+      <tr><td>Extra Wire</td><td>Additional wiring</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-switch"/></svg>Switch Replacement</th><td>1&#8211;3 Gang Switch</td><td>On-off switch replacement</td></tr>
+      <tr><td>20A Aircond Switch</td><td>On-off switch replacement</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-meter"/></svg>Meter</th><td>Timer Meter</td><td>Supply and installation</td></tr>
+      <tr><td>Split Meter</td><td>Supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-heater"/></svg>Water Heater</th><td>Labour + Panasonic Non-Pump</td><td>Water heater installation</td></tr>
+      <tr><td>Labour + Flexible Hose</td><td>Water heater installation</td></tr>
+      <tr><td>Remove Old Water Heater</td><td>Dismantling service</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Exhaust Fan</th><td>Installation Only</td><td>Exhaust fan installation</td></tr>
+      <tr><td>Installation + Supply 6-inch Fan</td><td>Includes 6-inch exhaust fan</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Ceiling Fan</th><td>Labour Only</td><td>Ceiling fan installation</td></tr>
+      <tr><td>Labour + Deka 5-Blade 56-inch Fan</td><td>Includes fan supply and installation</td></tr>
+      <tr><td>Dismantle Old Ceiling Fan</td><td>Removal service</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Wall Fan</th><td>Labour + Khind 16-inch Remote Fan</td><td>Includes wall fan supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-hook"/></svg>Fan Hook Installation</th><td>Concrete Ceiling</td><td>Fan hook installation</td></tr>
+      <tr><td>Plaster Ceiling</td><td>Fan hook installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-bulb"/></svg>Surface Light</th><td>Labour + 18W LED Light</td><td>Includes light supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tv"/></svg>TV Bracket</th><td>Install Only</td><td>TV bracket installation</td></tr>
+      <tr><td>Supply + Install</td><td>Up to 60-inch TV</td></tr>
+      <tr><td>Supply + Install Adjustable Bracket</td><td>Up to 60-inch TV</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV Package &#8211; 2-Way Audio</th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk &#8226; 22" Monitor &#8226; Audio &#8226; Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 8-Channel CCTV</td><td>1TB Hard Disk &#8226; 22" Monitor &#8226; Audio &#8226; Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 16-Channel CCTV</td><td>1TB Hard Disk &#8226; 22" Monitor &#8226; Audio &#8226; Hikvision / Dahua</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV Package &#8211; 1-Way Audio</th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk &#8226; 22" Monitor &#8226; Audio &#8226; Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 8-Channel CCTV</td><td>1TB Hard Disk &#8226; 22" Monitor &#8226; Audio &#8226; Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 16-Channel CCTV</td><td>1TB Hard Disk &#8226; 22" Monitor &#8226; Audio &#8226; Hikvision / Dahua</td></tr>
+      <tr><td>Additional Wiring</td><td>Additional CCTV wiring</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV Installation</th><td>CCTV Installation Only</td><td>Available for 1&#8211;3 units or 3+ units</td></tr>
+      <tr><td>CCTV Wiring to Plug Point</td><td>Wiring from CCTV to plug point</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>Indoor Wireless CCTV</th><td>Supply + Install C300 / C302</td><td>Wireless CCTV + Plug Point &#8226; Near installation (&lt;40 ft)</td></tr>
+      <tr><td>Supply + Install C300 / C302</td><td>Wireless CCTV + Plug Point &#8226; Longer-distance installation</td></tr>
+      <tr><td>Supply + Install CW300</td><td>Wireless CCTV + Plug Point &#8226; Near installation (&lt;40 ft)</td></tr>
+      <tr><td>Supply + Install CW300</td><td>Wireless CCTV + Plug Point &#8226; Long-distance installation (&gt;40 ft)</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Base Cabinet</th><td>Base Cabinet + Quartz Stone Table Top</td><td>Standard 6 ft package</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Base Cabinet &#8211; Add-On</th><td>Hole Opening + Sink Installation</td><td>Add-on service</td></tr>
+      <tr><td>Hole Opening + Cooking Stove Installation</td><td>Add-on service</td></tr>
+      <tr><td>Kitchen Hood Installation</td><td>Add-on service</td></tr>
+      <tr><td>3-Tier Drawer</td><td>Add-on item</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Wall Cabinet</th><td>Standard Wall Cabinet</td><td>Standard 6 ft package</td></tr>
+      <tr><td>High Wall Cabinet</td><td>Additional high wall cabinet option</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Tall Cabinet</th><td>Standard Height Tall Cabinet</td><td>Standard 2 ft package</td></tr>
+      <tr><td>Ceiling Height Tall Cabinet</td><td>Full-height cabinet option</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Wardrobe</th><td>Standard Height Wardrobe</td><td>Standard 6 ft package</td></tr>
+      <tr><td>Ceiling Height Wardrobe</td><td>Full-height wardrobe option</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="7"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Additional Cabinet Length</th><td>Base Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Standard Wall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>High Wall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Standard Height Tall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Ceiling Height Tall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Standard Height Wardrobe</td><td>Additional per-foot run</td></tr>
+      <tr><td>Ceiling Height Wardrobe</td><td>Additional per-foot run</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="6"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Interior Painting &#8211; Walls &amp; Ceiling</th><td>Condo 2&#8211;3 Bedrooms</td><td>600&#8211;900 sq ft</td></tr>
+      <tr><td>Condo / Single-Storey Home 3&#8211;4 Bedrooms</td><td>900&#8211;1,500 sq ft</td></tr>
+      <tr><td>Large Condo / Double-Storey Home</td><td>1,500&#8211;2,200 sq ft</td></tr>
+      <tr><td>Master / Medium Bedroom</td><td>Below 400 sq ft</td></tr>
+      <tr><td>Living Room</td><td>Below 400 sq ft</td></tr>
+      <tr><td>Kitchen</td><td>Below 400 sq ft</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Add-On Service</th><td>Single-Leaf Door + Frame Painting</td><td>Door and frame painting</td></tr>
+      <tr><td>Furniture / Item Relocation</td><td>Moving items before painting work</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Exterior Painting &#8211; Single Storey</th><td>High-Pressure Wash Only</td><td>Paint supplied by owner</td></tr>
+      <tr><td>High-Pressure Wash + Weathershield Paint</td><td>Includes ICI Dulux Weathershield</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Exterior Painting &#8211; Double Storey</th><td>High-Pressure Wash + Scaffolding</td><td>Paint supplied by owner</td></tr>
+      <tr><td>High-Pressure Wash + Weathershield Paint + Scaffolding</td><td>Includes ICI Dulux Weathershield</td></tr>
+    </tbody>
+    <tbody data-tab="others">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing &#8211; Standard</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><td>Medium Toilet</td><td>60&#8211;100 sq ft</td></tr>
+      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    </tbody>
+    <tbody data-tab="others">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing &#8211; Premium</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><td>Medium Toilet</td><td>60&#8211;100 sq ft</td></tr>
+      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    </tbody>
+  </table>
+  <p class="sv-empty" hidden>No services match. Try another word, or choose All Services.</p>
   </div>
 
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Kitchen cabinet</h4><p class="muted small">Base cabinet with quartz stone top, wall cabinets, tall units, drawers, sink and hob cut-outs.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM2,400</p></div>
-    <div class="card"><h4>Indoor painting</h4><p class="muted small">Cat dinding dalam rumah &#8212; interior wall painting, prepared and finished.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM600</p></div>
-    <div class="card"><h4>Outdoor painting</h4><p class="muted small">Cat dinding luar rumah &#8212; exterior walls including preparation and weather coat.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM2,250</p></div>
-    <div class="card"><h4>Plaster ceiling</h4><p class="muted small">Flat ceiling, L-box, cornice and LED works.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM5.50 / sqft</p></div>
-    <div class="card"><h4>Partition</h4><p class="muted small">Gypsum and glass partition walls and doors.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM12 / sqft</p></div>
-    <div class="card"><h4>Wall panel</h4><p class="muted small">Fluted panels, marble panels and wainscoting.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM25 / sqft</p></div>
-  </div>
-</section>
-
-<!-- &#9552;&#9552; 5 &#183; FLOORING & EXTERIOR &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
-<section class="svcblock" id="flooring">
-  <div class="catband">
-    <img src="img/services/decking.jpg" alt="Laying timber decking boards" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Flooring &amp; exterior solutions</h2>
-    <p>Epoxy flake flooring, invisible grilles and decking.</p>
-  </div>
-  </div>
-
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Epoxy flakes flooring</h4><p class="muted small">Epoxy flake floor finish, commonly paired with toilet waterproofing.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM15 / sqft</p></div>
-    <div class="card"><h4>Invisible grille</h4><p class="muted small">Nylon and teflon grilles for cat and baby protection.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM25 / sqft</p></div>
-    <div class="card"><h4>Decking</h4><p class="muted small">SPC, vinyl and herringbone deck flooring.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM28 / sqft</p></div>
-  </div>
-</section>
-
+  <p class="sv-note" data-tab="electrical">Note: Uses SIRIM-certified components and MS IEC 60227 wire for safe installation.</p>
+  <p class="sv-note" data-tab="cctv">Warranty Note: Customers are required to keep the CCTV box and SD card box for warranty return and claim purposes.</p>
 </div>
-
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Service catalogue</div>
-      <h2 data-anim="lines">The complete catalogue</h2>
-      <p>Every price table, the SSM and CIDB certificates, branch details and bank information for each entity.</p>
-    </div>
-    <article class="dlcard">
-      <div class="cover"><img src="data:image/jpeg;base64,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iZy0nz4289sn2rsvhf8Atr/DvwN4H8P+HrjSNYgn0iBre4t9Pe3S0uSRjzZA2Hdu4GRz3NOdbienTlWhFuUuXSysvc1trtzaP81uKNLIJzjTlJKK5tdbv3tL/LX/ADOU8R/BK98VfA74d+F/Cek2sXiHUNRvLa6m2JG5MLShjNKBkqm3nOeBxXnHjX9jX4ieGbCHUfD2oaX4jje8WwnGmSl2t7hzjbIGAwAep7dxXfwftj6NosXhiXQ9KupJtE1O/urpLhkVJoL1pSURlLEOFk6kYyO9dDp/7TXw8tbi38G/AjRpNDl1zWor7ULzW5t0IkLZKjYXIUk4zxj0q6dXiDDO0Kfu3k9bNayk3d3uko25bJ32InTyWuvfn71orS6ekUtFazbd73sef6p+w74x07T9QuovEugXNxpFsbjULOGWRp4CF3bGUIeT2JwK4WL9lTxrN420HwKuo6eLnxBp51G3lJl8uOMDO1/kzu+gIr9NfFOk6H4K0bx5481fw2ugz6jprC51Y3qzwXsrLgLBHncoJ55VSfSvkzwt+2D8GbR/DvirxP4b1WXxFoennTlmtpYxAIyMFgrONxOO4GPWuTAZ9neKpTqYde0tpooaScLrZ2sped7bq50YzJ8pw9SEKz5L66uWylZ7q92vK19meNeCv2NvHXi7Sf7XvdW0rSFnupbTT0vXcNeSREqfLCqcKSOM8+1fMXizwvrPgrxJeeFPEMXk3thM0MyA5AZfQ9weor9APh/+214Y0jwwvh7xZZ63EbG7mns30ieOITxSOWWO43HIxnkqa+Gfib42k+IvjvUvGkkJt/t85kWJnMhRegBduWOOpr6bJ6+cTxlaOPhamttu+lurut79e2x4OZ0crhhqUsHO8+u/bX8dvL7zhKKKK+lPBCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Q+M6KKK/rA/nIKKKKACiiigAooooA1LrXNbv7VLC+vbmeCL/VxSyu6L/uqSQPwrLoopKKjokNyb1bCiiimIKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9H4zooor+sD+cgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii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" alt="" width="296" height="420"></div>
-      <div class="body">
-        <h3>Encik Beku Service Catalogue</h3>
-        <p>Complete overview of Encik Beku air-conditioning, technical and property services, including full pricing tables.</p>
-        <div class="specs"><span><b>PDF</b></span><span>34 pages</span><span>English &amp; Malay</span><span>3.1 MB</span><span><b>v1.0</b></span><span>Updated 20 August 2026</span></div>
-        <div class="acts">
-          <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" target="_blank" rel="noopener">Preview PDF</a>
-          <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>Download PDF</a>
-        </div>
-      </div>
-    </article>
-    <p class="note">A separate, more frequently updated <strong>Price List</strong> document is planned. Until it is published, the pricing above and in the catalogue carries the effective date shown at the top of this page.</p>
-  </div>
-</section>
 
 </section>
 </main>

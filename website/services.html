@@ -4,38 +4,127 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What We Do</title>
-<meta name="description" content="The Encik Beku service catalogue — air-conditioning, electrical and security, water and property protection, interior and renovation, flooring and exterior solutions, with current pricing.">
-<link rel="stylesheet" href="../fonts/fonts.css?v=mtwgk8ze">
-<link rel="stylesheet" href="../tokens/tokens.css?v=mtwgk8ze">
-<link rel="stylesheet" href="site.css?v=mtwgk8ze">
+<meta name="description" content="Encik Beku services and their details — aircond, electrical, CCTV, renovation and waterproofing.">
+<link rel="stylesheet" href="../fonts/fonts.css?v=mu4zmonw">
+<link rel="stylesheet" href="../tokens/tokens.css?v=mu4zmonw">
+<link rel="stylesheet" href="site.css?v=mu4zmonw">
 <link rel="icon" href="../svg/mark/encik-beku-mark-navy.svg">
 <style>
-  .catnav-bar {
-    position: sticky; top: 4.5rem; z-index: 40;
-    background: var(--eb-bg-1); border-bottom: 1px solid var(--eb-border-1);
+  .sv-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .sv-body [hidden] { display: none !important; }
+  .sv-ico { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  .sv-hero img { display: block; width: 100%; height: clamp(11rem, 22vw, 20rem); object-fit: cover; object-position: 50% 16%; }
+
+  .sv-body { padding: var(--eb-space-2) 0 var(--eb-space-9); }
+
+  .sv-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--eb-space-2); }
+  .sv-tabs button {
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    min-height: 3.1rem; padding: 0 1rem; border: 0; border-radius: var(--eb-radius-sm);
+    background: var(--eb-bg-tint); color: var(--eb-fg-1);
+    font: inherit; font-size: var(--eb-text-sm); cursor: pointer; white-space: nowrap;
   }
-  .catnav { display: flex; gap: var(--eb-space-2); flex-wrap: wrap; padding: var(--eb-space-3) 0; overflow-x: auto; }
-  .catnav a {
-    font-size: var(--eb-text-sm); font-weight: var(--eb-fw-bold);
-    text-decoration: none; color: var(--eb-fg-2);
-    padding: 0.375rem 0.75rem; border-radius: var(--eb-radius-pill);
-    border: 1px solid var(--eb-border-1); white-space: nowrap;
+  .sv-tabs button[aria-pressed="true"] {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--eb-blue-400) 35%, var(--eb-bg-brand)), var(--eb-bg-brand));
+    color: var(--eb-fg-on-brand); box-shadow: var(--eb-shadow-brand);
   }
-  .catnav a:hover { color: var(--eb-fg-brand); background: var(--eb-bg-tint); border-color: transparent; }
-  .svcblock { padding: var(--eb-space-7) 0; border-bottom: 1px solid var(--eb-border-1); }
-  .svcblock:last-child { border-bottom: 0; }
-  .brands { display: flex; gap: var(--eb-space-2); flex-wrap: wrap; margin-top: var(--eb-space-2); }
-  .subhead { margin-top: var(--eb-space-6); margin-bottom: var(--eb-space-3); }
-  .svcblock[id] { scroll-margin-top: 8.75rem; }
-  @media (max-width: 940px) { .catnav-bar { position: static; } .svcblock[id] { scroll-margin-top: 1.25rem; } }
+  .sv-tabs .sv-ico { width: 1.25rem; height: 1.25rem; }
+
+  .sv-filters { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: var(--eb-space-4); margin-top: var(--eb-space-3); }
+  .sv-search, .sv-type { position: relative; }
+  .sv-search input, .sv-type select {
+    appearance: none; width: 100%; height: 2.9rem;
+    border: 1px solid var(--eb-border-1); border-radius: var(--eb-radius-sm);
+    background: var(--eb-bg-1); color: var(--eb-fg-1); font: inherit; font-size: var(--eb-text-sm);
+  }
+  .sv-search input { padding: 0 1rem 0 3rem; font-weight: var(--eb-fw-regular); }
+  .sv-search input::placeholder { color: var(--eb-fg-3); }
+  .sv-type select { padding: 0 3rem 0 1.25rem; cursor: pointer; }
+  .sv-search .sv-ico, .sv-type .sv-ico { position: absolute; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--eb-fg-1); }
+  .sv-search .sv-ico { left: 1rem; width: 1.25rem; height: 1.25rem; }
+  .sv-type .sv-ico { right: 1rem; width: 1.1rem; height: 1.1rem; stroke-width: 2.2; }
+
+  .sv-table-wrap { margin-top: var(--eb-space-3); border: 1px solid var(--eb-border-1); border-radius: var(--eb-radius-md); overflow: hidden; }
+  .sv-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: var(--eb-text-sm); line-height: 1.35; }
+  .sv-table thead th {
+    background: var(--eb-bg-tint); color: var(--eb-fg-brand); font-weight: var(--eb-fw-bold);
+    font-size: var(--eb-text-sm); letter-spacing: normal; text-transform: none; white-space: normal;
+    text-align: left; padding: 0.8rem 1.4rem;
+  }
+  .sv-table tbody tr { background: none; }
+  .sv-table tbody td, .sv-table tbody th { border-bottom: 0; white-space: normal; }
+  .sv-table thead th:nth-child(1) { width: 23.5%; }
+  .sv-table thead th:nth-child(2) { width: 28%; }
+  .sv-table tbody { border-top: 1px solid var(--eb-border-1); }
+  .sv-table th[scope="rowgroup"] {
+    position: relative; padding: 0.6rem 1.4rem 0.6rem 4.9rem; text-align: left; vertical-align: middle;
+    background: color-mix(in srgb, var(--eb-bg-tint) 45%, var(--eb-bg-1));
+    color: var(--eb-fg-brand); font-weight: var(--eb-fw-bold);
+  }
+  .sv-table th[scope="rowgroup"] .sv-ico { position: absolute; left: 1.4rem; top: 50%; width: 2.1rem; height: 2.1rem; transform: translateY(-50%); }
+  .sv-table td {
+    padding: 0.3rem 1.4rem; vertical-align: top; color: var(--eb-fg-1); font-weight: var(--eb-fw-regular);
+    border-left: 1px solid var(--eb-border-1);
+  }
+  .sv-table tr + tr td { border-top: 1px solid color-mix(in srgb, var(--eb-border-1) 55%, var(--eb-bg-1)); }
+
+  .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
+  .sv-note { margin-top: var(--eb-space-3); font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
+
+  @media (max-width: 760px) {
+    .sv-tabs {
+      grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto;
+      margin-inline: calc(var(--eb-space-6) / -2); padding-inline: calc(var(--eb-space-6) / 2);
+    }
+    .sv-filters { grid-template-columns: 1fr; gap: var(--eb-space-2); }
+    .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
+    .sv-table th[scope="rowgroup"] { padding: 0.8rem 1rem 0.8rem 3.6rem; }
+    .sv-table th[scope="rowgroup"] .sv-ico { left: 1rem; width: 1.7rem; height: 1.7rem; }
+    .sv-table td { border-left: 0; padding: 0 1rem; }
+    .sv-table td:nth-last-child(2) { padding-top: 0.55rem; font-weight: var(--eb-fw-medium); }
+    .sv-table td:last-child { padding-bottom: 0.55rem; color: var(--eb-fg-2); }
+    .sv-table tr + tr td { border-top: 0; }
+    .sv-table tr + tr { border-top: 1px solid color-mix(in srgb, var(--eb-border-1) 55%, var(--eb-bg-1)); }
+  }
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <g id="i-dl" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 19h16"/></g>
-  <g id="i-cal" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></g>
+  <g id="sv-all"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></g>
+  <g id="sv-aircond"><path d="M12 2.5v19M3.77 7.25l16.46 9.5M3.77 16.75l16.46-9.5M9.53 4.53 12 7l2.47-2.47M9.53 19.47 12 17l2.47 2.47M6.77 6.12l.9 3.38-3.38.9M17.23 6.12l-.9 3.38 3.38.9M6.77 17.88l.9-3.38-3.38-.9M17.23 17.88l-.9-3.38 3.38-.9"/></g>
+  <g id="sv-electrical"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z" fill="currentColor"/></g>
+  <g id="sv-cctv"><path d="M3 8.5 16 5l1.6 6-13 3.5zM16 5l3-.8 1.6 6-3 .8M11 12.8l1 4.7H4.5M4.5 15v5"/></g>
+  <g id="sv-renovation"><path d="M3.5 11 12 4l8.5 7M5.5 9.5V20h13V9.5M10 20v-5h4v5"/></g>
+  <g id="sv-others"><circle cx="5.5" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="18.5" cy="12" r="1.9" fill="currentColor" stroke="none"/></g>
+  <g id="sv-search"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g>
+  <g id="sv-down"><path d="m6 9 6 6 6-6"/></g>
+  <g id="sv-wall"><rect x="2.5" y="6" width="19" height="11" rx="2.5"/><path d="M5.5 13.5h13M5.5 9.5h2"/></g>
+  <g id="sv-cassette"><path d="M12 5 21.5 10 12 15 2.5 10zM12 8l4 2-4 2-4-2zM2.5 10v2.5l9.5 5 9.5-5V10"/></g>
+  <g id="sv-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></g>
+  <g id="sv-truck"><path d="M13.5 16.5V6.5h-11v10h2.2M8.3 16.5h6.9M18.8 16.5h1.7V13l-3-3.5h-4"/><circle cx="6.5" cy="16.5" r="1.8"/><circle cx="17" cy="16.5" r="1.8"/></g>
+  <g id="sv-gas"><rect x="6.5" y="8.5" width="11" height="12.5" rx="3"/><path d="M10 8.5v-3h4v3M8.5 3.5h7M9.5 13h5v4h-5z"/></g>
+  <g id="sv-gear"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3.5V6M12 18v2.5M3.5 12H6M18 12h2.5M6 6l1.76 1.76M16.24 16.24 18 18M6 18l1.76-1.76M16.24 7.76 18 6"/></g>
+  <g id="sv-swap"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></g>
+  <g id="sv-pipe"><path d="M3 6h9a6 6 0 0 1 6 6v9M3 11h9a1 1 0 0 1 1 1v9M6.5 5v7M12 17.5h7"/></g>
+  <g id="sv-remote"><rect x="7.5" y="2.5" width="9" height="19" rx="2.5"/><rect x="10" y="5.5" width="4" height="3" rx=".6"/><path d="M10.5 12h.01M13.5 12h.01M10.5 15h.01M13.5 15h.01M10.5 18h.01M13.5 18h.01"/></g>
+  <g id="sv-switch"><rect x="4.5" y="3.5" width="15" height="17" rx="2.5"/><rect x="9.5" y="7.5" width="5" height="9" rx="1.2"/><path d="M9.5 12h5"/></g>
+  <g id="sv-db"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M3.5 8.5h17M7 12v4M10.3 12v4M13.7 12v4M17 12v4"/></g>
+  <g id="sv-breaker"><rect x="7" y="2.5" width="10" height="19" rx="1.5"/><rect x="10" y="8" width="4" height="7" rx="1"/><path d="M12 8v3.5M9.5 5h5M9.5 18.5h5"/></g>
+  <g id="sv-cable"><path d="M9 3v4M15 3v4M6.5 7h11v3a5.5 5.5 0 0 1-11 0zM12 15.5v3a2.5 2.5 0 0 0 2.5 2.5H20"/></g>
+  <g id="sv-meter"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M7.5 13a4.5 4.5 0 0 1 9 0M12 13l2-2.5M8 17h8"/></g>
+  <g id="sv-heater"><rect x="6" y="2.5" width="12" height="15" rx="3"/><path d="M9.5 17.5V21M14.5 17.5V21M12 6.5c1.5 1.8 2.2 2.9 2.2 4a2.2 2.2 0 0 1-4.4 0c0-1.1.7-2.2 2.2-4z"/></g>
+  <g id="sv-fan"><circle cx="12" cy="12" r="1.8"/><path d="M12 10.2C11 6 12.5 3 15.5 3.5c2.5.4 2 3.8-2 6.2M13.8 12.3c4.2-1 7.2.5 6.7 3.5-.4 2.5-3.8 2-6.2-2M10.4 13c-2.8 3.3-6.1 3.8-7.1 1-.9-2.4 2.3-3.7 6.6-2.4"/></g>
+  <g id="sv-hook"><path d="M4 3.5h16M12 3.5V12a3.5 3.5 0 1 1-3.5 3.5"/></g>
+  <g id="sv-bulb"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></g>
+  <g id="sv-tv"><rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M8 20.5h8M12 16.5v4"/></g>
+  <g id="sv-cabinet"><path d="M2.5 6.5h19"/><rect x="4" y="6.5" width="16" height="14" rx="1"/><path d="M12 6.5v14M10 11v2.5M14 11v2.5"/></g>
+  <g id="sv-roller"><rect x="3" y="3.5" width="15" height="5.5" rx="1.5"/><path d="M18 6.25h2.5v5.25H11V15M9.5 15h3v6h-3z"/></g>
+  <g id="sv-drop"><path d="M12 3c3.6 4.3 6 7.6 6 10.5a6 6 0 0 1-12 0C6 10.6 8.4 7.3 12 3z"/></g>
 </defs></svg>
+
 
 <header class="site">
   <div class="wrap nav">
@@ -53,374 +142,231 @@
 
 <main>
 
-<section class="pagehead">
-  <div class="wrap">
-    <div class="eyebrow">What we do</div>
-    <h1 data-anim="lines">Everything we do, in one place</h1>
-    <p class="lede">Our air-conditioning, technical, property and renovation services, with the scope of each and current pricing where it is published.</p>
-  </div>
-</section>
+<h1 class="sv-vh">What we do</h1>
 
-<div class="catnav-bar">
-  <nav class="wrap catnav" aria-label="Service categories">
-    <a href="#aircon">Air-conditioning</a>
-    <a href="#electrical">Electrical &amp; security</a>
-    <a href="#water">Water &amp; property protection</a>
-    <a href="#interior">Interior &amp; renovation</a>
-    <a href="#flooring">Flooring &amp; exterior</a>
-  </nav>
+<div class="sv-hero">
+  <img src="img/services-hero.jpg" alt="An Encik Beku technician servicing a wall-mounted aircond" width="1920" height="1059">
 </div>
 
-<section class="section tight">
-  <div class="wrap">
-    <span class="stamp"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cal"/></svg>Pricing effective 20 August 2026</span>
-    <p class="note" style="margin-top:var(--eb-space-4)">Prices below are published for guidance and are not a quotation. Final pricing depends on site conditions, access and materials. Where a service requires inspection before a firm price can be given, that is stated in the service scope.</p>
-  </div>
-</section>
-
-<div class="wrap">
-
-<!-- ══ 1 · AIR-CONDITIONING ══════════════════════════════ -->
-<section class="svcblock" id="aircon">
-  <div class="catband">
-    <img src="img/services/aircond-service.jpg" alt="A technician opening a ceiling cassette air conditioner for servicing" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Air-conditioning</h2>
-    <p>Supply and installation, servicing, repair and preventive maintenance for wall-mounted and cassette units, in homes and commercial premises.</p>
-  </div>
+<div class="wrap sv-body">
+  <div class="sv-tabs" role="group" aria-label="Service category">
+    <button type="button" data-tab="all" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-all"/></svg>All Services</button>
+    <button type="button" data-tab="aircond" aria-pressed="true"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-aircond"/></svg>Aircond</button>
+    <button type="button" data-tab="electrical" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-electrical"/></svg>Electrical</button>
+    <button type="button" data-tab="cctv" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV</button>
+    <button type="button" data-tab="renovation" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-renovation"/></svg>Renovation</button>
+    <button type="button" data-tab="others" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-others"/></svg>Others</button>
   </div>
 
-  <div class="brands">
-    <span class="chip tint">Daikin</span><span class="chip tint">Panasonic</span>
-    <span class="chip tint">Midea</span><span class="chip tint">AUX</span>
-  </div>
-
-  <h3 class="subhead">Supply &amp; installation — wall mounted</h3>
-  <div class="svc-head">
-    <span class="from-label">Inverter from</span><span class="from-price">RM1,500</span>
-    <span class="from-label">Non-inverter from</span><span class="from-price">RM1,300</span>
-  </div>
-
-  <div class="tablewrap">
-    <table>
-      <caption>Supply + install · inverter</caption>
-      <thead><tr><th>Capacity</th><th class="num">Daikin</th><th class="num">Panasonic</th><th class="num">Midea</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 1,900</td><td class="num">RM 1,900</td><td class="num">RM 1,500</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 2,300</td><td class="num">RM 2,300</td><td class="num">RM 1,800</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 3,400</td><td class="num">RM 3,500</td><td class="num">RM 2,500</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 3,700</td><td class="num">RM 3,600</td><td class="num">RM 3,100</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Supply + install · non-inverter</caption>
-      <thead><tr><th>Capacity</th><th class="num">Daikin</th><th class="num">Panasonic</th><th class="num">Midea</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 1,600</td><td class="num">RM 1,500</td><td class="num">RM 1,300</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 2,000</td><td class="num">RM 2,000</td><td class="num">RM 1,700</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 2,800</td><td class="num">RM 2,800</td><td class="num">RM 2,400</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 3,200</td><td class="num">RM 3,100</td><td class="num">RM 2,900</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 3,700</td><td class="num">RM 3,900</td><td class="num">—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Installation only — pasang wall aircond</caption>
-      <thead><tr><th>Capacity</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 320</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 360</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 390</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 440</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 480</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="grid g2" style="margin-top:var(--eb-space-4)">
-    <div class="card">
-      <h4>Included</h4>
-      <p class="muted small">Standard installation work · 6 ft of copper piping · drainage · testing and commissioning.</p>
+  <div class="sv-filters">
+    <div class="sv-search">
+      <label class="sv-vh" for="sv-q">Search services</label>
+      <svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-search"/></svg>
+      <input id="sv-q" type="search" placeholder="Search service or product…" autocomplete="off">
     </div>
-    <div class="card">
-      <h4>Not included</h4>
-      <p class="muted small">Additional copper piping beyond 6 ft, charged per foot and rising with capacity (RM20/ft at 1.0 HP to RM34/ft at 3.0 HP) · concealed piping · additional wiring · dismantling of old equipment · difficult or high-rise access.</p>
+    <div class="sv-type">
+      <label class="sv-vh" for="sv-type">Service type</label>
+      <select id="sv-type"><option value="">All Service Types</option></select>
+      <svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-down"/></svg>
     </div>
   </div>
 
-  <h3 class="subhead">Supply &amp; installation — cassette ceiling</h3>
-  <div class="svc-head"><span class="from-label">From</span><span class="from-price">RM3,000</span></div>
-  <div class="tablewrap">
-    <table>
-      <caption>Supply + install · ceiling cassette</caption>
-      <thead><tr><th>Capacity</th><th class="num">Daikin</th><th class="num">Panasonic</th><th class="num">Midea</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 3,700</td><td class="num">RM 3,600</td><td class="num">RM 3,000</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 3,900</td><td class="num">RM 3,800</td><td class="num">RM 3,400</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 4,500</td><td class="num">RM 4,400</td><td class="num">RM 4,100</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Installation only — pasang cassette ceiling</caption>
-      <thead><tr><th>Capacity</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th><span class="hp">1.0 HP</span></th><td class="num">RM 490</td></tr>
-        <tr><th><span class="hp">1.5 HP</span></th><td class="num">RM 540</td></tr>
-        <tr><th><span class="hp">2.0 HP</span></th><td class="num">RM 590</td></tr>
-        <tr><th><span class="hp">2.5 HP</span></th><td class="num">RM 640</td></tr>
-        <tr><th><span class="hp">3.0 HP</span></th><td class="num">RM 690</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3 class="subhead">Servicing &amp; maintenance</h3>
-  <div class="svc-head">
-    <span class="from-label">Aircond from</span><span class="from-price">RM99</span>
-    <span class="from-label">Cassette from</span><span class="from-price">RM200</span>
-  </div>
-  <p class="muted small">Per unit, for 4 units and above. Standard, chemical and overhaul cleaning are available for both wall-mounted and cassette units.</p>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Servis aircond · wall mounted</caption>
-      <thead><tr><th>Service</th><th class="num">1–3 units</th><th class="num">4 units &amp; above</th></tr></thead>
-      <tbody>
-        <tr><th>Standard</th><td class="num">RM 130</td><td class="num">RM 99</td></tr>
-        <tr><th>Chemical</th><td class="num">RM 180</td><td class="num">RM 150</td></tr>
-        <tr><th>Overhaul</th><td class="num">RM 250</td><td class="num">RM 200</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Servis cassette</caption>
-      <thead><tr><th>Service</th><th class="num">1–3 units</th><th class="num">4 units &amp; above</th></tr></thead>
-      <tbody>
-        <tr><th>Standard</th><td class="num">RM 250</td><td class="num">RM 200</td></tr>
-        <tr><th>Chemical</th><td class="num">RM 370</td><td class="num">RM 320</td></tr>
-        <tr><th>Overhaul</th><td class="num">RM 480</td><td class="num">RM 400</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Relocation — tempat lama, pindah baru</caption>
-      <thead><tr><th>Item</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th>Buka aircond (removal)</th><td class="num">RM 100</td></tr>
-        <tr><th>Pasang aircond (refit)</th><td class="num">By horsepower</td></tr>
-        <tr><th>Overhaul service</th><td class="num">RM 250</td></tr>
-        <tr><th>Transport 5 km – 15 km</th><td class="num">RM 100</td></tr>
-        <tr><th>Transport 15 km – 30 km</th><td class="num">RM 150</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3 class="subhead">Repair &amp; troubleshooting</h3>
-  <div class="svc-head"><span class="from-label">Full diagnostic</span><span class="from-price">RM450</span></div>
-  <div class="tablewrap">
-    <table>
-      <caption>Repairs &amp; others</caption>
-      <thead><tr><th>Item</th><th class="num">Price</th></tr></thead>
-      <tbody>
-        <tr><th>Top-up gas 150 PSI <span class="hp">1–3 HP</span></th><td class="num">RM 120</td></tr>
-        <tr><th>Top-up gas 10 PSI <span class="hp">1–3 HP</span></th><td class="num">RM 20</td></tr>
-        <tr><th>Top-up gas 150 PSI <span class="hp">4–5 HP</span></th><td class="num">RM 600</td></tr>
-        <tr><th>Top-up gas 10 PSI <span class="hp">4–5 HP</span></th><td class="num">RM 40</td></tr>
-        <tr><th>Capacitor replacement (indoor / outdoor)</th><td class="num">RM 150</td></tr>
-        <tr><th>Check &amp; troubleshoot</th><td class="num">RM 450</td></tr>
-        <tr><th>Install new PC board (depends on brand)</th><td class="num">RM 400 – RM 1,200</td></tr>
-        <tr><th>Checking aircond</th><td class="num">RM 100 / unit</td></tr>
-        <tr><th>Site visit</th><td class="num">RM 100 / trip</td></tr>
-        <tr><th>Trade in (indoor + outdoor)</th><td class="num">RM 70 / set</td></tr>
-        <tr><th>Trade in (outdoor compressor)</th><td class="num">RM 30</td></tr>
-        <tr><th>Universal remote</th><td class="num">RM 50</td></tr>
-        <tr><th>Original remote</th><td class="num">RM 50 – RM 100</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Conceal work</caption>
-      <thead><tr><th>Wall type</th><th class="num">Under 18 ft</th><th class="num">Over 18 ft</th></tr></thead>
-      <tbody>
-        <tr><th>Brick &amp; cement wall</th><td class="num">RM 300</td><td class="num">RM 15 / ft</td></tr>
-        <tr><th>Concrete wall</th><td class="num">RM 500</td><td class="num">RM 20 / ft</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ══ 2 · ELECTRICAL & SECURITY ═════════════════════════ -->
-<section class="svcblock" id="electrical">
-  <div class="catband">
-    <img src="img/services/electrical-testing.jpg" alt="Testing a distribution board with a multimeter" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Electrical &amp; security</h2>
-    <p>Electrical work, wiring, distribution boards, fans and lighting, plus CCTV supply, installation and maintenance.</p>
-  </div>
-  </div>
-
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Switches &amp; plug points</h4><p class="muted small">New switch from a socket or direct from the DB box, aircond and heater points, extra wiring per foot.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM150</p></div>
-    <div class="card"><h4>DB box &amp; protection</h4><p class="muted small">1-, 2- and 3-row distribution boards, MCB, RCCB, ELCB and SPD in single or three phase.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM180</p></div>
-    <div class="card"><h4>Meters</h4><p class="muted small">Timer meter and split meter, supplied and installed.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM300</p></div>
-    <div class="card"><h4>Ceiling &amp; wall fans</h4><p class="muted small">Fan supply and installation, fan hooks in concrete or plaster ceiling, dismantling of old units.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM150</p></div>
-    <div class="card"><h4>Water heater &amp; exhaust</h4><p class="muted small">Water heater supply and installation, flexible hose, old unit removal, exhaust fan installation.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM150</p></div>
-    <div class="card"><h4>Lighting &amp; TV bracket</h4><p class="muted small">Surface LED lighting, and TV brackets up to 60 inch including adjustable arms.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM80</p></div>
-  </div>
-  <p class="note">We use <strong>SIRIM-certified components</strong> and MS IEC 60227 wire on every electrical installation. Item-by-item pricing is in the Service Catalogue.</p>
-
-  <h3 class="subhead">CCTV installation</h3>
-  <div class="svc-head">
-    <span class="from-label">Installation only from</span><span class="from-price">RM80</span>
-    <span class="chip ok">1 year warranty</span>
-  </div>
-  <p class="muted small">HIKVision and Dahua systems. All supply-and-install packages include a 1 TB hard disk and a 22-inch monitor.</p>
-
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Supply + install · 2-way audio</caption>
-      <thead><tr><th>System</th><th class="num">HIKVision</th><th class="num">Dahua</th></tr></thead>
-      <tbody>
-        <tr><th>4 channel</th><td class="num">RM 3,399</td><td class="num">RM 2,899</td></tr>
-        <tr><th>8 channel</th><td class="num">RM 4,399</td><td class="num">RM 3,599</td></tr>
-        <tr><th>16 channel</th><td class="num">RM 8,399</td><td class="num">RM 6,399</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Supply + install · 1-way audio</caption>
-      <thead><tr><th>System</th><th class="num">HIKVision</th><th class="num">Dahua</th></tr></thead>
-      <tbody>
-        <tr><th>4 channel</th><td class="num">RM 2,899</td><td class="num">RM 2,599</td></tr>
-        <tr><th>8 channel</th><td class="num">RM 3,899</td><td class="num">RM 3,099</td></tr>
-        <tr><th>16 channel</th><td class="num">RM 7,899</td><td class="num">RM 5,899</td></tr>
-        <tr><th>Additional wiring</th><td class="num" colspan="2">RM 500 / 200 m</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tablewrap" style="margin-top:var(--eb-space-4)">
-    <table>
-      <caption>Installation only</caption>
-      <thead><tr><th>Item</th><th class="num">1–3 units</th><th class="num">3 units &amp; above</th></tr></thead>
-      <tbody>
-        <tr><th>Pasang CCTV sahaja</th><td class="num">RM 100</td><td class="num">RM 80</td></tr>
-        <tr><th>Wiring to plug point</th><td class="num">RM 150</td><td class="num">RM 120</td></tr>
-        <tr><th>Wireless C300 / C302 — near (&lt;40 ft)</th><td class="num">RM 450</td><td class="num">RM 360</td></tr>
-        <tr><th>Wireless C300 / C302 — far (20–40 ft)</th><td class="num">RM 500</td><td class="num">RM 400</td></tr>
-        <tr><th>Wireless CW300 — near (&lt;40 ft)</th><td class="num">RM 600</td><td class="num">RM 480</td></tr>
-        <tr><th>Wireless CW300 — far (&gt;40 ft)</th><td class="num">RM 650</td><td class="num">RM 550</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="note">For warranty purposes, please keep the <strong>CCTV box and the SD card box</strong> — both are required for returns and warranty claims.</p>
-</section>
-
-<!-- ══ 3 · WATER & PROPERTY PROTECTION ═══════════════════ -->
-<section class="svcblock" id="water">
-  <div class="catband">
-    <img src="img/services/water-protection.jpg" alt="Sealing and finishing a wall surface by hand" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Water &amp; property protection</h2>
-    <p>Plumbing, water pumps and waterproofing — the work that keeps water where it belongs.</p>
-  </div>
-  </div>
-
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Install shower set</h4><p class="muted small">Shower sets and WC flush, supplied and fitted.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM300</p></div>
-    <div class="card"><h4>Unclog sink</h4><p class="muted small">Blocked sinks, traps and drainage lines cleared.</p><p class="from-price" style="font-size:var(--eb-text-lg)">RM300</p></div>
-    <div class="card"><h4>Install water pump</h4><p class="muted small">Water pump supply and installation, including tank connection.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM1,800</p></div>
-  </div>
-
-  <h3 class="subhead">Toilet waterproofing</h3>
-  <div class="tablewrap">
-    <table>
-      <caption>Toilet waterproofing — standard and premium</caption>
-      <thead><tr><th>Toilet size</th><th class="num">Standard</th><th class="num">Premium</th></tr></thead>
-      <tbody>
-        <tr><th>Small — under 60 sqft</th><td class="num">RM 950</td><td class="num">RM 1,500</td></tr>
-        <tr><th>Medium — 60–100 sqft</th><td class="num">RM 1,300</td><td class="num">RM 2,050</td></tr>
-        <tr><th>Large — over 100 sqft</th><td class="num">RM 15 / sqft</td><td class="num">RM 25 / sqft</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ══ 4 · INTERIOR & RENOVATION ═════════════════════════ -->
-<section class="svcblock" id="interior">
-  <div class="catband">
-    <img src="img/services/plaster-ceiling.jpg" alt="Skim-coating a ceiling with a trowel" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Interior &amp; renovation</h2>
-    <p>Cabinets, painting, ceilings, partitions and wall panels — improvement work for homes and commercial interiors.</p>
-  </div>
+  <div class="sv-table-wrap">
+  <table class="sv-table">
+    <caption class="sv-vh">Encik Beku services and details</caption>
+    <thead><tr><th scope="col">Service Category</th><th scope="col">Service / Product</th><th scope="col">Details</th></tr></thead>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-wall"/></svg>Wall Mounted</th><td>Wall-Mounted Aircond Installation</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP, 3.0 HP • Includes first 6 ft of piping</td></tr>
+      <tr><td>Supply + Install Aircond (Inverter)</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP • Daikin, Panasonic, Midea</td></tr>
+      <tr><td>Supply + Install Aircond (Non-Inverter)</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP, 3.0 HP • Daikin, Panasonic, Midea</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cassette"/></svg>Cassette</th><td>Ceiling Cassette Installation</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP, 3.0 HP • Includes first 6 ft of piping</td></tr>
+      <tr><td>Supply + Install Ceiling Cassette Aircond</td><td>2.0 HP, 2.5 HP, 3.0 HP • Daikin, Panasonic, Midea</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-wrench"/></svg>Aircond Service</th><td>Wall-Mounted Aircond Service</td><td>Standard • Chemical • Overhaul</td></tr>
+      <tr><td>Cassette Aircond Service</td><td>Standard • Chemical • Overhaul</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-truck"/></svg>Aircond Relocation</th><td>Aircond Relocation Service</td><td>Dismantling • Reinstallation • Overhaul • Transport 5–15 km • Transport 15–30 km</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-gas"/></svg>Gas Top-Up</th><td>Aircond Gas Top-Up</td><td>1–3 HP / 4–5 HP • 10 PSI / 150 PSI</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="5"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-gear"/></svg>Repair &amp; Others</th><td>Capacitor Replacement</td><td>Indoor / Outdoor</td></tr>
+      <tr><td>Check &amp; Troubleshoot</td><td>Aircond troubleshooting and inspection</td></tr>
+      <tr><td>New PC Board Installation</td><td>Depending on aircond brand</td></tr>
+      <tr><td>Aircond Inspection</td><td>General aircond checking</td></tr>
+      <tr><td>Site Visit</td><td>On-site inspection</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-swap"/></svg>Trade-In</th><td>Indoor + Outdoor Unit Trade-In</td><td>Aircond trade-in</td></tr>
+      <tr><td>Outdoor Compressor Trade-In</td><td>Compressor trade-in</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-pipe"/></svg>Concealed Work</th><td>Brick Wall &amp; Cement Wall</td><td>Below 18 ft / Above 18 ft</td></tr>
+      <tr><td>Concrete Wall</td><td>Below 18 ft / Above 18 ft</td></tr>
+    </tbody>
+    <tbody data-tab="aircond">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-remote"/></svg>Aircond Remote</th><td>Universal Remote</td><td>Universal aircond remote control</td></tr>
+      <tr><td>Original Remote</td><td>Original aircond remote control</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-switch"/></svg>Electrical Switch</th><td>New Switch Point Installation</td><td>From socket to new switch point • Below 18 ft</td></tr>
+      <tr><td>New Switch Point Installation from DB</td><td>From DB to new switch point • Below 18 ft</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-db"/></svg>Electrical DB Box</th><td>1-Row DB Box</td><td>Suitable for small houses</td></tr>
+      <tr><td>2-Row DB Box</td><td>Distribution board installation</td></tr>
+      <tr><td>3-Row DB Box</td><td>Distribution board installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="7"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-breaker"/></svg>MCB / RCCB / ELCB / SPD</th><td>Single Phase MCB</td><td>EPS brand</td></tr>
+      <tr><td>3 Phase MCB</td><td>EPS brand</td></tr>
+      <tr><td>Single Phase RCCB</td><td>EPS brand</td></tr>
+      <tr><td>3 Phase RCCB</td><td>EPS brand</td></tr>
+      <tr><td>Single Phase ELCB</td><td>EPS brand</td></tr>
+      <tr><td>3 Phase ELCB</td><td>EPS brand</td></tr>
+      <tr><td>SPD</td><td>EPS brand</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cable"/></svg>2.5 mm Wiring</th><td>Plug Loop Wiring Installation</td><td>From nearest point • Surface wiring • Below 18 ft</td></tr>
+      <tr><td>Plug to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
+      <tr><td>Extra Wire</td><td>Additional wiring</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cable"/></svg>4 mm Wiring</th><td>Plug to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
+      <tr><td>Aircond Point to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
+      <tr><td>Water Heater Point to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
+      <tr><td>Extra Wire</td><td>Additional wiring</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-switch"/></svg>Switch Replacement</th><td>1–3 Gang Switch</td><td>On-off switch replacement</td></tr>
+      <tr><td>20A Aircond Switch</td><td>On-off switch replacement</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-meter"/></svg>Meter</th><td>Timer Meter</td><td>Supply and installation</td></tr>
+      <tr><td>Split Meter</td><td>Supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-heater"/></svg>Water Heater</th><td>Labour + Panasonic Non-Pump</td><td>Water heater installation</td></tr>
+      <tr><td>Labour + Flexible Hose</td><td>Water heater installation</td></tr>
+      <tr><td>Remove Old Water Heater</td><td>Dismantling service</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Exhaust Fan</th><td>Installation Only</td><td>Exhaust fan installation</td></tr>
+      <tr><td>Installation + Supply 6-inch Fan</td><td>Includes 6-inch exhaust fan</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Ceiling Fan</th><td>Labour Only</td><td>Ceiling fan installation</td></tr>
+      <tr><td>Labour + Deka 5-Blade 56-inch Fan</td><td>Includes fan supply and installation</td></tr>
+      <tr><td>Dismantle Old Ceiling Fan</td><td>Removal service</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Wall Fan</th><td>Labour + Khind 16-inch Remote Fan</td><td>Includes wall fan supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-hook"/></svg>Fan Hook Installation</th><td>Concrete Ceiling</td><td>Fan hook installation</td></tr>
+      <tr><td>Plaster Ceiling</td><td>Fan hook installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-bulb"/></svg>Surface Light</th><td>Labour + 18W LED Light</td><td>Includes light supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="electrical">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tv"/></svg>TV Bracket</th><td>Install Only</td><td>TV bracket installation</td></tr>
+      <tr><td>Supply + Install</td><td>Up to 60-inch TV</td></tr>
+      <tr><td>Supply + Install Adjustable Bracket</td><td>Up to 60-inch TV</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV Package – 2-Way Audio</th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 8-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 16-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV Package – 1-Way Audio</th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 8-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+      <tr><td>Supply + Install 16-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+      <tr><td>Additional Wiring</td><td>Additional CCTV wiring</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV Installation</th><td>CCTV Installation Only</td><td>Available for 1–3 units or 3+ units</td></tr>
+      <tr><td>CCTV Wiring to Plug Point</td><td>Wiring from CCTV to plug point</td></tr>
+    </tbody>
+    <tbody data-tab="cctv">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>Indoor Wireless CCTV</th><td>Supply + Install C300 / C302</td><td>Wireless CCTV + Plug Point • Near installation (&lt;40 ft)</td></tr>
+      <tr><td>Supply + Install C300 / C302</td><td>Wireless CCTV + Plug Point • Longer-distance installation</td></tr>
+      <tr><td>Supply + Install CW300</td><td>Wireless CCTV + Plug Point • Near installation (&lt;40 ft)</td></tr>
+      <tr><td>Supply + Install CW300</td><td>Wireless CCTV + Plug Point • Long-distance installation (&gt;40 ft)</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Base Cabinet</th><td>Base Cabinet + Quartz Stone Table Top</td><td>Standard 6 ft package</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Base Cabinet – Add-On</th><td>Hole Opening + Sink Installation</td><td>Add-on service</td></tr>
+      <tr><td>Hole Opening + Cooking Stove Installation</td><td>Add-on service</td></tr>
+      <tr><td>Kitchen Hood Installation</td><td>Add-on service</td></tr>
+      <tr><td>3-Tier Drawer</td><td>Add-on item</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Wall Cabinet</th><td>Standard Wall Cabinet</td><td>Standard 6 ft package</td></tr>
+      <tr><td>High Wall Cabinet</td><td>Additional high wall cabinet option</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Tall Cabinet</th><td>Standard Height Tall Cabinet</td><td>Standard 2 ft package</td></tr>
+      <tr><td>Ceiling Height Tall Cabinet</td><td>Full-height cabinet option</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Wardrobe</th><td>Standard Height Wardrobe</td><td>Standard 6 ft package</td></tr>
+      <tr><td>Ceiling Height Wardrobe</td><td>Full-height wardrobe option</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="7"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Additional Cabinet Length</th><td>Base Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Standard Wall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>High Wall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Standard Height Tall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Ceiling Height Tall Cabinet</td><td>Additional per-foot run</td></tr>
+      <tr><td>Standard Height Wardrobe</td><td>Additional per-foot run</td></tr>
+      <tr><td>Ceiling Height Wardrobe</td><td>Additional per-foot run</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="6"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Interior Painting – Walls &amp; Ceiling</th><td>Condo 2–3 Bedrooms</td><td>600–900 sq ft</td></tr>
+      <tr><td>Condo / Single-Storey Home 3–4 Bedrooms</td><td>900–1,500 sq ft</td></tr>
+      <tr><td>Large Condo / Double-Storey Home</td><td>1,500–2,200 sq ft</td></tr>
+      <tr><td>Master / Medium Bedroom</td><td>Below 400 sq ft</td></tr>
+      <tr><td>Living Room</td><td>Below 400 sq ft</td></tr>
+      <tr><td>Kitchen</td><td>Below 400 sq ft</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Add-On Service</th><td>Single-Leaf Door + Frame Painting</td><td>Door and frame painting</td></tr>
+      <tr><td>Furniture / Item Relocation</td><td>Moving items before painting work</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Exterior Painting – Single Storey</th><td>High-Pressure Wash Only</td><td>Paint supplied by owner</td></tr>
+      <tr><td>High-Pressure Wash + Weathershield Paint</td><td>Includes ICI Dulux Weathershield</td></tr>
+    </tbody>
+    <tbody data-tab="renovation">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Exterior Painting – Double Storey</th><td>High-Pressure Wash + Scaffolding</td><td>Paint supplied by owner</td></tr>
+      <tr><td>High-Pressure Wash + Weathershield Paint + Scaffolding</td><td>Includes ICI Dulux Weathershield</td></tr>
+    </tbody>
+    <tbody data-tab="others">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing – Standard</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
+      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    </tbody>
+    <tbody data-tab="others">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing – Premium</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
+      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    </tbody>
+  </table>
+  <p class="sv-empty" hidden>No services match. Try another word, or choose All Services.</p>
   </div>
 
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Kitchen cabinet</h4><p class="muted small">Base cabinet with quartz stone top, wall cabinets, tall units, drawers, sink and hob cut-outs.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM2,400</p></div>
-    <div class="card"><h4>Indoor painting</h4><p class="muted small">Cat dinding dalam rumah — interior wall painting, prepared and finished.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM600</p></div>
-    <div class="card"><h4>Outdoor painting</h4><p class="muted small">Cat dinding luar rumah — exterior walls including preparation and weather coat.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM2,250</p></div>
-    <div class="card"><h4>Plaster ceiling</h4><p class="muted small">Flat ceiling, L-box, cornice and LED works.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM5.50 / sqft</p></div>
-    <div class="card"><h4>Partition</h4><p class="muted small">Gypsum and glass partition walls and doors.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM12 / sqft</p></div>
-    <div class="card"><h4>Wall panel</h4><p class="muted small">Fluted panels, marble panels and wainscoting.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM25 / sqft</p></div>
-  </div>
-</section>
-
-<!-- ══ 5 · FLOORING & EXTERIOR ═══════════════════════════ -->
-<section class="svcblock" id="flooring">
-  <div class="catband">
-    <img src="img/services/decking.jpg" alt="Laying timber decking boards" width="453" height="640" loading="lazy">
-  <div class="sec-head">
-    <div class="eyebrow">Service category</div>
-    <h2 data-anim="lines">Flooring &amp; exterior solutions</h2>
-    <p>Epoxy flake flooring, invisible grilles and decking.</p>
-  </div>
-  </div>
-
-  <div class="grid g3" data-anim="stagger">
-    <div class="card"><h4>Epoxy flakes flooring</h4><p class="muted small">Epoxy flake floor finish, commonly paired with toilet waterproofing.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM15 / sqft</p></div>
-    <div class="card"><h4>Invisible grille</h4><p class="muted small">Nylon and teflon grilles for cat and baby protection.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM25 / sqft</p></div>
-    <div class="card"><h4>Decking</h4><p class="muted small">SPC, vinyl and herringbone deck flooring.</p><p class="from-price" style="font-size:var(--eb-text-lg)">From RM28 / sqft</p></div>
-  </div>
-</section>
-
+  <p class="sv-note" data-tab="electrical">Note: Uses SIRIM-certified components and MS IEC 60227 wire for safe installation.</p>
+  <p class="sv-note" data-tab="cctv">Warranty Note: Customers are required to keep the CCTV box and SD card box for warranty return and claim purposes.</p>
 </div>
-
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Service catalogue</div>
-      <h2 data-anim="lines">The complete catalogue</h2>
-      <p>Every price table, the SSM and CIDB certificates, branch details and bank information for each entity.</p>
-    </div>
-    <article class="dlcard">
-      <div class="cover"><img src="img/covers/service-catalogue.jpg" alt="" width="296" height="420"></div>
-      <div class="body">
-        <h3>Encik Beku Service Catalogue</h3>
-        <p>Complete overview of Encik Beku air-conditioning, technical and property services, including full pricing tables.</p>
-        <div class="specs"><span><b>PDF</b></span><span>34 pages</span><span>English &amp; Malay</span><span>3.1 MB</span><span><b>v1.0</b></span><span>Updated 20 August 2026</span></div>
-        <div class="acts">
-          <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" target="_blank" rel="noopener">Preview PDF</a>
-          <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>Download PDF</a>
-        </div>
-      </div>
-    </article>
-    <p class="note">A separate, more frequently updated <strong>Price List</strong> document is planned. Until it is published, the pricing above and in the catalogue carries the effective date shown at the top of this page.</p>
-  </div>
-</section>
 
 </main>
 
@@ -450,13 +396,62 @@
     </div>
     <div class="legal">
       Encik Beku Aircond Sdn Bhd (1561739-D) · 5, Jln Bukit Badong 26/4, Hicom Industrial Estate, 40400 Shah Alam, Selangor<br>
-      Encik Beku Aircond N9 Sdn Bhd (1611987-U) · Encik Beku Aircond Selatan Sdn Bhd (1611766-A)<br>
-      Pricing effective 20 August 2026. Published for guidance; not a quotation.
+      Encik Beku Aircond N9 Sdn Bhd (1611987-U) · Encik Beku Aircond Selatan Sdn Bhd (1611766-A)
     </div>
   </div>
 </footer>
 
-<script src="anim.js?v=mtwgk8ze"></script>
+<script>
+(function () {
+  var groups = [].slice.call(document.querySelector('.sv-table').tBodies);
+  var tabs = [].slice.call(document.querySelectorAll('.sv-tabs button'));
+  var notes = [].slice.call(document.querySelectorAll('.sv-note'));
+  var q = document.getElementById('sv-q'), type = document.getElementById('sv-type');
+  var empty = document.querySelector('.sv-empty');
+  var tab = 'aircond';
+
+  function inTab(el) { return tab === 'all' || el.dataset.tab === tab; }
+  function catName(g) { return g.querySelector('th').textContent.trim(); }
+
+  function fillTypes() {
+    type.length = 1;
+    groups.filter(inTab).forEach(function (g) { type.add(new Option(catName(g), catName(g))); });
+  }
+
+  // The category cell spans its group with rowspan, so when rows are filtered
+  // out it moves to the first row still showing and its span is recounted.
+  function render() {
+    var term = q.value.trim().toLowerCase(), shown = 0;
+    groups.forEach(function (g) {
+      var th = g.querySelector('th'), name = catName(g);
+      var rows = [].filter.call(g.rows, function (r) {
+        return inTab(g) && (!type.value || type.value === name) &&
+          (name + ' ' + r.textContent).toLowerCase().indexOf(term) !== -1;
+      });
+      [].forEach.call(g.rows, function (r) { r.hidden = rows.indexOf(r) === -1; });
+      g.hidden = !rows.length;
+      if (rows.length) { rows[0].insertBefore(th, rows[0].firstChild); th.rowSpan = rows.length; }
+      shown += rows.length;
+    });
+    notes.forEach(function (n) { n.hidden = !inTab(n); });
+    empty.hidden = shown > 0;
+  }
+
+  tabs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === b); });
+      tab = b.dataset.tab;
+      fillTypes();
+      render();
+    });
+  });
+  q.addEventListener('input', render);
+  type.addEventListener('change', render);
+  fillTypes();
+  render();
+})();
+</script>
+<script src="anim.js?v=mu4zmonw"></script>
 <script src="i18n.js"></script>
 </body>
 </html>
