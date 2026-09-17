@@ -23,7 +23,7 @@
     display: flex; align-items: center; justify-content: center; gap: 0.75rem;
     min-height: 3.1rem; padding: 0 1rem; border: 0; border-radius: var(--eb-radius-sm);
     background: var(--eb-bg-tint); color: var(--eb-fg-1);
-    font: inherit; font-size: var(--eb-text-sm); cursor: pointer; white-space: nowrap;
+    font: inherit; font-size: var(--eb-text-sm); line-height: 1.2; text-align: center; cursor: pointer;
   }
   .sv-tabs button[aria-pressed="true"] {
     background: linear-gradient(180deg, color-mix(in srgb, var(--eb-blue-400) 35%, var(--eb-bg-brand)), var(--eb-bg-brand));
@@ -72,6 +72,7 @@
   .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
   .sv-note { margin-top: var(--eb-space-3); font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
 
+  @media (max-width: 840px) { .sv-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   @media (max-width: 760px) {
     .sv-tabs {
       grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto;
@@ -93,12 +94,9 @@
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <g id="sv-all"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></g>
   <g id="sv-aircond"><path d="M12 2.5v19M3.77 7.25l16.46 9.5M3.77 16.75l16.46-9.5M9.53 4.53 12 7l2.47-2.47M9.53 19.47 12 17l2.47 2.47M6.77 6.12l.9 3.38-3.38.9M17.23 6.12l-.9 3.38 3.38.9M6.77 17.88l.9-3.38-3.38-.9M17.23 17.88l-.9-3.38 3.38-.9"/></g>
   <g id="sv-electrical"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z" fill="currentColor"/></g>
   <g id="sv-cctv"><path d="M3 8.5 16 5l1.6 6-13 3.5zM16 5l3-.8 1.6 6-3 .8M11 12.8l1 4.7H4.5M4.5 15v5"/></g>
-  <g id="sv-renovation"><path d="M3.5 11 12 4l8.5 7M5.5 9.5V20h13V9.5M10 20v-5h4v5"/></g>
-  <g id="sv-others"><circle cx="5.5" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="18.5" cy="12" r="1.9" fill="currentColor" stroke="none"/></g>
   <g id="sv-search"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g>
   <g id="sv-down"><path d="m6 9 6 6 6-6"/></g>
   <g id="sv-wall"><rect x="2.5" y="6" width="19" height="11" rx="2.5"/><path d="M5.5 13.5h13M5.5 9.5h2"/></g>
@@ -122,6 +120,12 @@
   <g id="sv-tv"><rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M8 20.5h8M12 16.5v4"/></g>
   <g id="sv-cabinet"><path d="M2.5 6.5h19"/><rect x="4" y="6.5" width="16" height="14" rx="1"/><path d="M12 6.5v14M10 11v2.5M14 11v2.5"/></g>
   <g id="sv-roller"><rect x="3" y="3.5" width="15" height="5.5" rx="1.5"/><path d="M18 6.25h2.5v5.25H11V15M9.5 15h3v6h-3z"/></g>
+  <g id="sv-ceiling"><path d="M2.5 4h19M2.5 4v4.5a2 2 0 0 0 2 2h15a2 2 0 0 0 2-2V4M9.5 10.5v1.5h5v-1.5M12 15v2.5M7.5 14.5l-1.5 2M16.5 14.5l1.5 2"/></g>
+  <g id="sv-partition"><path d="M2.5 20.5h19M4 20.5V3.5h16v17M11 20.5V9h6v11.5M15 15h.01"/></g>
+  <g id="sv-tap"><path d="M3.5 9h9.5a4 4 0 0 1 4 4v1.5M3.5 6.5v5M8.5 9V5.5M6 5.5h5M17 18c.8 1 1.2 1.6 1.2 2.2a1.2 1.2 0 0 1-2.4 0c0-.6.4-1.2 1.2-2.2z"/></g>
+  <g id="sv-grille"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5"/><path d="M3.5 8h17M3.5 12h17M3.5 16h17"/></g>
+  <g id="sv-panel"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 6v12M12 6v12M16 6v12"/></g>
+  <g id="sv-decking"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.33h18M3 14.67h18M10 4v5.33M15 9.33v5.34M8 14.67V20"/></g>
   <g id="sv-drop"><path d="M12 3c3.6 4.3 6 7.6 6 10.5a6 6 0 0 1-12 0C6 10.6 8.4 7.3 12 3z"/></g>
 </defs></svg>
 
@@ -150,12 +154,18 @@
 
 <div class="wrap sv-body">
   <div class="sv-tabs" role="group" aria-label="Service category">
-    <button type="button" data-tab="all" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-all"/></svg>All Services</button>
     <button type="button" data-tab="aircond" aria-pressed="true"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-aircond"/></svg>Aircond</button>
-    <button type="button" data-tab="electrical" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-electrical"/></svg>Electrical</button>
+    <button type="button" data-tab="wiring" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-electrical"/></svg>Wiring</button>
     <button type="button" data-tab="cctv" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV</button>
-    <button type="button" data-tab="renovation" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-renovation"/></svg>Renovation</button>
-    <button type="button" data-tab="others" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-others"/></svg>Others</button>
+    <button type="button" data-tab="waterproofing" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Waterproofing</button>
+    <button type="button" data-tab="cabinet" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Cabinet &amp; Wardrobe</button>
+    <button type="button" data-tab="painting" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Painting</button>
+    <button type="button" data-tab="ceiling" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-ceiling"/></svg>Plaster Ceiling Works</button>
+    <button type="button" data-tab="partition" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-partition"/></svg>Partition</button>
+    <button type="button" data-tab="plumbing" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Plumbing</button>
+    <button type="button" data-tab="grille" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-grille"/></svg>Invisible Grille</button>
+    <button type="button" data-tab="panel" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-panel"/></svg>Wall Panel</button>
+    <button type="button" data-tab="decking" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-decking"/></svg>Decking</button>
   </div>
 
   <div class="sv-filters">
@@ -213,16 +223,16 @@
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-remote"/></svg>Aircond Remote</th><td>Universal Remote</td><td>Universal aircond remote control</td></tr>
       <tr><td>Original Remote</td><td>Original aircond remote control</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-switch"/></svg>Electrical Switch</th><td>New Switch Point Installation</td><td>From socket to new switch point • Below 18 ft</td></tr>
       <tr><td>New Switch Point Installation from DB</td><td>From DB to new switch point • Below 18 ft</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-db"/></svg>Electrical DB Box</th><td>1-Row DB Box</td><td>Suitable for small houses</td></tr>
       <tr><td>2-Row DB Box</td><td>Distribution board installation</td></tr>
       <tr><td>3-Row DB Box</td><td>Distribution board installation</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="7"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-breaker"/></svg>MCB / RCCB / ELCB / SPD</th><td>Single Phase MCB</td><td>EPS brand</td></tr>
       <tr><td>3 Phase MCB</td><td>EPS brand</td></tr>
       <tr><td>Single Phase RCCB</td><td>EPS brand</td></tr>
@@ -231,50 +241,50 @@
       <tr><td>3 Phase ELCB</td><td>EPS brand</td></tr>
       <tr><td>SPD</td><td>EPS brand</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cable"/></svg>2.5 mm Wiring</th><td>Plug Loop Wiring Installation</td><td>From nearest point • Surface wiring • Below 18 ft</td></tr>
       <tr><td>Plug to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
       <tr><td>Extra Wire</td><td>Additional wiring</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cable"/></svg>4 mm Wiring</th><td>Plug to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
       <tr><td>Aircond Point to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
       <tr><td>Water Heater Point to Direct DB Wiring</td><td>Surface wiring • Below 18 ft</td></tr>
       <tr><td>Extra Wire</td><td>Additional wiring</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-switch"/></svg>Switch Replacement</th><td>1–3 Gang Switch</td><td>On-off switch replacement</td></tr>
       <tr><td>20A Aircond Switch</td><td>On-off switch replacement</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-meter"/></svg>Meter</th><td>Timer Meter</td><td>Supply and installation</td></tr>
       <tr><td>Split Meter</td><td>Supply and installation</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-heater"/></svg>Water Heater</th><td>Labour + Panasonic Non-Pump</td><td>Water heater installation</td></tr>
       <tr><td>Labour + Flexible Hose</td><td>Water heater installation</td></tr>
       <tr><td>Remove Old Water Heater</td><td>Dismantling service</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Exhaust Fan</th><td>Installation Only</td><td>Exhaust fan installation</td></tr>
       <tr><td>Installation + Supply 6-inch Fan</td><td>Includes 6-inch exhaust fan</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Ceiling Fan</th><td>Labour Only</td><td>Ceiling fan installation</td></tr>
       <tr><td>Labour + Deka 5-Blade 56-inch Fan</td><td>Includes fan supply and installation</td></tr>
       <tr><td>Dismantle Old Ceiling Fan</td><td>Removal service</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-fan"/></svg>Wall Fan</th><td>Labour + Khind 16-inch Remote Fan</td><td>Includes wall fan supply and installation</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-hook"/></svg>Fan Hook Installation</th><td>Concrete Ceiling</td><td>Fan hook installation</td></tr>
       <tr><td>Plaster Ceiling</td><td>Fan hook installation</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-bulb"/></svg>Surface Light</th><td>Labour + 18W LED Light</td><td>Includes light supply and installation</td></tr>
     </tbody>
-    <tbody data-tab="electrical">
+    <tbody data-tab="wiring">
       <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tv"/></svg>TV Bracket</th><td>Install Only</td><td>TV bracket installation</td></tr>
       <tr><td>Supply + Install</td><td>Up to 60-inch TV</td></tr>
       <tr><td>Supply + Install Adjustable Bracket</td><td>Up to 60-inch TV</td></tr>
@@ -300,28 +310,38 @@
       <tr><td>Supply + Install CW300</td><td>Wireless CCTV + Plug Point • Near installation (&lt;40 ft)</td></tr>
       <tr><td>Supply + Install CW300</td><td>Wireless CCTV + Plug Point • Long-distance installation (&gt;40 ft)</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="waterproofing">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing – Standard</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
+      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    </tbody>
+    <tbody data-tab="waterproofing">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing – Premium</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
+      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    </tbody>
+    <tbody data-tab="cabinet">
       <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Base Cabinet</th><td>Base Cabinet + Quartz Stone Table Top</td><td>Standard 6 ft package</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="cabinet">
       <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Base Cabinet – Add-On</th><td>Hole Opening + Sink Installation</td><td>Add-on service</td></tr>
       <tr><td>Hole Opening + Cooking Stove Installation</td><td>Add-on service</td></tr>
       <tr><td>Kitchen Hood Installation</td><td>Add-on service</td></tr>
       <tr><td>3-Tier Drawer</td><td>Add-on item</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="cabinet">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Wall Cabinet</th><td>Standard Wall Cabinet</td><td>Standard 6 ft package</td></tr>
       <tr><td>High Wall Cabinet</td><td>Additional high wall cabinet option</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="cabinet">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Tall Cabinet</th><td>Standard Height Tall Cabinet</td><td>Standard 2 ft package</td></tr>
       <tr><td>Ceiling Height Tall Cabinet</td><td>Full-height cabinet option</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="cabinet">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Wardrobe</th><td>Standard Height Wardrobe</td><td>Standard 6 ft package</td></tr>
       <tr><td>Ceiling Height Wardrobe</td><td>Full-height wardrobe option</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="cabinet">
       <tr><th scope="rowgroup" rowspan="7"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Additional Cabinet Length</th><td>Base Cabinet</td><td>Additional per-foot run</td></tr>
       <tr><td>Standard Wall Cabinet</td><td>Additional per-foot run</td></tr>
       <tr><td>High Wall Cabinet</td><td>Additional per-foot run</td></tr>
@@ -330,7 +350,7 @@
       <tr><td>Standard Height Wardrobe</td><td>Additional per-foot run</td></tr>
       <tr><td>Ceiling Height Wardrobe</td><td>Additional per-foot run</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="painting">
       <tr><th scope="rowgroup" rowspan="6"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Interior Painting – Walls &amp; Ceiling</th><td>Condo 2–3 Bedrooms</td><td>600–900 sq ft</td></tr>
       <tr><td>Condo / Single-Storey Home 3–4 Bedrooms</td><td>900–1,500 sq ft</td></tr>
       <tr><td>Large Condo / Double-Storey Home</td><td>1,500–2,200 sq ft</td></tr>
@@ -338,33 +358,125 @@
       <tr><td>Living Room</td><td>Below 400 sq ft</td></tr>
       <tr><td>Kitchen</td><td>Below 400 sq ft</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="painting">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Add-On Service</th><td>Single-Leaf Door + Frame Painting</td><td>Door and frame painting</td></tr>
       <tr><td>Furniture / Item Relocation</td><td>Moving items before painting work</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="painting">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Exterior Painting – Single Storey</th><td>High-Pressure Wash Only</td><td>Paint supplied by owner</td></tr>
       <tr><td>High-Pressure Wash + Weathershield Paint</td><td>Includes ICI Dulux Weathershield</td></tr>
     </tbody>
-    <tbody data-tab="renovation">
+    <tbody data-tab="painting">
       <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Exterior Painting – Double Storey</th><td>High-Pressure Wash + Scaffolding</td><td>Paint supplied by owner</td></tr>
       <tr><td>High-Pressure Wash + Weathershield Paint + Scaffolding</td><td>Includes ICI Dulux Weathershield</td></tr>
     </tbody>
-    <tbody data-tab="others">
-      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing – Standard</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
-      <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
-      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    <tbody data-tab="ceiling">
+      <tr><th scope="rowgroup" rowspan="5"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-ceiling"/></svg>Plaster Ceiling Works</th><td>Flat Ceiling</td><td>Standard plaster ceiling work</td></tr>
+      <tr><td>L-Box</td><td>L-box ceiling design</td></tr>
+      <tr><td>Cornice Ceiling + 4K LED Light</td><td>Cornice ceiling with LED lighting</td></tr>
+      <tr><td>Normal Cornice Design</td><td>Standard cornice ceiling design</td></tr>
+      <tr><td>White Ceiling Painting</td><td>Ceiling painting in white finish</td></tr>
     </tbody>
-    <tbody data-tab="others">
-      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Toilet Waterproofing – Premium</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
-      <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
-      <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
+    <tbody data-tab="partition">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-partition"/></svg>Partition Wall</th><td>Gypsum Board Partition</td><td>Painted finish</td></tr>
+      <tr><td>Soundproof Gypsum Board Partition</td><td>Soundproof partition wall</td></tr>
+      <tr><td>Glass Partition Wall</td><td>Glass wall partition</td></tr>
+    </tbody>
+    <tbody data-tab="partition">
+      <tr><th scope="rowgroup" rowspan="8"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-partition"/></svg>Door Type</th><td>Full Wooden Door</td><td>Aluminium frame / paint finish</td></tr>
+      <tr><td>Half Wood &amp; Glass Door</td><td>Mixed wood and glass door</td></tr>
+      <tr><td>Full Glass Door</td><td>Full glass door</td></tr>
+      <tr><td>Clear Glass Window (Static)</td><td>3 x 3 ft</td></tr>
+      <tr><td>Clear Glass Window (Static)</td><td>6 x 4 ft</td></tr>
+      <tr><td>Sliding Window</td><td>4 x 4 ft</td></tr>
+      <tr><td>Extra Frame</td><td>Additional frame work</td></tr>
+      <tr><td>Curve Arch</td><td>Curved arch opening</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Supply + Install</th><td>Heavy Duty Items</td><td>Supply and installation service</td></tr>
+      <tr><td>Normal Items</td><td>Supply and installation service</td></tr>
+      <tr><td>Install Only</td><td>Installation service only</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>WC Flush</th><td>Supply and Install</td><td>WC flush supply and installation</td></tr>
+      <tr><td>Dismantle</td><td>Removal / dismantling service</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Kitchen Sink</th><td>Install Only</td><td>Kitchen sink installation only</td></tr>
+      <tr><td>Supply and Install</td><td>Kitchen sink supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="5"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Shower Set</th><td>Standard Shower Set Install Only</td><td>Installation only</td></tr>
+      <tr><td>Supply Standard Shower Set &amp; Install</td><td>Includes supply and installation</td></tr>
+      <tr><td>Supply Rain Shower &amp; Install</td><td>Includes supply and installation</td></tr>
+      <tr><td>Install Water Heater</td><td>Water heater installation only</td></tr>
+      <tr><td>Supply Panasonic Water Heater &amp; Install</td><td>Includes supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="4"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Maintenance</th><td>Leaking Valve / Stopcock Repair</td><td>Rubber replacement only</td></tr>
+      <tr><td>Hack + Replace Valve + Plaster</td><td>Repair with hacking and plastering</td></tr>
+      <tr><td>Unclog Floor Trap / Sink</td><td>Unclogging service</td></tr>
+      <tr><td>Check &amp; Repair Clogged Pipe</td><td>For kitchen, floor trap, or toilet</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="7"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Water Pump</th><td>Supply + Install Tsunami Pump 0.5 HP</td><td>Water pump supply and installation</td></tr>
+      <tr><td>Supply + Install Tsunami Pump 0.75 HP</td><td>Water pump supply and installation</td></tr>
+      <tr><td>Supply + Install Tsunami Pump 1 HP</td><td>Water pump supply and installation</td></tr>
+      <tr><td>Supply + Install Grundfos Pump 0.67 HP</td><td>Water pump supply and installation</td></tr>
+      <tr><td>Supply + Install Grundfos Pump 0.9 HP</td><td>Water pump supply and installation</td></tr>
+      <tr><td>Supply + Install Grundfos Pump 1.2 HP</td><td>Water pump supply and installation</td></tr>
+      <tr><td>Labour + Wiring</td><td>Installation labour and wiring</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Water Tank</th><td>Supply + Install King Kong Water Tank 1000L</td><td>Water tank supply and installation</td></tr>
+      <tr><td>Labour Only</td><td>Installation labour only</td></tr>
+    </tbody>
+    <tbody data-tab="plumbing">
+      <tr><th scope="rowgroup" rowspan="3"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Water Tank + Pump + Filter</th><td>Supply + Install King Kong Water Tank 1000L + Hitachi Water Pump 200W + 6-Layer Water Filter</td><td>Complete package</td></tr>
+      <tr><td>Supply + Install King Kong Water Tank 1000L + Hitachi Water Pump 250W + 6-Layer Water Filter</td><td>Complete package</td></tr>
+      <tr><td>Labour Only</td><td>Installation labour only</td></tr>
+    </tbody>
+    <tbody data-tab="grille">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-grille"/></svg>Nylon Invisible Grille</th><td>Cat Safety</td><td>3.5 cm spacing</td></tr>
+      <tr><td>Baby Safety</td><td>5.5 cm spacing</td></tr>
+    </tbody>
+    <tbody data-tab="grille">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-grille"/></svg>Teflon Invisible Grille</th><td>Cat Safety</td><td>3.5 cm spacing</td></tr>
+      <tr><td>Baby Safety</td><td>5.5 cm spacing</td></tr>
+    </tbody>
+    <tbody data-tab="panel">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-panel"/></svg>Fluted Wall Panel</th><td>Supply + Install</td><td>Fluted wall panel with installation</td></tr>
+      <tr><td>Install Only</td><td>Installation service only</td></tr>
+    </tbody>
+    <tbody data-tab="panel">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-panel"/></svg>Marble Wall Panel</th><td>Supply + Install</td><td>Marble wall panel with installation</td></tr>
+      <tr><td>Install Only</td><td>Installation service only</td></tr>
+    </tbody>
+    <tbody data-tab="panel">
+      <tr><th scope="rowgroup" rowspan="2"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-panel"/></svg>Wainscoting + White Paint</th><td>Supply + Install</td><td>MDF / Plywood wainscoting with white paint</td></tr>
+      <tr><td>Install Only</td><td>Installation service only</td></tr>
+    </tbody>
+    <tbody data-tab="decking">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-decking"/></svg>Type A</th><td>Supply + Install</td><td>Type A flooring / decking supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="decking">
+      <tr><th scope="rowgroup" rowspan="1"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-decking"/></svg>Type B</th><td>Supply + Install</td><td>Type B flooring / decking supply and installation</td></tr>
+    </tbody>
+    <tbody data-tab="decking">
+      <tr><th scope="rowgroup" rowspan="8"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-decking"/></svg>Flooring</th><td>Install Only</td><td>Installation service only</td></tr>
+      <tr><td>Levelling</td><td>Floor levelling service</td></tr>
+      <tr><td>Supply + Install SPC</td><td>SPC flooring supply and installation</td></tr>
+      <tr><td>Install Only SPC</td><td>SPC flooring installation only</td></tr>
+      <tr><td>Supply + Install Vinyl</td><td>Vinyl flooring supply and installation</td></tr>
+      <tr><td>Install Only Vinyl</td><td>Vinyl flooring installation only</td></tr>
+      <tr><td>Herringbone Design SPC</td><td>SPC flooring with herringbone pattern</td></tr>
+      <tr><td>Herringbone Design Vinyl</td><td>Vinyl flooring with herringbone pattern</td></tr>
     </tbody>
   </table>
-  <p class="sv-empty" hidden>No services match. Try another word, or choose All Services.</p>
+  <p class="sv-empty" hidden>No services match. Try another word.</p>
   </div>
 
-  <p class="sv-note" data-tab="electrical">Note: Uses SIRIM-certified components and MS IEC 60227 wire for safe installation.</p>
+  <p class="sv-note" data-tab="wiring">Note: Uses SIRIM-certified components and MS IEC 60227 wire for safe installation.</p>
   <p class="sv-note" data-tab="cctv">Warranty Note: Customers are required to keep the CCTV box and SD card box for warranty return and claim purposes.</p>
 </div>
 
@@ -410,7 +522,7 @@
   var empty = document.querySelector('.sv-empty');
   var tab = 'aircond';
 
-  function inTab(el) { return tab === 'all' || el.dataset.tab === tab; }
+  function inTab(el) { return el.dataset.tab === tab; }
   function catName(g) { return g.querySelector('th').textContent.trim(); }
 
   function fillTypes() {
