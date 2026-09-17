@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "locked": "2026-08-19",
   "owner": "Encik Beku Aircond Sdn Bhd (1561739-D)",
-  "fileCount": 186,
-  "totalBytes": 66996586,
+  "fileCount": 208,
+  "totalBytes": 82661987,
   "entries": [
     {
       "path": ".gitattributes",
@@ -199,9 +199,64 @@
       "sha256": "adcf5a68389c5b070ccb06279a3fa0e256ad3872ea599d0e8e57feabd6638313"
     },
     {
-      "path": "_source/encik-beku-services-hero.png",
-      "bytes": 1963512,
-      "sha256": "6dd73c318898c9ba346324bd8837b6ab87edc5f66a7453ea1cdeed1f9da6a728"
+      "path": "_source/encik-beku-services-hero-aircond.jpg",
+      "bytes": 1124771,
+      "sha256": "b702dd8552566d9c538a9126b17f0792d3ef159efcae649b5f444830d54b93c7"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-cabinet.jpg",
+      "bytes": 883661,
+      "sha256": "f606dbf535f1bae7cdad8eb331a78917f073675360c83ed9a10e4faad81b058f"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-cctv.jpg",
+      "bytes": 1074108,
+      "sha256": "331d6422063b4010e049d3441819a5522d28bb708e63402dbf53c4018004c988"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-ceiling.jpg",
+      "bytes": 872495,
+      "sha256": "3927579d67ef28ff90c398240995c53eadf3df1db8401276b22041efe09ebea1"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-decking.jpg",
+      "bytes": 1165492,
+      "sha256": "d9e6ec08bd591f643dcd476b9c6c45ab75d7aae83f6411fa94dad7202b4e19a2"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-grille.jpg",
+      "bytes": 1007808,
+      "sha256": "6af3747c66aba1bdc71f8d14fa794d0d40bce3f20afabd2c3ef379ddca31334a"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-painting.jpg",
+      "bytes": 1243182,
+      "sha256": "fb8dce712bb60dfd27127b7f26a28e942f3eaf506ef8feb301c2365b7fb9fe6e"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-panel.jpg",
+      "bytes": 1050915,
+      "sha256": "15229c179a7aca736f23f263880bffd594d4e09cbdd48792ed5f45443788f338"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-partition.jpg",
+      "bytes": 992429,
+      "sha256": "08105d15f708e6c5012f2e9d403dbaef307f670cdeac96d9e66b02620b160844"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-plumbing.jpg",
+      "bytes": 1071740,
+      "sha256": "031b717dc8604fbb4f7b1573bfd78764c0ff9407343c9fcce89c1f16ff58eade"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-waterproofing.jpg",
+      "bytes": 902476,
+      "sha256": "7103b406c3344e4b36228d8ac232b32a45d22c05c8ba203d3954f3b5ebdb46f9"
+    },
+    {
+      "path": "_source/encik-beku-services-hero-wiring.jpg",
+      "bytes": 964966,
+      "sha256": "86c2d0e4f191a85456f211e659f9cf0beb1920549e76058902892dd7e9504d35"
     },
     {
       "path": "code/README.md",
@@ -600,8 +655,8 @@
     },
     {
       "path": "tools/build-heroes.sh",
-      "bytes": 1957,
-      "sha256": "6876de1d29af72bdd16cb83e3ff3bc1edb85f5142123832421d8adc7188f983c"
+      "bytes": 2146,
+      "sha256": "c94879d1d69c4499168bec16ca4768a40222efd6716f6b0779b4209a504a8d16"
     },
     {
       "path": "tools/build-logos.sh",
@@ -670,8 +725,8 @@
     },
     {
       "path": "tools/verify.mjs",
-      "bytes": 13534,
-      "sha256": "b75beea1aede0606693326dc7d690bd05e2007395d4081ad69c416142a9df391"
+      "bytes": 14313,
+      "sha256": "db0519f6e4246e3ee89ec0f334d05cf4fa1fb12a3f0953bceb00a06b92e6be93"
     },
     {
       "path": "tools/video-frames.swift",
@@ -909,9 +964,64 @@
       "sha256": "0d436ea625f4b639706a9883bdf1133acd2f15739612d9b5d446051336024210"
     },
     {
-      "path": "website/img/services-hero.jpg",
-      "bytes": 131657,
-      "sha256": "f184ae24b23fff5cf2b6920fbac325e8a106e67bf04bd1fe0daf1eb1aa260fa5"
+      "path": "website/img/services-hero-aircond.jpg",
+      "bytes": 522336,
+      "sha256": "f3dd72c395090b4e1981f52e3b6c4eb696b6d91178443fe352d0205c71317c4b"
+    },
+    {
+      "path": "website/img/services-hero-cabinet.jpg",
+      "bytes": 373820,
+      "sha256": "7cac16a331b585e5edd6a792b354ab7e811267780cbc4ad38ac3fee717ec5b62"
+    },
+    {
+      "path": "website/img/services-hero-cctv.jpg",
+      "bytes": 485913,
+      "sha256": "b6be83f85cd92e9dfe58d6b47f9b611fb16a9776eaac057709a219f0fcc9769b"
+    },
+    {
+      "path": "website/img/services-hero-ceiling.jpg",
+      "bytes": 350413,
+      "sha256": "8e732486246a01554597de9e6b24c239f0cf7badb2fa53e2ea914cc30c6c44bb"
+    },
+    {
+      "path": "website/img/services-hero-decking.jpg",
+      "bytes": 581857,
+      "sha256": "eef6ab17569aaddbc23aa0005344eaadfe53d83b891773d7623706b8f1d9e030"
+    },
+    {
+      "path": "website/img/services-hero-grille.jpg",
+      "bytes": 448484,
+      "sha256": "ef893f1d31ab7682ff210449f477cd4087407895e141ca6afd590c6962efb9d9"
+    },
+    {
+      "path": "website/img/services-hero-painting.jpg",
+      "bytes": 521243,
+      "sha256": "f52b9801e6d9a78e4beecfe0aad0e273f3d257a820565efa2e5e3efe6bbae02e"
+    },
+    {
+      "path": "website/img/services-hero-panel.jpg",
+      "bytes": 452067,
+      "sha256": "3896194ae9ae67919120cbeb27d0627a7874c78579c0e7fe0e55e1f40e342944"
+    },
+    {
+      "path": "website/img/services-hero-partition.jpg",
+      "bytes": 427903,
+      "sha256": "d42e78064964b6a6d6cff5296fec767e07e70c643a93c9b5b74b4b2cc6d82a0f"
+    },
+    {
+      "path": "website/img/services-hero-plumbing.jpg",
+      "bytes": 438287,
+      "sha256": "ad4b5abdf7fefb95e81f36725d5c4fa76082421dfc259f411cc0013fa3242425"
+    },
+    {
+      "path": "website/img/services-hero-waterproofing.jpg",
+      "bytes": 410171,
+      "sha256": "2b6b659397c7d38d75c804f17c93e5f3966a112d4d4134c3593614a56595cb86"
+    },
+    {
+      "path": "website/img/services-hero-wiring.jpg",
+      "bytes": 393894,
+      "sha256": "26bddd40a0534729b2e530f1b5d7028cfda8a4dae90d73d542d48c2ca216821c"
     },
     {
       "path": "website/index.html",
@@ -925,13 +1035,13 @@
     },
     {
       "path": "website/services.html",
-      "bytes": 36592,
-      "sha256": "1fdc693cc40583dde42e0d0d57509d298882021c4d3d577bf259b5a7005b575b"
+      "bytes": 36230,
+      "sha256": "7d33c521b6526dc95404b2b085574973453bf1158da221fa15c81ab0c5bec245"
     },
     {
       "path": "website/site-preview.html",
-      "bytes": 2708382,
-      "sha256": "dcc795338c7a6fae414ebf234219691af859ab7f16130e9063387396e1a68543"
+      "bytes": 2707915,
+      "sha256": "06d8b7d61cb6e689b1ac7a3afe6e6fbf076c7aac6222b60df90109f4aef23de6"
     },
     {
       "path": "website/site.css",

@@ -278,6 +278,18 @@ section('6 · code/index.ts re-exports resolve');
     : bad(`missing service photographs: ${missing.join(', ')} — rerun tools/build-service-photos.sh`);
 }
 
+/* ── Every What we do section has its banner photo ─────────────
+   services.html builds the path from the tab's key when a section is picked,
+   so no src attribute names these files and the publish link check cannot see
+   a missing one. Rebuild them with tools/build-heroes.sh. */
+{
+  const keys = [...read('website/services.html').matchAll(/<button type="button" data-tab="([a-z]+)"/g)].map((m) => m[1]);
+  const missing = keys.filter((k) => !existsSync(join(ROOT, `website/img/services-hero-${k}.jpg`)));
+  keys.length && missing.length === 0
+    ? ok(`all ${keys.length} What we do section banners present`)
+    : bad(`What we do section(s) with no banner photo: ${missing.join(', ') || 'no tabs found'} — rerun tools/build-heroes.sh`);
+}
+
 /* ── result ────────────────────────────────────────────────── */
 console.log(
   failures === 0
