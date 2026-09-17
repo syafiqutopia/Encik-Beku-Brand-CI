@@ -13,10 +13,10 @@
   .sv-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .sv-body [hidden] { display: none !important; }
 
-  /* Same banner as Who we are: the photo at 70% over Tech Blue is its flat 30%
-     #035CC2 tint, and the blue stands in while a section's photo loads. */
-  .sv-hero { position: relative; display: grid; place-items: center; height: clamp(11rem, 22vw, 20rem); overflow: hidden; background: var(--eb-bg-brand); }
-  .sv-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+  /* The section photos are 1920 × 960: the band keeps that 2:1 so the whole photo
+     shows untinted. Tech Blue stands in until the first photo loads. */
+  .sv-hero { position: relative; display: grid; place-items: center; aspect-ratio: 2 / 1; overflow: hidden; background: var(--eb-bg-brand); }
+  .sv-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .sv-hero-title {
     position: relative; margin: 0; padding-inline: var(--eb-space-4); text-align: center; text-transform: uppercase;
     font-size: clamp(2rem, 4.4vw, 3.25rem); font-weight: var(--eb-fw-black); line-height: var(--eb-leading-tight);
