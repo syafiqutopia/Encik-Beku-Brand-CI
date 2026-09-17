@@ -1696,7 +1696,22 @@ table { max-width: none; }
   .sv-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .sv-body [hidden] { display: none !important; }
 
-  .sv-hero img { display: block; width: 100%; height: clamp(11rem, 22vw, 20rem); object-fit: cover; object-position: 50% 16%; }
+  .sv-hero {
+    position: relative; display: grid; align-content: center;
+    height: clamp(11rem, 22vw, 20rem);
+    overflow: hidden;
+  }
+  .sv-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  .sv-hero-title {
+    position: relative; z-index: 1; margin: 0; text-align: center;
+    font-size: var(--eb-text-2xl); font-weight: var(--eb-fw-black);
+    color: var(--eb-fg-on-brand); text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(13, 31, 66, 0.40);
+  }
+  .sv-hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(rgba(3, 92, 194, .35), rgba(3, 92, 194, .35));
+  }
 
   
   .sv-body { padding: var(--eb-space-6) 0 var(--eb-space-9); box-shadow: 0 0 0 100vmax var(--eb-bg-tint); clip-path: inset(0 -100vmax); background: var(--eb-bg-tint); }
@@ -2902,24 +2917,25 @@ table { max-width: none; }
 <h1 class="sv-vh">What we do</h1>
 
 <div class="sv-hero">
-  <img src="img/services-hero.jpg" alt="An Encik Beku technician servicing a wall-mounted aircond" width="1920" height="1059">
+  <h1 class="sv-hero-title">Aircond</h1>
+  <img id="sv-hero-img" src="img/aircond.jpg" alt="Aircond services" width="1920" height="960">
 </div>
 
 <div class="wrap sv-body">
   <div class="sv-tabs" role="group" aria-labelledby="sv-menu">
     <p class="sv-menu" id="sv-menu">Services</p>
-    <button type="button" data-tab="aircond" aria-pressed="true"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-aircond"/></svg>Aircond</button>
-    <button type="button" data-tab="wiring" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-electrical"/></svg>Wiring</button>
-    <button type="button" data-tab="cctv" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV</button>
-    <button type="button" data-tab="waterproofing" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Waterproofing</button>
-    <button type="button" data-tab="cabinet" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Cabinet &amp; Wardrobe</button>
-    <button type="button" data-tab="painting" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Painting</button>
-    <button type="button" data-tab="ceiling" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-ceiling"/></svg>Plaster Ceiling Works</button>
-    <button type="button" data-tab="partition" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-partition"/></svg>Partition</button>
-    <button type="button" data-tab="plumbing" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Plumbing</button>
-    <button type="button" data-tab="grille" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-grille"/></svg>Invisible Grille</button>
-    <button type="button" data-tab="panel" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-panel"/></svg>Wall Panel</button>
-    <button type="button" data-tab="decking" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-decking"/></svg>Decking</button>
+    <button type="button" data-tab="aircond" data-image="img/aircond.jpg" aria-pressed="true"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-aircond"/></svg>Aircond</button>
+    <button type="button" data-tab="wiring" data-image="img/wiring.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-electrical"/></svg>Wiring</button>
+    <button type="button" data-tab="cctv" data-image="img/cctv.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cctv"/></svg>CCTV</button>
+    <button type="button" data-tab="waterproofing" data-image="img/waterproofing.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-drop"/></svg>Waterproofing</button>
+    <button type="button" data-tab="cabinet" data-image="img/cabinet.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-cabinet"/></svg>Cabinet &amp; Wardrobe</button>
+    <button type="button" data-tab="painting" data-image="img/painting.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-roller"/></svg>Painting</button>
+    <button type="button" data-tab="ceiling" data-image="img/ceiling.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-ceiling"/></svg>Plaster Ceiling Works</button>
+    <button type="button" data-tab="partition" data-image="img/partition.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-partition"/></svg>Partition</button>
+    <button type="button" data-tab="plumbing" data-image="img/plumbing.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-tap"/></svg>Plumbing</button>
+    <button type="button" data-tab="grille" data-image="img/grille.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-grille"/></svg>Invisible Grille</button>
+    <button type="button" data-tab="panel" data-image="img/panel.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-panel"/></svg>Wall Panel</button>
+    <button type="button" data-tab="decking" data-image="img/decking.jpg" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-decking"/></svg>Decking</button>
   </div>
 
   <div class="sv-card">
