@@ -719,10 +719,40 @@
   function last() { return solo.matches ? PAGES : (PAGES % 2 ? PAGES : PAGES + 1); }
 
   // visibility, not display or hidden: an empty slot has to keep its half of
-  // the book, or the cover would stretch across the whole spread.
+  // the book, or the cover would stretch across the whole spread. A page that
+  // has not arrived yet shows as paper: an <img> whose src has changed keeps
+  // painting the OLD picture until the new one decodes, and that is what put a
+  // spread on screen that does not exist in the book - page 12 beside page 11.
   function put(img, n) {
-    img.style.visibility = has(n) ? 'visible' : 'hidden';
-    if (has(n) && img.getAttribute('src') !== url(n)) img.setAttribute('src', url(n));
+    if (!has(n)) { img.style.visibility = 'hidden'; return; }
+    if (img.getAttribute('src') !== url(n)) img.setAttribute('src', url(n));
+    if (img.complete) { img.style.visibility = 'visible'; return; }
+    img.style.visibility = 'hidden';
+    img.onload = function () { img.style.visibility = 'visible'; };
+  }
+
+  // Pages near the spread, kept in a map rather than loaded and forgotten: an
+  // Image nothing holds can be collected mid-download, which cancels the fetch.
+  var held = {};
+  function hold(n) {
+    if (!held[n]) { held[n] = new Image(); held[n].src = url(n); }
+    return held[n];
+  }
+  // Hold the turn until the pages it needs can be drawn - but only briefly. On a
+  // slow line the reader would otherwise click and watch nothing happen; better
+  // to turn on time and let a page arrive as paper and fill in a moment later.
+  function ready(ns, then) {
+    ns = ns.filter(has);
+    var left = ns.length, fired = false;
+    var go = function () { if (!fired) { fired = true; then(); } };
+    if (!left) return go();
+    setTimeout(go, 150);
+    ns.forEach(function (n) {
+      var im = hold(n), done = function () { if (!--left) go(); };
+      if (im.decode) im.decode().then(done, done);
+      else if (im.complete) done();
+      else { im.onload = done; im.onerror = done; }
+    });
   }
 
   function paint() {
@@ -736,9 +766,13 @@
       : 'Pages ' + l + '–' + r + ' of ' + PAGES;
     dlg.querySelector('[data-step="-1"]').disabled = page - step() < 1;
     dlg.querySelector('[data-step="1"]').disabled = page + step() > last();
-    // Warm only the next spread, and keep no reference: the browser can drop
-    // the decoded bitmaps again, which 34 full-page scans need it to do.
-    [page + step(), page + step() + 1].forEach(function (n) { if (has(n)) new Image().src = url(n); });
+    // Warm the spread either side - a reader turns back as well - and drop the
+    // rest, so 34 full-page scans never pile up as decoded bitmaps.
+    var keep = {};
+    [l, r, page - step(), page - step() + 1, page + step(), page + step() + 1].forEach(function (n) {
+      if (has(n)) { keep[n] = 1; hold(n); }
+    });
+    for (var k in held) if (!keep[k]) delete held[k];
   }
 
   function turn(d) {
@@ -753,10 +787,12 @@
     busy = true;
     // The leaf carries the page it lifts on its front and that sheet's reverse
     // on its back; the page it uncovers is placed underneath before it moves.
-    var reveal;
-    if (solo.matches) { put(front, fwd ? page : to); reveal = fwd ? to : 0; }
-    else if (fwd) { put(front, page); put(back, to - 1); reveal = to; }
-    else { put(front, page - 1); put(back, to); reveal = to - 1; }
+    var f = solo.matches ? (fwd ? page : to) : (fwd ? page : page - 1);
+    var b = solo.matches ? 0 : (fwd ? to - 1 : to);
+    var reveal = solo.matches ? (fwd ? to : 0) : (fwd ? to : to - 1);
+
+    ready([f, b, reveal], function () {
+    put(front, f); if (!solo.matches) put(back, b);
     leaf.classList.toggle('cb-rev', !fwd && !solo.matches);
 
     var from = fwd ? 0 : -180, into = fwd ? -180 : 0;
@@ -775,6 +811,7 @@
           leaf.style.transform = '';
           busy = false;
         };
+    });
     });
   }
 
