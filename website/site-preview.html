@@ -1703,8 +1703,11 @@ table { max-width: none; }
     background: var(--eb-bg-brand) center / cover no-repeat;
   }
   .sv-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  
+  .sv-hero::after { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--eb-bg-brand) 30%, transparent); }
   .sv-hero-title {
-    position: relative; margin: 0; padding-inline: var(--eb-space-4); text-align: center; text-transform: uppercase;
+    position: relative; z-index: 1;   
+    margin: 0; padding-inline: var(--eb-space-4); text-align: center; text-transform: uppercase;
     font-size: clamp(2rem, 4.4vw, 3.25rem); font-weight: var(--eb-fw-black); line-height: var(--eb-leading-tight);
     letter-spacing: var(--eb-tracking-tight); color: var(--eb-fg-on-brand);
   }
