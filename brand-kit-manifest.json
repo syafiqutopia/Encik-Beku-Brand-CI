@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "locked": "2026-08-19",
   "owner": "Encik Beku Aircond Sdn Bhd (1561739-D)",
-  "fileCount": 208,
-  "totalBytes": 82663255,
+  "fileCount": 243,
+  "totalBytes": 88308807,
   "entries": [
     {
       "path": ".gitattributes",
@@ -644,6 +644,11 @@
       "sha256": "108555095d5a842a47465c60c2594015b4bf40757ee49e27ea7f276b46a48cf0"
     },
     {
+      "path": "tools/build-catalogue-pages.sh",
+      "bytes": 1802,
+      "sha256": "16200e806ca6c49b69999e6885e1a795c3802f59ab848163b991e7749cdcaabd"
+    },
+    {
       "path": "tools/build-distribution.sh",
       "bytes": 3287,
       "sha256": "98b24754e6c46a2decc23419df699cbcc0a6557d8dc69f4b3c64e7b2c6954484"
@@ -725,8 +730,8 @@
     },
     {
       "path": "tools/verify.mjs",
-      "bytes": 14313,
-      "sha256": "db0519f6e4246e3ee89ec0f334d05cf4fa1fb12a3f0953bceb00a06b92e6be93"
+      "bytes": 15423,
+      "sha256": "09d8900ee24a67429b122a2329dcb09b33c08fb17dfda2ffdd61af96305a8847"
     },
     {
       "path": "tools/video-frames.swift",
@@ -745,8 +750,8 @@
     },
     {
       "path": "website/README.md",
-      "bytes": 6905,
-      "sha256": "9b7288532fe32af757d150c7240664f31d33f74f050cb4ea8a77752d7a0649c8"
+      "bytes": 7902,
+      "sha256": "81eb0439fa63962bfd15fd587028ed05e3d9c05579982736f514996305e3b8c5"
     },
     {
       "path": "website/about.html",
@@ -785,8 +790,8 @@
     },
     {
       "path": "website/i18n.js",
-      "bytes": 8383,
-      "sha256": "968e891737f3d6e46b6330692975f170d8426d54b0c199fddf7ba399190e92ed"
+      "bytes": 8560,
+      "sha256": "c472b591380b3e83e0751a454d70c1abc7b69bb31b46b65fa24666d27b344602"
     },
     {
       "path": "website/img/about-hero.jpg",
@@ -852,6 +857,176 @@
       "path": "website/img/brands/wiring.png",
       "bytes": 30144,
       "sha256": "b87f48d52a13fbc9b4e8e5b4e78f810b9948d3fe7e598683edca8c0fd3a4f0f4"
+    },
+    {
+      "path": "website/img/catalogue/p01.jpg",
+      "bytes": 71605,
+      "sha256": "73163b3d071f3c8a77a94803f6836bdc7c0b6b0d1103d232628d6d76e1bf286c"
+    },
+    {
+      "path": "website/img/catalogue/p02.jpg",
+      "bytes": 200518,
+      "sha256": "800ff102a3bcf2c22bba8daddaf6d3ff6e65f760ca6f2306603489dfc6ba3f51"
+    },
+    {
+      "path": "website/img/catalogue/p03.jpg",
+      "bytes": 106047,
+      "sha256": "c1be3f3a20a258fc30888df724c7ac88da2113f5de95de2517dac35ba08b9bb3"
+    },
+    {
+      "path": "website/img/catalogue/p04.jpg",
+      "bytes": 106303,
+      "sha256": "d9aa7949d3ba1f703942345f36583796b9ee61db595cad85394919be62bd2faa"
+    },
+    {
+      "path": "website/img/catalogue/p05.jpg",
+      "bytes": 97326,
+      "sha256": "36c93a5d7e51b3cf3c2a51684e8c0001604187a179d1c25be718489081be79c9"
+    },
+    {
+      "path": "website/img/catalogue/p06.jpg",
+      "bytes": 98936,
+      "sha256": "ab29c014cd1b7c1bcadd9efdfd2437f32a4a4a748f6d91669de9ec06115312a3"
+    },
+    {
+      "path": "website/img/catalogue/p07.jpg",
+      "bytes": 153416,
+      "sha256": "d1f44820fab8ee0bb36dc99e9965d26bcf9b118fcfd2f7346af5c47e9e78d1f1"
+    },
+    {
+      "path": "website/img/catalogue/p08.jpg",
+      "bytes": 127391,
+      "sha256": "6b668e838634946c6f70d280a43e67af578040306f60cc935999bce16a925605"
+    },
+    {
+      "path": "website/img/catalogue/p09.jpg",
+      "bytes": 125885,
+      "sha256": "976e81d473e1fd30f55f07ed0ead6acf4126f017e15452ca8f10c03b722dcc72"
+    },
+    {
+      "path": "website/img/catalogue/p10.jpg",
+      "bytes": 128675,
+      "sha256": "ee6cfc3e90b4616fb8942ce3799d1de3c58e0305ecc627339c1cfc224aba4073"
+    },
+    {
+      "path": "website/img/catalogue/p11.jpg",
+      "bytes": 138020,
+      "sha256": "e275244674aa63b702574db766683eb9c6d0fcae218f8c63471de5fd0d81f0d5"
+    },
+    {
+      "path": "website/img/catalogue/p12.jpg",
+      "bytes": 126046,
+      "sha256": "9559a67b50a67160d73d0a4042e715a471349b481221e214ca3cd08bc9a4652d"
+    },
+    {
+      "path": "website/img/catalogue/p13.jpg",
+      "bytes": 174758,
+      "sha256": "55aa62b25b2e294157b443bd2a407a9975f6e4ea2504641b68d7b133f0d89eb2"
+    },
+    {
+      "path": "website/img/catalogue/p14.jpg",
+      "bytes": 242309,
+      "sha256": "738d1be753cba4e181e45a2742e84c550a8e300ed107b76c4c997552af20b46d"
+    },
+    {
+      "path": "website/img/catalogue/p15.jpg",
+      "bytes": 246491,
+      "sha256": "87fa03894a8f38b2dc3e0c77b605ecb450853bbadc00098d9e01f2c02bb23330"
+    },
+    {
+      "path": "website/img/catalogue/p16.jpg",
+      "bytes": 197105,
+      "sha256": "701630e5cc3495d7ab9a7e0bf47ee9d7c469790cc1d027e3b0fa54f6acb2625f"
+    },
+    {
+      "path": "website/img/catalogue/p17.jpg",
+      "bytes": 167668,
+      "sha256": "7a7e0febd101e53f5ec28cf4909f33d8f9173a8ae922c175ec35f9e5285e553a"
+    },
+    {
+      "path": "website/img/catalogue/p18.jpg",
+      "bytes": 169467,
+      "sha256": "f041ae625afd64d9ee5399f061d8f89999963cd619215230e1209891515b14c7"
+    },
+    {
+      "path": "website/img/catalogue/p19.jpg",
+      "bytes": 193902,
+      "sha256": "f28c40f6561fa051239a3b3db9d0ba320aa81046a188cbee464a2a49755ec1b8"
+    },
+    {
+      "path": "website/img/catalogue/p20.jpg",
+      "bytes": 178215,
+      "sha256": "16e19570c3510712be71f05e75c030326cfe556fa3364961b9f1de5b4f85dd40"
+    },
+    {
+      "path": "website/img/catalogue/p21.jpg",
+      "bytes": 243402,
+      "sha256": "9a252b58636e9794d816631fe792ea72656c2d6fbec4cc06392190c4e80f49a4"
+    },
+    {
+      "path": "website/img/catalogue/p22.jpg",
+      "bytes": 176653,
+      "sha256": "13111b6883e57be0a7a18b4df30da7e71617a83b059d5f07fc5ab3276bd348e8"
+    },
+    {
+      "path": "website/img/catalogue/p23.jpg",
+      "bytes": 176818,
+      "sha256": "20ff25fe051103c56fa3feccd58d6da62ea3f7158814fc01d196b3ca5ed6f0ac"
+    },
+    {
+      "path": "website/img/catalogue/p24.jpg",
+      "bytes": 179474,
+      "sha256": "aa10d98b8249099dd4ee7a6c82d5e2a4ef321f2a40b5c1402d1f7b02ea3edb82"
+    },
+    {
+      "path": "website/img/catalogue/p25.jpg",
+      "bytes": 203504,
+      "sha256": "200af34d6c0d82719f58222416633e7c98d783b7d932f014c5644f46fcf711cc"
+    },
+    {
+      "path": "website/img/catalogue/p26.jpg",
+      "bytes": 147010,
+      "sha256": "b50862f2e453db3f4f09404dff77c858a2c46e1901b69fa54be3f1e19c3053ab"
+    },
+    {
+      "path": "website/img/catalogue/p27.jpg",
+      "bytes": 171118,
+      "sha256": "6024c4683808cdb63b6e45e8cc11315b2def47aedd0476e48c9b592118ea3808"
+    },
+    {
+      "path": "website/img/catalogue/p28.jpg",
+      "bytes": 149727,
+      "sha256": "ccf352080d172d22bf98fa8f65a0c521f3979b5e1058ecd2eb9496760fe3d3d9"
+    },
+    {
+      "path": "website/img/catalogue/p29.jpg",
+      "bytes": 175489,
+      "sha256": "de10345b57dab96f74a744ddab61d7d5d7464c46db4816912c47d6f028fe1436"
+    },
+    {
+      "path": "website/img/catalogue/p30.jpg",
+      "bytes": 238890,
+      "sha256": "ae1802426fc562b1b2d4a7e347d87baea0a9c16ed2e41de859758aeb3b4735e3"
+    },
+    {
+      "path": "website/img/catalogue/p31.jpg",
+      "bytes": 229860,
+      "sha256": "da2909f4dc5eac3b66e2686c3834cf5fd47458f4751fda71ee63a4278731fcf0"
+    },
+    {
+      "path": "website/img/catalogue/p32.jpg",
+      "bytes": 181532,
+      "sha256": "e75e8a3c77e0dd6ca3c1f03e6ff5ff54dae437332acd3ce6f4346dd1bdfa29d9"
+    },
+    {
+      "path": "website/img/catalogue/p33.jpg",
+      "bytes": 245404,
+      "sha256": "fec32c0c59ed504870dafae6865213a22291782730172473b2e43dd03730aa1e"
+    },
+    {
+      "path": "website/img/catalogue/p34.jpg",
+      "bytes": 50561,
+      "sha256": "18c40441a8fdeca86535b8051a63889bef67301c97adb2e255bd666c7ddf470b"
     },
     {
       "path": "website/img/covers/brand-guidelines.jpg",
@@ -1035,13 +1210,13 @@
     },
     {
       "path": "website/services.html",
-      "bytes": 37283,
-      "sha256": "f208c375482463f0a290ff9055be3499b63dacb977ceb255215c39dd690b87e5"
+      "bytes": 50591,
+      "sha256": "99dbd440a834ad9754826f29051aaa1bc07f1cf3c8321ef7bb2e93013fa2c314"
     },
     {
       "path": "website/site-preview.html",
-      "bytes": 2708130,
-      "sha256": "b3c666acc1ec258e8a0918deb1142748f48bb9dd4f53e17d150f31242e489730"
+      "bytes": 2716763,
+      "sha256": "ecb168888456793d52b53813d42dff3c454155fc54c68fef8a13cbf8c24b978a"
     },
     {
       "path": "website/site.css",

@@ -1762,8 +1762,61 @@ table { max-width: none; }
   }
   .sv-table tbody tr th { font-weight: var(--eb-fw-bold); }
 
+  .sv-acts { display: flex; align-items: center; gap: var(--eb-space-3); margin-inline-start: auto; }
+
   .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
   .sv-note { margin: var(--eb-space-4) 0 0; font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
+
+  
+  .cb {
+    --cb-page: 0.707;                
+    --cb-cols: 2;
+    --cb-chrome: 8.5rem;             
+    --cb-gut: var(--eb-space-5);
+    
+    --cb-bulge: 1.17;
+    --cb-h: min(calc((100svh - var(--cb-chrome)) / var(--cb-bulge)),
+                calc((100vw - 2 * var(--cb-gut)) / (var(--cb-cols) * var(--cb-page))),
+                900px);
+    --cb-w: calc(var(--cb-h) * var(--cb-page));
+    width: 100vw; max-width: none; height: 100svh; max-height: none;
+    margin: 0; padding: 0; border: 0;
+    
+    background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
+    color: var(--eb-fg-on-brand); overscroll-behavior: contain;
+  }
+  .cb::backdrop { background: none; }
+  .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
+  .cb-bar, .cb-nav { display: flex; align-items: center; gap: var(--eb-space-3); padding: var(--eb-space-3) var(--eb-space-5); }
+  .cb-bar { border-bottom: 1px solid var(--eb-border-on-brand); }
+  .cb-nav { justify-content: center; border-top: 1px solid var(--eb-border-on-brand); }
+  .cb-title { margin: 0; font-weight: var(--eb-fw-bold); }
+  .cb-count { margin: 0 var(--eb-space-3) 0 auto; font-size: var(--eb-text-sm); color: var(--eb-fg-on-brand-muted); }
+  .cb-x { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: inherit; cursor: pointer; }
+  .cb-x svg { width: 1.25rem; height: 1.25rem; stroke-width: 2; }
+  .cb-stage { display: grid; place-items: center; min-height: 0; padding: 0 var(--cb-gut); }
+  
+  .cb-book {
+    position: relative; perspective: calc(var(--cb-w) * 7);
+    width: calc(var(--cb-cols) * var(--cb-w)); height: var(--cb-h);
+    box-shadow: var(--eb-shadow-lg); cursor: pointer;
+    touch-action: pan-y pinch-zoom;   
+  }
+  .cb-pg { position: absolute; top: 0; width: var(--cb-w); height: var(--cb-h); object-fit: fill; background: var(--eb-bg-1); }
+  .cb-l { left: 0; }
+  .cb-r { left: var(--cb-w); }
+  
+  .cb-leaf {
+    position: absolute; top: 0; left: var(--cb-w); z-index: 2;
+    width: var(--cb-w); height: var(--cb-h); visibility: hidden;
+    transform-origin: left center; transform-style: preserve-3d;
+  }
+  .cb-leaf.cb-rev { left: 0; transform-origin: right center; }
+  .cb-face {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill;
+    background: var(--eb-bg-1); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  }
+  .cb-back { transform: rotateY(180deg); }   
 
   
   @media (max-width: 1024px) {
@@ -1780,6 +1833,16 @@ table { max-width: none; }
     .sv-card { padding: var(--eb-space-4); }
     .sv-field { flex: 1 1 100%; flex-direction: column; align-items: stretch; gap: var(--eb-space-2); }
     .sv-field input, .sv-field select { width: 100%; }
+    
+    .sv-acts { flex: 1 1 100%; margin-inline-start: 0; }
+    .sv-acts .btn { flex: 1 1 0; }
+    
+    .cb { --cb-cols: 1; --cb-chrome: 7.5rem; --cb-gut: var(--eb-space-3); }
+    .cb-r, .cb-back { display: none; }
+    .cb-leaf { left: 0; width: var(--cb-w); }
+    .cb-bar, .cb-nav { padding: var(--eb-space-2) var(--eb-space-3); }
+    .cb-title { display: none; }      
+    .cb-count { margin-inline-start: 0; }
     .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
     .sv-table tbody { padding: 0.5rem 0 0.9rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1)); }
@@ -2850,8 +2913,73 @@ table { max-width: none; }
   }
   .sv-table tbody tr th { font-weight: var(--eb-fw-bold); }
 
+  .sv-acts { display: flex; align-items: center; gap: var(--eb-space-3); margin-inline-start: auto; }
+
   .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
   .sv-note { margin: var(--eb-space-4) 0 0; font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
+
+  /* &#9472;&#9472; Catalogue viewer &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
+     Only one leaf is ever in the air, and a turn shows four pages at most:
+     the one being covered, the leaf's two faces, and the one being revealed.
+     So the book is three elements &#8212; two page slots and one reusable leaf
+     above them &#8212; rather than 34 stacked sheets. Nothing writes a z-index
+     mid-turn and only four images are ever decoded. */
+  .cb {
+    --cb-page: 0.707;                /* 595.5 / 842.25 &#8212; the catalogue's page */
+    --cb-cols: 2;
+    --cb-chrome: 8.5rem;             /* the bar above and the controls below */
+    --cb-gut: var(--eb-space-5);
+    /* Mid-turn the leaf's outer edge is a page-width nearer the eye, so it
+       draws about 17% taller than the page. Reserve that or the turn is
+       clipped at the moment it is most visible. */
+    --cb-bulge: 1.17;
+    --cb-h: min(calc((100svh - var(--cb-chrome)) / var(--cb-bulge)),
+                calc((100vw - 2 * var(--cb-gut)) / (var(--cb-cols) * var(--cb-page))),
+                900px);
+    --cb-w: calc(var(--cb-h) * var(--cb-page));
+    width: 100vw; max-width: none; height: 100svh; max-height: none;
+    margin: 0; padding: 0; border: 0;
+    /* The scrim is the dialog itself: ::backdrop does not inherit custom
+       properties everywhere, so a token can resolve to nothing there. */
+    background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
+    color: var(--eb-fg-on-brand); overscroll-behavior: contain;
+  }
+  .cb::backdrop { background: none; }
+  .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
+  .cb-bar, .cb-nav { display: flex; align-items: center; gap: var(--eb-space-3); padding: var(--eb-space-3) var(--eb-space-5); }
+  .cb-bar { border-bottom: 1px solid var(--eb-border-on-brand); }
+  .cb-nav { justify-content: center; border-top: 1px solid var(--eb-border-on-brand); }
+  .cb-title { margin: 0; font-weight: var(--eb-fw-bold); }
+  .cb-count { margin: 0 var(--eb-space-3) 0 auto; font-size: var(--eb-text-sm); color: var(--eb-fg-on-brand-muted); }
+  .cb-x { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: inherit; cursor: pointer; }
+  .cb-x svg { width: 1.25rem; height: 1.25rem; stroke-width: 2; }
+  .cb-stage { display: grid; place-items: center; min-height: 0; padding: 0 var(--cb-gut); }
+  /* Perspective belongs to the book, but the book keeps no 3D context of its
+     own: each child is flattened into it separately, so the turning leaf can
+     never sink into the pages underneath and z-index alone decides the order. */
+  .cb-book {
+    position: relative; perspective: calc(var(--cb-w) * 7);
+    width: calc(var(--cb-cols) * var(--cb-w)); height: var(--cb-h);
+    box-shadow: var(--eb-shadow-lg); cursor: pointer;
+    touch-action: pan-y pinch-zoom;   /* never none: that kills pinch zoom */
+  }
+  .cb-pg { position: absolute; top: 0; width: var(--cb-w); height: var(--cb-h); object-fit: fill; background: var(--eb-bg-1); }
+  .cb-l { left: 0; }
+  .cb-r { left: var(--cb-w); }
+  /* No overflow, opacity, filter or clip here: each of those would compute
+     transform-style back to flat and the leaf would turn into a mirrored
+     rectangle. */
+  .cb-leaf {
+    position: absolute; top: 0; left: var(--cb-w); z-index: 2;
+    width: var(--cb-w); height: var(--cb-h); visibility: hidden;
+    transform-origin: left center; transform-style: preserve-3d;
+  }
+  .cb-leaf.cb-rev { left: 0; transform-origin: right center; }
+  .cb-face {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill;
+    background: var(--eb-bg-1); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  }
+  .cb-back { transform: rotateY(180deg); }   /* so it reads upright, not mirrored, at -180&#176; */
 
   /* No room for a sidebar beside the table: the menu becomes a swipeable row above the card. */
   @media (max-width: 1024px) {
@@ -2868,6 +2996,18 @@ table { max-width: none; }
     .sv-card { padding: var(--eb-space-4); }
     .sv-field { flex: 1 1 100%; flex-direction: column; align-items: stretch; gap: var(--eb-space-2); }
     .sv-field input, .sv-field select { width: 100%; }
+    /* .btn ships flex-shrink: 0, so the pair needs flex-basis 0 to share the row */
+    .sv-acts { flex: 1 1 100%; margin-inline-start: 0; }
+    .sv-acts .btn { flex: 1 1 0; }
+    /* One page at a time, and the leaf turns away over the whole width. Its
+       back face stays hidden: past 90&#176; the leaf is swinging off the left of a
+       single-page book, and a page sliding away out there reads as a mistake. */
+    .cb { --cb-cols: 1; --cb-chrome: 7.5rem; --cb-gut: var(--eb-space-3); }
+    .cb-r, .cb-back { display: none; }
+    .cb-leaf { left: 0; width: var(--cb-w); }
+    .cb-bar, .cb-nav { padding: var(--eb-space-2) var(--eb-space-3); }
+    .cb-title { display: none; }      /* no room beside the count and controls */
+    .cb-count { margin-inline-start: 0; }
     .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
     .sv-table tbody { padding: 0.5rem 0 0.9rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1)); }
@@ -2894,6 +3034,7 @@ table { max-width: none; }
   <g id="sv-decking"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.33h18M3 14.67h18M10 4v5.33M15 9.33v5.34M8 14.67V20"/></g>
   <g id="sv-drop"><path d="M12 3c3.6 4.3 6 7.6 6 10.5a6 6 0 0 1-12 0C6 10.6 8.4 7.3 12 3z"/></g>
   <g id="sv-down"><path d="m6 9 6 6 6-6"/></g>
+  <g id="i-dl" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 19h16"/></g>
 </defs></svg>
 
 
@@ -2947,6 +3088,10 @@ table { max-width: none; }
       <label for="sv-type">Service Type</label>
       <select id="sv-type"><option value="">All Service Types</option></select>
       <svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-down"/></svg>
+    </div>
+    <div class="sv-acts">
+      <a class="btn btn-ghost btn-sm" id="cb-open" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" target="_blank" rel="noopener" aria-haspopup="dialog"><span data-i18n="doc.preview.cat">Preview catalogue</span></a>
+      <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.cat">Download catalogue</span></a>
     </div>
   </div>
 
