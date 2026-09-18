@@ -13,9 +13,14 @@
   .sv-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .sv-body [hidden] { display: none !important; }
 
-  /* The section photos are 1920 × 960: the band keeps that 2:1 so the whole photo
-     shows untinted. Tech Blue stands in until the first photo loads. */
-  .sv-hero { position: relative; display: grid; place-items: center; aspect-ratio: 2 / 1; overflow: hidden; background: var(--eb-bg-brand); }
+  /* Sized like the Who we are band. On a section change the script parks the
+     outgoing photo on the background and fades the new one in over it, so the
+     band never flashes its Tech Blue fill between photos. */
+  .sv-hero {
+    position: relative; display: grid; place-items: center;
+    min-height: clamp(17rem, 30vw, 28rem); padding: var(--eb-space-8) 0; overflow: hidden;
+    background: var(--eb-bg-brand) center / cover no-repeat;
+  }
   .sv-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .sv-hero-title {
     position: relative; margin: 0; padding-inline: var(--eb-space-4); text-align: center; text-transform: uppercase;
@@ -541,10 +546,20 @@
     empty.hidden = shown > 0;
   }
 
+  // The new photo fades up over the outgoing one, which the click handler parks on
+  // the band behind it. Fading the img out first cannot work: that change animates
+  // too, so it never reaches 0 before the new photo arrives.
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  hero.addEventListener('load', function () {
+    if (hero.animate && !still.matches) hero.animate([{ opacity: 0 }, { opacity: 1 }], 400);
+  });
+
   tabs.forEach(function (b) {
     b.addEventListener('click', function () {
       tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === b); });
       tab = b.dataset.tab;
+      // Hold the outgoing photo behind the img so the new one fades in over it.
+      hero.parentNode.style.backgroundImage = 'url("' + hero.src + '")';
       hero.src = 'img/services-hero-' + tab + '.jpg';
       heroTitle.textContent = b.textContent.trim();
       fillTypes();
