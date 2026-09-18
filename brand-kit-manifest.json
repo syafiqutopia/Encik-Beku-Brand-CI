@@ -6,7 +6,7 @@
   "locked": "2026-08-19",
   "owner": "Encik Beku Aircond Sdn Bhd (1561739-D)",
   "fileCount": 243,
-  "totalBytes": 88310285,
+  "totalBytes": 88331360,
   "entries": [
     {
       "path": ".gitattributes",
@@ -715,8 +715,8 @@
     },
     {
       "path": "tools/render-pdf.swift",
-      "bytes": 2159,
-      "sha256": "189d8b9d6395c67e357d38a0f40a118d41b46c7336b00d11b62a66a78ef6112f"
+      "bytes": 2384,
+      "sha256": "6b8c93f46fc06daab57316656539584375c3224b25b4660b511c6e15fa5841d6"
     },
     {
       "path": "tools/stamp-assets.mjs",
@@ -860,173 +860,173 @@
     },
     {
       "path": "website/img/catalogue/p01.jpg",
-      "bytes": 71605,
-      "sha256": "73163b3d071f3c8a77a94803f6836bdc7c0b6b0d1103d232628d6d76e1bf286c"
+      "bytes": 70228,
+      "sha256": "c3f8d14ddb7a678fc97dce0e886700059ccfb7d98ff9903dab5474129de846ae"
     },
     {
       "path": "website/img/catalogue/p02.jpg",
-      "bytes": 200518,
-      "sha256": "800ff102a3bcf2c22bba8daddaf6d3ff6e65f760ca6f2306603489dfc6ba3f51"
+      "bytes": 203001,
+      "sha256": "b1164d32488a4803ec8bb7826d796a5733bd5ea48013ea7068c6c8b8456ffc7a"
     },
     {
       "path": "website/img/catalogue/p03.jpg",
-      "bytes": 106047,
-      "sha256": "c1be3f3a20a258fc30888df724c7ac88da2113f5de95de2517dac35ba08b9bb3"
+      "bytes": 109415,
+      "sha256": "a1b7f91184bb6ca9d33efc90e48d8b7b6e40cb53d046b890354284d96a61e502"
     },
     {
       "path": "website/img/catalogue/p04.jpg",
-      "bytes": 106303,
-      "sha256": "d9aa7949d3ba1f703942345f36583796b9ee61db595cad85394919be62bd2faa"
+      "bytes": 110053,
+      "sha256": "c3ad88809abb3658fa636e2f6fe7e70b00fc26e3d2cc932f843955f2ec1ee1db"
     },
     {
       "path": "website/img/catalogue/p05.jpg",
-      "bytes": 97326,
-      "sha256": "36c93a5d7e51b3cf3c2a51684e8c0001604187a179d1c25be718489081be79c9"
+      "bytes": 101653,
+      "sha256": "2992053b622a2275f51a3e563b8482c4d8a4fff298b9ae222029864b768378b0"
     },
     {
       "path": "website/img/catalogue/p06.jpg",
-      "bytes": 98936,
-      "sha256": "ab29c014cd1b7c1bcadd9efdfd2437f32a4a4a748f6d91669de9ec06115312a3"
+      "bytes": 98859,
+      "sha256": "417aeb4e26eecfa9175e7e9c67137bbe84e0718e924f9739bd347923662c2dca"
     },
     {
       "path": "website/img/catalogue/p07.jpg",
-      "bytes": 153416,
-      "sha256": "d1f44820fab8ee0bb36dc99e9965d26bcf9b118fcfd2f7346af5c47e9e78d1f1"
+      "bytes": 150531,
+      "sha256": "e223e39183a82b805a78afe990f946d7321fc6377fa39c5fc8c16aa5cb3727c5"
     },
     {
       "path": "website/img/catalogue/p08.jpg",
-      "bytes": 127391,
-      "sha256": "6b668e838634946c6f70d280a43e67af578040306f60cc935999bce16a925605"
+      "bytes": 129667,
+      "sha256": "cf33fa8fa9c99722b0f5ab84279ae8694ee59dad0903d24b361812a7ea1ad362"
     },
     {
       "path": "website/img/catalogue/p09.jpg",
-      "bytes": 125885,
-      "sha256": "976e81d473e1fd30f55f07ed0ead6acf4126f017e15452ca8f10c03b722dcc72"
+      "bytes": 128691,
+      "sha256": "9962108e258e6126f8199629ed4ca60c40ed075ab3f750df23b047ac8413d812"
     },
     {
       "path": "website/img/catalogue/p10.jpg",
-      "bytes": 128675,
-      "sha256": "ee6cfc3e90b4616fb8942ce3799d1de3c58e0305ecc627339c1cfc224aba4073"
+      "bytes": 132471,
+      "sha256": "24e3317e650e2a30fc5e5dd07f6308b3672f902da94f7f1b3e6f9ca87817c3da"
     },
     {
       "path": "website/img/catalogue/p11.jpg",
-      "bytes": 138020,
-      "sha256": "e275244674aa63b702574db766683eb9c6d0fcae218f8c63471de5fd0d81f0d5"
+      "bytes": 139946,
+      "sha256": "75ddc82e398ba7b610bb6e03a6ffe2a409f7a6ea3a12a43164002799617ade8b"
     },
     {
       "path": "website/img/catalogue/p12.jpg",
-      "bytes": 126046,
-      "sha256": "9559a67b50a67160d73d0a4042e715a471349b481221e214ca3cd08bc9a4652d"
+      "bytes": 128226,
+      "sha256": "398acd6c296c19ecdf24025e42e67dee324511fdc585efc91e83568ebaf2da4d"
     },
     {
       "path": "website/img/catalogue/p13.jpg",
-      "bytes": 174758,
-      "sha256": "55aa62b25b2e294157b443bd2a407a9975f6e4ea2504641b68d7b133f0d89eb2"
+      "bytes": 173459,
+      "sha256": "a604094e612a14833eb33b7453de725f1278f7c7dd6cc762a977afd35be48dc6"
     },
     {
       "path": "website/img/catalogue/p14.jpg",
-      "bytes": 242309,
-      "sha256": "738d1be753cba4e181e45a2742e84c550a8e300ed107b76c4c997552af20b46d"
+      "bytes": 240139,
+      "sha256": "9bee2705653d7415eaf95a307062e4e6e89c83d5d626e7cdb633d86b6c640e6a"
     },
     {
       "path": "website/img/catalogue/p15.jpg",
-      "bytes": 246491,
-      "sha256": "87fa03894a8f38b2dc3e0c77b605ecb450853bbadc00098d9e01f2c02bb23330"
+      "bytes": 244340,
+      "sha256": "89f1400c9e57fbee85a4bfb6353cfb5510d5f416d5e1535d39df793e4f59213a"
     },
     {
       "path": "website/img/catalogue/p16.jpg",
-      "bytes": 197105,
-      "sha256": "701630e5cc3495d7ab9a7e0bf47ee9d7c469790cc1d027e3b0fa54f6acb2625f"
+      "bytes": 196015,
+      "sha256": "a93071f2c205a1185f484f33701c487320258a0c787c7f56c068fc41a1e89d18"
     },
     {
       "path": "website/img/catalogue/p17.jpg",
-      "bytes": 167668,
-      "sha256": "7a7e0febd101e53f5ec28cf4909f33d8f9173a8ae922c175ec35f9e5285e553a"
+      "bytes": 166504,
+      "sha256": "fc47ae2cdf3b6e5d0f10ffb0f1d0132249a72e1fa528a2274cd77a3d757c4cea"
     },
     {
       "path": "website/img/catalogue/p18.jpg",
-      "bytes": 169467,
-      "sha256": "f041ae625afd64d9ee5399f061d8f89999963cd619215230e1209891515b14c7"
+      "bytes": 170104,
+      "sha256": "ecd63bf8fd1f57fea542ec31c963aaad5c4efae85aaca6247231f0c3d623c9b7"
     },
     {
       "path": "website/img/catalogue/p19.jpg",
-      "bytes": 193902,
-      "sha256": "f28c40f6561fa051239a3b3db9d0ba320aa81046a188cbee464a2a49755ec1b8"
+      "bytes": 191709,
+      "sha256": "164e0dab3b1d4b27e37c48acd4ace1a7cba343e7392b985e14d47fce1700eacd"
     },
     {
       "path": "website/img/catalogue/p20.jpg",
-      "bytes": 178215,
-      "sha256": "16e19570c3510712be71f05e75c030326cfe556fa3364961b9f1de5b4f85dd40"
+      "bytes": 179090,
+      "sha256": "1728c1338ed3294089a4d93414ea18e0bf6a6e6a15e412f4be991451ac7e5354"
     },
     {
       "path": "website/img/catalogue/p21.jpg",
-      "bytes": 243402,
-      "sha256": "9a252b58636e9794d816631fe792ea72656c2d6fbec4cc06392190c4e80f49a4"
+      "bytes": 242162,
+      "sha256": "e89dcbdfa9adc184cc11c5cf96dded3d9c5e83275809e9a9176c3a7af0f16ebf"
     },
     {
       "path": "website/img/catalogue/p22.jpg",
-      "bytes": 176653,
-      "sha256": "13111b6883e57be0a7a18b4df30da7e71617a83b059d5f07fc5ab3276bd348e8"
+      "bytes": 176296,
+      "sha256": "1a1401cbd18a165771e0ccd8f89fcf0000fdc7326c593c1849202a774856f514"
     },
     {
       "path": "website/img/catalogue/p23.jpg",
-      "bytes": 176818,
-      "sha256": "20ff25fe051103c56fa3feccd58d6da62ea3f7158814fc01d196b3ca5ed6f0ac"
+      "bytes": 175361,
+      "sha256": "f9de69b32ae4db6d6b719d6a17ddde96b8ab43399d4ee40aaaaff559d48f66ab"
     },
     {
       "path": "website/img/catalogue/p24.jpg",
-      "bytes": 179474,
-      "sha256": "aa10d98b8249099dd4ee7a6c82d5e2a4ef321f2a40b5c1402d1f7b02ea3edb82"
+      "bytes": 180570,
+      "sha256": "3850b968b640817c8fbcbb4a3149667b1d481675eb86b40cdbc864afb6c8d183"
     },
     {
       "path": "website/img/catalogue/p25.jpg",
-      "bytes": 203504,
-      "sha256": "200af34d6c0d82719f58222416633e7c98d783b7d932f014c5644f46fcf711cc"
+      "bytes": 204156,
+      "sha256": "ff7ec93bfeaae7f2bd0d556f265f334b72b8937362440818c79bb2d8b1bed11c"
     },
     {
       "path": "website/img/catalogue/p26.jpg",
-      "bytes": 147010,
-      "sha256": "b50862f2e453db3f4f09404dff77c858a2c46e1901b69fa54be3f1e19c3053ab"
+      "bytes": 146536,
+      "sha256": "edececa8fcbf0249ac76ddb9503ee9d5831a8aea76e2ccd05b513bb9742ff98f"
     },
     {
       "path": "website/img/catalogue/p27.jpg",
-      "bytes": 171118,
-      "sha256": "6024c4683808cdb63b6e45e8cc11315b2def47aedd0476e48c9b592118ea3808"
+      "bytes": 173233,
+      "sha256": "7e6edda6f6f00a0b277a673b1c7bfc7fa1a170ecb9a9357ec2ccc5f615d532b8"
     },
     {
       "path": "website/img/catalogue/p28.jpg",
-      "bytes": 149727,
-      "sha256": "ccf352080d172d22bf98fa8f65a0c521f3979b5e1058ecd2eb9496760fe3d3d9"
+      "bytes": 153763,
+      "sha256": "e46b55fd1ba34142f9802f497a1c8659c88c48f2f7b466a14a432a4fbc9fe77d"
     },
     {
       "path": "website/img/catalogue/p29.jpg",
-      "bytes": 175489,
-      "sha256": "de10345b57dab96f74a744ddab61d7d5d7464c46db4816912c47d6f028fe1436"
+      "bytes": 177215,
+      "sha256": "88a885d788800a8b82813614d2251b4760f4d4442d3b617b4648321020ec1be0"
     },
     {
       "path": "website/img/catalogue/p30.jpg",
-      "bytes": 238890,
-      "sha256": "ae1802426fc562b1b2d4a7e347d87baea0a9c16ed2e41de859758aeb3b4735e3"
+      "bytes": 240751,
+      "sha256": "93150645be343885e43f2014f85365b3ed22f3d9af3a805c642f0170936006d4"
     },
     {
       "path": "website/img/catalogue/p31.jpg",
-      "bytes": 229860,
-      "sha256": "da2909f4dc5eac3b66e2686c3834cf5fd47458f4751fda71ee63a4278731fcf0"
+      "bytes": 230177,
+      "sha256": "c1c678704505ae04bafb09ca761c527f0cadc7d141fc82a139de22ac297fffc9"
     },
     {
       "path": "website/img/catalogue/p32.jpg",
-      "bytes": 181532,
-      "sha256": "e75e8a3c77e0dd6ca3c1f03e6ff5ff54dae437332acd3ce6f4346dd1bdfa29d9"
+      "bytes": 179929,
+      "sha256": "65bb3cbc215a2a36223cc73d477c97e66181ddab4e198245f36e16b5d67bca3d"
     },
     {
       "path": "website/img/catalogue/p33.jpg",
-      "bytes": 245404,
-      "sha256": "fec32c0c59ed504870dafae6865213a22291782730172473b2e43dd03730aa1e"
+      "bytes": 246163,
+      "sha256": "cd8eaa115c9d7843e67f5b352d8b0db43dd5a09aa32fa7263a900bb3880a721f"
     },
     {
       "path": "website/img/catalogue/p34.jpg",
-      "bytes": 50561,
-      "sha256": "18c40441a8fdeca86535b8051a63889bef67301c97adb2e255bd666c7ddf470b"
+      "bytes": 49913,
+      "sha256": "cc1aa3c24d91f6345ff75e37fec3084aac188c27052256f07eeb2908e6199749"
     },
     {
       "path": "website/img/covers/brand-guidelines.jpg",
@@ -1210,8 +1210,8 @@
     },
     {
       "path": "website/services.html",
-      "bytes": 51243,
-      "sha256": "d16ffe8bfcf892779dca9cde81ecf9adbd24dded5bf603791c17b7830a558e83"
+      "bytes": 51292,
+      "sha256": "a92f8241404035f30e383acbed2115934f04e01708615a586b01c74e20670372"
     },
     {
       "path": "website/site-preview.html",

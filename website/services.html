@@ -701,7 +701,7 @@
   var opener = document.getElementById('cb-open'), dlg = document.getElementById('cb');
   if (!opener || !dlg || !dlg.showModal) return;   // no <dialog>: the link opens the PDF instead
 
-  var PAGES = 34, DUR = 560;
+  var PAGES = 34, DUR = 420;
   var book = dlg.querySelector('.cb-book');
   var L = dlg.querySelector('.cb-l'), R = dlg.querySelector('.cb-r');
   var leaf = dlg.querySelector('.cb-leaf');
@@ -709,7 +709,7 @@
   var count = dlg.querySelector('.cb-count');
   var solo = window.matchMedia('(max-width: 760px)');
   var still = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var page = 1, busy = false, queued = 0;
+  var page = 1, busy = false;
 
   function url(n) { return 'img/catalogue/p' + (n < 10 ? '0' : '') + n + '.jpg'; }
   function has(n) { return n >= 1 && n <= PAGES; }
@@ -742,7 +742,10 @@
   }
 
   function turn(d) {
-    if (busy) { queued = d; return; }              // one deep, so fast clicking still feels alive
+    // A click during a turn is dropped, not queued: queueing them made the book
+    // carry on flipping after the reader had stopped clicking, landing somewhere
+    // they never asked for. One click, one turn.
+    if (busy) return;
     var to = page + d * step(), fwd = d > 0;
     if (to < 1 || to > last()) return;
     if (still.matches) { page = to; paint(); return; }   // opt out of the turn, don't shorten it
@@ -771,7 +774,6 @@
           leaf.style.visibility = 'hidden';
           leaf.style.transform = '';
           busy = false;
-          if (queued) { var q = queued; queued = 0; turn(q); }
         };
     });
   }
@@ -807,7 +809,7 @@
 
   opener.addEventListener('click', function (e) {
     e.preventDefault();
-    page = 1; busy = false; queued = 0;
+    page = 1; busy = false;
     leaf.style.visibility = 'hidden';
     paint();
     dlg.showModal();

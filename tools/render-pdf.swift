@@ -40,7 +40,10 @@ for i in 0..<doc.pageCount {
     cg.setFillColor(NSColor.white.cgColor)
     cg.fill(CGRect(x:0,y:0,width:w,height:h))
     cg.scaleBy(x: scale, y: scale)
-    cg.translateBy(x: -rect.origin.x, y: -rect.origin.y)
+    // No translate by the box origin: draw(with:to:) already maps the box to the
+    // context. Every one of these PDFs has a non-zero y origin (7.83 / 8.58), so
+    // compensating again pushed the artwork down and left a white band across
+    // the top of every rendered page.
     page.draw(with: .mediaBox, to: cg)
     NSGraphicsContext.restoreGraphicsState()
     let num = String(format: "%02d", i+1)
