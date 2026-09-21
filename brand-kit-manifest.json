@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "locked": "2026-08-19",
   "owner": "Encik Beku Aircond Sdn Bhd (1561739-D)",
-  "fileCount": 245,
-  "totalBytes": 88370773,
+  "fileCount": 246,
+  "totalBytes": 88392014,
   "entries": [
     {
       "path": ".gitattributes",
@@ -260,13 +260,18 @@
     },
     {
       "path": "code/README.md",
-      "bytes": 4821,
-      "sha256": "38e538304b57052789e267d9c76b805276cdd971c01e5faf29bcce27e9b75439"
+      "bytes": 6240,
+      "sha256": "a1aec273cd81de6ca91f1f6076b1c68e20bb3ec0111d792a4b0b18f589b08c5e"
     },
     {
       "path": "code/email/signature.html",
       "bytes": 4436,
       "sha256": "ef097f410c10460084974c8720d19a268978601d6b139e23bc5df652b837be8b"
+    },
+    {
+      "path": "code/framer/CatalogueFlipbook.tsx",
+      "bytes": 19822,
+      "sha256": "326f42f3f2a1d500b6ebb61a248df778929e1bb73b763cc8cfd0fae1aad07ab2"
     },
     {
       "path": "code/index.ts",

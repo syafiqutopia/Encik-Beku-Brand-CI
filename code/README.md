@@ -28,6 +28,8 @@ code/
 │   └── quotation.html        A4
 ├── email/
 │   └── signature.html        table-based, Outlook-safe
+├── framer/
+│   └── CatalogueFlipbook.tsx the Service Catalogue as a book, for Framer
 └── index.ts                  barrel export
 ```
 
@@ -142,6 +144,33 @@ requirement on Malaysian company correspondence.
 The email signature is deliberately table-based with inline styles and an Arial
 fallback. Outlook on Windows renders with the Word engine and drops flexbox,
 CSS variables and web fonts. Do not modernise it.
+
+---
+
+## Framer
+
+`framer/CatalogueFlipbook.tsx` is the catalogue flip-book from the What we do
+page, packaged as a Framer code component: the Service Catalogue as a book the
+visitor turns a page at a time, a spread on a wide frame and a single page on a
+narrow one.
+
+**To use it:** in Framer, Assets ▸ Code ▸ New code file, paste the file in, then
+drag the component onto the canvas and size the frame. Nothing to install — the
+page turning is [StPageFlip](https://github.com/Nodlik/StPageFlip) 2.0.7 (MIT),
+fetched from a CDN the first time the component runs, so it behaves the same on
+the canvas, in preview and on a published site that is server-rendered first.
+
+Out of the box it reads the catalogue pages from the live site
+(`…/website/img/catalogue/p01.jpg` … `p34.jpg`), so it works as soon as it is
+placed. Point **Base URL** at another folder of pages named the same way, or
+hand it its own list under **Images**, to show a different booklet.
+
+Two things are deliberate, both learned from the website version:
+
+- Every page is its own element with its own image, so a page that has not
+  loaded is blank paper and never the page it is replacing.
+- Only the pages around the one in view are fetched, and the book is rebuilt to
+  fit whenever the frame is resized, keeping the reader on their spread.
 
 ---
 
