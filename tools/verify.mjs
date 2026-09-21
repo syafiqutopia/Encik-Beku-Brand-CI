@@ -290,24 +290,6 @@ section('6 · code/index.ts re-exports resolve');
     : bad(`What we do section(s) with no banner photo: ${missing.join(', ') || 'no tabs found'} — rerun tools/build-heroes.sh`);
 }
 
-/* ── The catalogue flip-book has every page it claims ──────────
-   services.html builds `img/catalogue/pNN.jpg` from a counter, so no src
-   attribute names these files either. A page short is a visitor turning onto
-   blank paper; a page over is a leftover from a longer earlier edition still
-   sitting in the folder. Rebuild them with tools/build-catalogue-pages.sh. */
-{
-  const dir = join(ROOT, 'website/img/catalogue');
-  const n = Number((read('website/services.html').match(/PAGES\s*=\s*(\d+)/) || [])[1]);
-  const want = Array.from({ length: n }, (_, i) => `p${String(i + 1).padStart(2, '0')}.jpg`);
-  const have = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.jpg')) : [];
-  const missing = want.filter((f) => !have.includes(f));
-  const stray = have.filter((f) => !want.includes(f));
-  n && !missing.length && !stray.length
-    ? ok(`all ${n} catalogue pages present`)
-    : bad(`catalogue pages do not match services.html (PAGES = ${n || '?'}): ` +
-          `${missing.length} missing, ${stray.length} stray — rerun tools/build-catalogue-pages.sh`);
-}
-
 /* ── result ────────────────────────────────────────────────── */
 console.log(
   failures === 0

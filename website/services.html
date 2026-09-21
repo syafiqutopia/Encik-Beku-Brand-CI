@@ -94,69 +94,6 @@
   .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
   .sv-note { margin: var(--eb-space-4) 0 0; font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
 
-  /* ── Catalogue viewer ───────────────────────────────────────────
-     Only one leaf is ever in the air, and a turn shows four pages at most:
-     the one being covered, the leaf's two faces, and the one being revealed.
-     So the book is three elements — two page slots and one reusable leaf
-     above them — rather than 34 stacked sheets. Nothing writes a z-index
-     mid-turn and only four images are ever decoded. */
-  .cb {
-    --cb-page: 0.707;                /* 595.5 / 842.25 — the catalogue's page */
-    --cb-cols: 2;
-    --cb-chrome: 8.5rem;             /* the bar above and the controls below */
-    --cb-gut: var(--eb-space-5);
-    /* Mid-turn the leaf's outer edge is a page-width nearer the eye, so it
-       draws about 17% taller than the page. Reserve that or the turn is
-       clipped at the moment it is most visible. */
-    --cb-bulge: 1.17;
-    --cb-h: min(calc((100svh - var(--cb-chrome)) / var(--cb-bulge)),
-                calc((100vw - 2 * var(--cb-gut)) / (var(--cb-cols) * var(--cb-page))),
-                900px);
-    --cb-w: calc(var(--cb-h) * var(--cb-page));
-    width: 100vw; max-width: none; height: 100svh; max-height: none;
-    margin: 0; padding: 0; border: 0;
-    /* The scrim is the dialog itself: ::backdrop does not inherit custom
-       properties everywhere, so a token can resolve to nothing there. */
-    background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
-    color: var(--eb-fg-on-brand); overscroll-behavior: contain;
-  }
-  .cb::backdrop { background: none; }
-  .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
-  .cb-bar, .cb-nav { display: flex; align-items: center; gap: var(--eb-space-3); padding: var(--eb-space-3) var(--eb-space-5); }
-  .cb-bar { border-bottom: 1px solid var(--eb-border-on-brand); }
-  .cb-nav { justify-content: center; border-top: 1px solid var(--eb-border-on-brand); }
-  .cb-title { margin: 0; font-weight: var(--eb-fw-bold); }
-  .cb-count { margin: 0 var(--eb-space-3) 0 auto; font-size: var(--eb-text-sm); color: var(--eb-fg-on-brand-muted); }
-  .cb-x { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: inherit; cursor: pointer; }
-  .cb-x svg { width: 1.25rem; height: 1.25rem; stroke-width: 2; }
-  .cb-stage { display: grid; place-items: center; min-height: 0; padding: 0 var(--cb-gut); }
-  /* Perspective belongs to the book, but the book keeps no 3D context of its
-     own: each child is flattened into it separately, so the turning leaf can
-     never sink into the pages underneath and z-index alone decides the order. */
-  .cb-book {
-    position: relative; perspective: calc(var(--cb-w) * 7);
-    width: calc(var(--cb-cols) * var(--cb-w)); height: var(--cb-h);
-    box-shadow: var(--eb-shadow-lg); cursor: pointer;
-    touch-action: pan-y pinch-zoom;   /* never none: that kills pinch zoom */
-  }
-  .cb-pg { position: absolute; top: 0; width: var(--cb-w); height: var(--cb-h); object-fit: fill; background: var(--eb-bg-1); }
-  .cb-l { left: 0; }
-  .cb-r { left: var(--cb-w); }
-  /* No overflow, opacity, filter or clip here: each of those would compute
-     transform-style back to flat and the leaf would turn into a mirrored
-     rectangle. */
-  .cb-leaf {
-    position: absolute; top: 0; left: var(--cb-w); z-index: 2;
-    width: var(--cb-w); height: var(--cb-h); visibility: hidden;
-    transform-origin: left center; transform-style: preserve-3d;
-  }
-  .cb-leaf.cb-rev { left: 0; transform-origin: right center; }
-  .cb-face {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill;
-    background: var(--eb-bg-1); backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  }
-  .cb-back { transform: rotateY(180deg); }   /* so it reads upright, not mirrored, at -180° */
-
   /* No room for a sidebar beside the table: the menu becomes a swipeable row above the card. */
   @media (max-width: 1024px) {
     .sv-body { grid-template-columns: minmax(0, 1fr); gap: var(--eb-space-3); }
@@ -176,15 +113,6 @@
        and a wrap so they stack instead of overflowing on a narrow phone. */
     .sv-acts { flex: 1 1 100%; flex-wrap: wrap; margin-inline-start: 0; }
     .sv-acts .btn { flex: 1 1 9rem; }
-    /* One page at a time, and the leaf turns away over the whole width. Its
-       back face stays hidden: past 90° the leaf is swinging off the left of a
-       single-page book, and a page sliding away out there reads as a mistake. */
-    .cb { --cb-cols: 1; --cb-chrome: 7.5rem; --cb-gut: var(--eb-space-3); }
-    .cb-r, .cb-back { display: none; }
-    .cb-leaf { left: 0; width: var(--cb-w); }
-    .cb-bar, .cb-nav { padding: var(--eb-space-2) var(--eb-space-3); }
-    .cb-title { display: none; }      /* no room beside the count and controls */
-    .cb-count { margin-inline-start: 0; }
     .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
     .sv-table tbody { padding: 0.5rem 0 0.9rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1)); }
@@ -267,7 +195,7 @@
       <svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-down"/></svg>
     </div>
     <div class="sv-acts">
-      <a class="btn btn-ghost btn-sm" id="cb-open" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" target="_blank" rel="noopener" aria-haspopup="dialog"><span data-i18n="doc.preview.cat">Preview catalogue</span></a>
+      <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" target="_blank" rel="noopener"><span data-i18n="doc.preview.cat">Preview catalogue</span></a>
       <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.cat">Download catalogue</span></a>
     </div>
   </div>
@@ -603,32 +531,6 @@
   </div>
 </footer>
 
-<!-- Outside <main> on purpose: the single-file preview build lifts only <main>,
-     and this viewer cannot work there anyway (it copies no inline script). The
-     Preview control stays an ordinary link to the PDF, so it still works. -->
-<dialog class="cb" id="cb" aria-labelledby="cb-title">
-  <div class="cb-bar">
-    <p class="cb-title" id="cb-title" data-i18n="doc.cat">Encik Beku Service Catalogue</p>
-    <p class="cb-count tnum" aria-live="polite">Cover · 34 pages</p>
-    <a class="btn btn-ghost btn-sm on-blue" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.cat">Download catalogue</span></a>
-    <button type="button" class="cb-x" aria-label="Close catalogue"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
-  </div>
-  <div class="cb-stage">
-    <!-- Photographs of typeset pages: there is no honest alt text for them, so
-         the book is hidden from screen readers. The service table on this page
-         is the same content marked up, and the PDF is one button away. -->
-    <div class="cb-book" aria-hidden="true">
-      <img class="cb-pg cb-l" alt="" decoding="async">
-      <img class="cb-pg cb-r" alt="" decoding="async">
-      <div class="cb-leaf"><img class="cb-face cb-front" alt="" decoding="async"><img class="cb-face cb-back" alt="" decoding="async"></div>
-    </div>
-  </div>
-  <div class="cb-nav">
-    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="-1">Previous</button>
-    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="1">Next</button>
-  </div>
-</dialog>
-
 <script>
 (function () {
   var groups = [].slice.call(document.querySelector('.sv-table').tBodies);
@@ -690,169 +592,6 @@
   type.addEventListener('change', render);
   fillTypes();
   render();
-})();
-
-/* ── Catalogue viewer ─────────────────────────────────────────────
-   Its own IIFE: a fault in the book must not take the table with it.
-   `page` is the page on the RIGHT of the spread, so the book opens and
-   closes the way a real one does — the cover alone on the right, spreads
-   2-3 … 32-33, then page 34 alone on the left. */
-(function () {
-  var opener = document.getElementById('cb-open'), dlg = document.getElementById('cb');
-  if (!opener || !dlg || !dlg.showModal) return;   // no <dialog>: the link opens the PDF instead
-
-  var PAGES = 34, DUR = 420;
-  var book = dlg.querySelector('.cb-book');
-  var L = dlg.querySelector('.cb-l'), R = dlg.querySelector('.cb-r');
-  var leaf = dlg.querySelector('.cb-leaf');
-  var front = dlg.querySelector('.cb-front'), back = dlg.querySelector('.cb-back');
-  var count = dlg.querySelector('.cb-count');
-  var solo = window.matchMedia('(max-width: 760px)');
-  var still = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var page = 1, busy = false;
-
-  function url(n) { return 'img/catalogue/p' + (n < 10 ? '0' : '') + n + '.jpg'; }
-  function has(n) { return n >= 1 && n <= PAGES; }
-  function step() { return solo.matches ? 1 : 2; }
-  // One past the last page is a real state on a spread: it is the back of the
-  // final sheet, which leaves page 34 alone on the left.
-  function last() { return solo.matches ? PAGES : (PAGES % 2 ? PAGES : PAGES + 1); }
-
-  // visibility, not display or hidden: an empty slot has to keep its half of
-  // the book, or the cover would stretch across the whole spread. A page that
-  // has not arrived yet shows as paper: an <img> whose src has changed keeps
-  // painting the OLD picture until the new one decodes, and that is what put a
-  // spread on screen that does not exist in the book - page 12 beside page 11.
-  function put(img, n) {
-    if (!has(n)) { img.style.visibility = 'hidden'; return; }
-    if (img.getAttribute('src') !== url(n)) img.setAttribute('src', url(n));
-    if (img.complete) { img.style.visibility = 'visible'; return; }
-    img.style.visibility = 'hidden';
-    img.onload = function () { img.style.visibility = 'visible'; };
-  }
-
-  // Pages near the spread, kept in a map rather than loaded and forgotten: an
-  // Image nothing holds can be collected mid-download, which cancels the fetch.
-  var held = {};
-  function hold(n) {
-    if (!held[n]) { held[n] = new Image(); held[n].src = url(n); }
-    return held[n];
-  }
-  // Hold the turn until the pages it needs can be drawn - but only briefly. On a
-  // slow line the reader would otherwise click and watch nothing happen; better
-  // to turn on time and let a page arrive as paper and fill in a moment later.
-  function ready(ns, then) {
-    ns = ns.filter(has);
-    var left = ns.length, fired = false;
-    var go = function () { if (!fired) { fired = true; then(); } };
-    if (!left) return go();
-    setTimeout(go, 150);
-    ns.forEach(function (n) {
-      var im = hold(n), done = function () { if (!--left) go(); };
-      if (im.decode) im.decode().then(done, done);
-      else if (im.complete) done();
-      else { im.onload = done; im.onerror = done; }
-    });
-  }
-
-  function paint() {
-    if (!solo.matches && page % 2 === 0) page--;    // a spread always starts on an odd page
-    if (page > last()) page = last();
-    var l = solo.matches ? page : page - 1, r = solo.matches ? 0 : page;
-    put(L, l); put(R, r);
-    count.textContent = solo.matches ? 'Page ' + page + ' of ' + PAGES
-      : !has(l) ? 'Cover · ' + PAGES + ' pages'
-      : !has(r) ? 'Page ' + l + ' of ' + PAGES
-      : 'Pages ' + l + '–' + r + ' of ' + PAGES;
-    dlg.querySelector('[data-step="-1"]').disabled = page - step() < 1;
-    dlg.querySelector('[data-step="1"]').disabled = page + step() > last();
-    // Warm the spread either side - a reader turns back as well - and drop the
-    // rest, so 34 full-page scans never pile up as decoded bitmaps.
-    var keep = {};
-    [l, r, page - step(), page - step() + 1, page + step(), page + step() + 1].forEach(function (n) {
-      if (has(n)) { keep[n] = 1; hold(n); }
-    });
-    for (var k in held) if (!keep[k]) delete held[k];
-  }
-
-  function turn(d) {
-    // A click during a turn is dropped, not queued: queueing them made the book
-    // carry on flipping after the reader had stopped clicking, landing somewhere
-    // they never asked for. One click, one turn.
-    if (busy) return;
-    var to = page + d * step(), fwd = d > 0;
-    if (to < 1 || to > last()) return;
-    if (still.matches) { page = to; paint(); return; }   // opt out of the turn, don't shorten it
-
-    busy = true;
-    // The leaf carries the page it lifts on its front and that sheet's reverse
-    // on its back; the page it uncovers is placed underneath before it moves.
-    var f = solo.matches ? (fwd ? page : to) : (fwd ? page : page - 1);
-    var b = solo.matches ? 0 : (fwd ? to - 1 : to);
-    var reveal = solo.matches ? (fwd ? to : 0) : (fwd ? to : to - 1);
-
-    ready([f, b, reveal], function () {
-    put(front, f); if (!solo.matches) put(back, b);
-    leaf.classList.toggle('cb-rev', !fwd && !solo.matches);
-
-    var from = fwd ? 0 : -180, into = fwd ? -180 : 0;
-    if (!fwd && !solo.matches) { from = 0; into = 180; }   // reverse hinges on the other edge
-    leaf.style.transform = 'rotateY(' + from + 'deg)';
-    leaf.style.visibility = 'visible';
-    requestAnimationFrame(function () {
-      // Only once the leaf is demonstrably covering it: swap in the same frame
-      // and the page underneath flashes for one frame before it is hidden.
-      if (has(reveal)) put(fwd && !solo.matches ? R : L, reveal);
-      leaf.animate([{ transform: 'rotateY(' + from + 'deg)' }, { transform: 'rotateY(' + into + 'deg)' }],
-        { duration: DUR, easing: 'cubic-bezier(.4,0,.2,1)' }).onfinish = function () {
-          page = to;
-          paint();                                  // the slots now match the landed leaf
-          leaf.style.visibility = 'hidden';
-          leaf.style.transform = '';
-          busy = false;
-        };
-    });
-    });
-  }
-
-  // One handler for both: a separate click listener would fire after a swipe
-  // and turn two pages at once.
-  var x0 = null;
-  book.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
-  book.addEventListener('pointercancel', function () { x0 = null; });
-  book.addEventListener('pointerup', function (e) {
-    if (x0 === null) return;
-    var dx = e.clientX - x0, r = book.getBoundingClientRect();
-    x0 = null;
-    if (Math.abs(dx) > 40) turn(dx < 0 ? 1 : -1);
-    else turn(e.clientX < r.left + r.width / 2 ? -1 : 1);
-  });
-
-  dlg.addEventListener('click', function (e) {
-    if (e.target === dlg) return dlg.close();                       // the surround
-    if (e.target.closest('.cb-x')) return dlg.close();
-    var b = e.target.closest('[data-step]');
-    if (b) turn(Number(b.dataset.step));
-  });
-  dlg.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight') turn(1);
-    else if (e.key === 'ArrowLeft') turn(-1);
-    else if (e.key === 'Home') { page = 1; paint(); }
-    else if (e.key === 'End') { page = last(); paint(); }
-    else return;
-    e.preventDefault();
-  });
-  solo.addEventListener('change', paint);          // the spread re-forms around the page in view
-
-  opener.addEventListener('click', function (e) {
-    e.preventDefault();
-    page = 1; busy = false;
-    leaf.style.visibility = 'hidden';
-    paint();
-    dlg.showModal();
-    document.documentElement.style.overflow = 'hidden';   // showModal does not lock the page
-  });
-  dlg.addEventListener('close', function () { document.documentElement.style.overflow = ''; });
 })();
 </script>
 <script src="anim.js?v=mu4zmonw"></script>
