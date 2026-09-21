@@ -94,6 +94,43 @@
   .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
   .sv-note { margin: var(--eb-space-4) 0 0; font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
 
+  /* ── Catalogue viewer ───────────────────────────────────────────
+     The book itself is StPageFlip (page-flip.browser.js, vendored). Every page
+     is its own element with its own <img>, so a page that has not loaded is
+     blank paper - it can never show the page it replaced. This block is only
+     the dialog around the book and the box the book is sized into. */
+  .cb {
+    --cb-page: 0.707;                /* 595.5 / 842.25 - the catalogue's page */
+    --cb-cols: 2;
+    --cb-chrome: 8.5rem;             /* the bar above and the controls below */
+    --cb-gut: var(--eb-space-5);
+    --cb-h: min(calc(100svh - var(--cb-chrome)),
+                calc((100vw - 2 * var(--cb-gut)) / (var(--cb-cols) * var(--cb-page))),
+                900px);
+    --cb-w: calc(var(--cb-h) * var(--cb-page));
+    width: 100vw; max-width: none; height: 100svh; max-height: none;
+    margin: 0; padding: 0; border: 0;
+    /* The scrim is the dialog itself: ::backdrop does not inherit custom
+       properties everywhere, so a token can resolve to nothing there. */
+    background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
+    color: var(--eb-fg-on-brand); overscroll-behavior: contain;
+  }
+  .cb::backdrop { background: none; }
+  .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
+  .cb-bar, .cb-nav { display: flex; align-items: center; gap: var(--eb-space-3); padding: var(--eb-space-3) var(--eb-space-5); }
+  .cb-bar { border-bottom: 1px solid var(--eb-border-on-brand); }
+  .cb-nav { justify-content: center; border-top: 1px solid var(--eb-border-on-brand); }
+  .cb-title { margin: 0; font-weight: var(--eb-fw-bold); }
+  .cb-count { margin: 0 var(--eb-space-3) 0 auto; font-size: var(--eb-text-sm); color: var(--eb-fg-on-brand-muted); }
+  .cb-x { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: inherit; cursor: pointer; }
+  .cb-x svg { width: 1.25rem; height: 1.25rem; stroke-width: 2; }
+  .cb-stage { display: grid; place-items: center; min-height: 0; padding: 0 var(--cb-gut); }
+  /* The library stretches the book to this box: two pages wide on a desktop,
+     and one below 760px, where it drops into its single-page mode. */
+  .cb-book { width: calc(var(--cb-cols) * var(--cb-w)); height: var(--cb-h); }
+  .cb-page { background: var(--eb-bg-1); overflow: hidden; }
+  .cb-page img { display: block; width: 100%; height: 100%; object-fit: fill; }
+
   /* No room for a sidebar beside the table: the menu becomes a swipeable row above the card. */
   @media (max-width: 1024px) {
     .sv-body { grid-template-columns: minmax(0, 1fr); gap: var(--eb-space-3); }
@@ -113,6 +150,10 @@
        and a wrap so they stack instead of overflowing on a narrow phone. */
     .sv-acts { flex: 1 1 100%; flex-wrap: wrap; margin-inline-start: 0; }
     .sv-acts .btn { flex: 1 1 9rem; }
+    .cb { --cb-cols: 1; --cb-chrome: 7.5rem; --cb-gut: var(--eb-space-3); }
+    .cb-bar, .cb-nav { padding: var(--eb-space-2) var(--eb-space-3); }
+    .cb-title { display: none; }      /* no room beside the count and controls */
+    .cb-count { margin-inline-start: 0; }
     .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
     .sv-table tbody { padding: 0.5rem 0 0.9rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1)); }
@@ -531,6 +572,29 @@
   </div>
 </footer>
 
+<!-- Outside <main> on purpose: the single-file preview build lifts only <main>,
+     and this viewer cannot work there anyway (it copies no script). The Preview
+     control stays an ordinary link to the PDF, so it still works there. -->
+<dialog class="cb" id="cb" aria-labelledby="cb-title">
+  <div class="cb-bar">
+    <p class="cb-title" id="cb-title" data-i18n="doc.cat">Encik Beku Service Catalogue</p>
+    <p class="cb-count tnum" aria-live="polite">Cover · 34 pages</p>
+    <a class="btn btn-ghost btn-sm on-blue" href="downloads/Encik-Beku-Service-Catalogue-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.cat">Download catalogue</span></a>
+    <button type="button" class="cb-x" aria-label="Close catalogue"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="cb-stage">
+    <!-- Photographs of typeset pages: there is no honest alt text for them, so
+         the book is hidden from screen readers. The service table on this page
+         is the same content marked up, and the PDF is one button away. -->
+    <div class="cb-book" id="cb-book" aria-hidden="true"></div>
+  </div>
+  <div class="cb-nav">
+    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="-1">Previous</button>
+    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="1">Next</button>
+  </div>
+</dialog>
+
+<script src="page-flip.browser.js?v=2.0.7"></script>
 <script>
 (function () {
   var groups = [].slice.call(document.querySelector('.sv-table').tBodies);
@@ -592,6 +656,94 @@
   type.addEventListener('change', render);
   fillTypes();
   render();
+})();
+
+/* ── Catalogue viewer ─────────────────────────────────────────────
+   StPageFlip does the turning. This only builds the pages, sizes the book,
+   wires the controls and keeps the count. Its own IIFE, so a fault in it
+   cannot take the service table with it. */
+(function () {
+  var opener = document.querySelector('.sv-acts .btn-ghost'), dlg = document.getElementById('cb');
+  if (!opener || !dlg || !dlg.showModal || !window.St) return;   // the link opens the PDF instead
+
+  var PAGES = 34;
+  var book = document.getElementById('cb-book'), count = dlg.querySelector('.cb-count');
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var pages = [], flip = null, flipping = false;
+
+  function url(n) { return 'img/catalogue/p' + (n < 10 ? '0' : '') + n + '.jpg'; }
+  for (var n = 1; n <= PAGES; n++) {
+    var pg = document.createElement('div'), im = document.createElement('img');
+    pg.className = 'cb-page'; im.alt = ''; im.decoding = 'async';
+    pg.appendChild(im); book.appendChild(pg); pages.push(pg);
+  }
+  // Only the pages around the one in view are fetched - a reader who opens the
+  // book and closes it again should not have paid for all 34. Never unset, so
+  // a page seen once stays.
+  function load(i) {
+    for (var k = Math.max(0, i - 3); k <= Math.min(PAGES - 1, i + 4); k++) {
+      var im = pages[k].firstChild;
+      if (!im.getAttribute('src')) im.setAttribute('src', url(k + 1));
+    }
+  }
+  // i is the library's 0-based index. With showCover the cover and the last
+  // page stand alone; every spread in between starts on an odd index.
+  function label(i) {
+    if (flip.getOrientation() === 'portrait') return 'Page ' + (i + 1) + ' of ' + PAGES;
+    if (i === 0) return 'Cover \u00b7 ' + PAGES + ' pages';
+    var l = i % 2 ? i : i - 1, r = l + 1;
+    return r >= PAGES ? 'Page ' + (l + 1) + ' of ' + PAGES
+                      : 'Pages ' + (l + 1) + '\u2013' + (r + 1) + ' of ' + PAGES;
+  }
+  function refresh() {
+    var i = flip.getCurrentPageIndex();
+    load(i); count.textContent = label(i);
+    dlg.querySelector('[data-step="-1"]').disabled = i <= 0;
+    dlg.querySelector('[data-step="1"]').disabled = i >= PAGES - 1;
+  }
+  function build() {
+    flip = new St.PageFlip(book, {
+      width: 595, height: 842, size: 'stretch',
+      minWidth: 300, maxWidth: 900, minHeight: 300, maxHeight: 1273,
+      showCover: true, usePortrait: true, autoSize: false,
+      flippingTime: 600, maxShadowOpacity: 0.35, mobileScrollSupport: false,
+      useMouseEvents: !still.matches         // no drag-to-turn when motion is off
+    });
+    flip.on('flip', refresh);
+    flip.on('changeOrientation', refresh);
+    flip.on('changeState', function (e) { flipping = e.data === 'flipping'; });
+    flip.loadFromHTML(pages);
+    refresh();
+  }
+  // A click while a page is still turning is dropped, not queued: queued clicks
+  // keep the book moving after the reader has stopped. One click, one turn.
+  function turn(d) {
+    if (flipping) return;
+    if (still.matches) { d > 0 ? flip.turnToNextPage() : flip.turnToPrevPage(); refresh(); }
+    else d > 0 ? flip.flipNext() : flip.flipPrev();
+  }
+
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg) return dlg.close();                        // the surround
+    if (e.target.closest('.cb-x')) return dlg.close();
+    var b = e.target.closest('[data-step]');
+    if (b) turn(Number(b.dataset.step));
+  });
+  dlg.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') turn(1);
+    else if (e.key === 'ArrowLeft') turn(-1);
+    else if (e.key === 'Home') { flip.turnToPage(0); refresh(); }
+    else if (e.key === 'End') { flip.turnToPage(PAGES - 1); refresh(); }
+    else return;
+    e.preventDefault();
+  });
+  opener.addEventListener('click', function (e) {
+    e.preventDefault();
+    dlg.showModal();
+    document.documentElement.style.overflow = 'hidden';   // showModal does not lock the page
+    if (!flip) build();                                    // the box has a size only once open
+  });
+  dlg.addEventListener('close', function () { document.documentElement.style.overflow = ''; });
 })();
 </script>
 <script src="anim.js?v=mu4zmonw"></script>

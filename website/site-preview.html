@@ -1772,6 +1772,37 @@ table { max-width: none; }
   .sv-note { margin: var(--eb-space-4) 0 0; font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
 
   
+  .cb {
+    --cb-page: 0.707;                
+    --cb-cols: 2;
+    --cb-chrome: 8.5rem;             
+    --cb-gut: var(--eb-space-5);
+    --cb-h: min(calc(100svh - var(--cb-chrome)),
+                calc((100vw - 2 * var(--cb-gut)) / (var(--cb-cols) * var(--cb-page))),
+                900px);
+    --cb-w: calc(var(--cb-h) * var(--cb-page));
+    width: 100vw; max-width: none; height: 100svh; max-height: none;
+    margin: 0; padding: 0; border: 0;
+    
+    background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
+    color: var(--eb-fg-on-brand); overscroll-behavior: contain;
+  }
+  .cb::backdrop { background: none; }
+  .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
+  .cb-bar, .cb-nav { display: flex; align-items: center; gap: var(--eb-space-3); padding: var(--eb-space-3) var(--eb-space-5); }
+  .cb-bar { border-bottom: 1px solid var(--eb-border-on-brand); }
+  .cb-nav { justify-content: center; border-top: 1px solid var(--eb-border-on-brand); }
+  .cb-title { margin: 0; font-weight: var(--eb-fw-bold); }
+  .cb-count { margin: 0 var(--eb-space-3) 0 auto; font-size: var(--eb-text-sm); color: var(--eb-fg-on-brand-muted); }
+  .cb-x { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: inherit; cursor: pointer; }
+  .cb-x svg { width: 1.25rem; height: 1.25rem; stroke-width: 2; }
+  .cb-stage { display: grid; place-items: center; min-height: 0; padding: 0 var(--cb-gut); }
+  
+  .cb-book { width: calc(var(--cb-cols) * var(--cb-w)); height: var(--cb-h); }
+  .cb-page { background: var(--eb-bg-1); overflow: hidden; }
+  .cb-page img { display: block; width: 100%; height: 100%; object-fit: fill; }
+
+  
   @media (max-width: 1024px) {
     .sv-body { grid-template-columns: minmax(0, 1fr); gap: var(--eb-space-3); }
     .sv-menu { display: none; }
@@ -1789,6 +1820,10 @@ table { max-width: none; }
     
     .sv-acts { flex: 1 1 100%; flex-wrap: wrap; margin-inline-start: 0; }
     .sv-acts .btn { flex: 1 1 9rem; }
+    .cb { --cb-cols: 1; --cb-chrome: 7.5rem; --cb-gut: var(--eb-space-3); }
+    .cb-bar, .cb-nav { padding: var(--eb-space-2) var(--eb-space-3); }
+    .cb-title { display: none; }      
+    .cb-count { margin-inline-start: 0; }
     .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
     .sv-table tbody { padding: 0.5rem 0 0.9rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1)); }
@@ -2871,6 +2906,43 @@ table { max-width: none; }
   .sv-empty { margin: 0; padding: var(--eb-space-6); text-align: center; color: var(--eb-fg-2); }
   .sv-note { margin: var(--eb-space-4) 0 0; font-size: var(--eb-text-sm); color: var(--eb-fg-2); }
 
+  /* &#9472;&#9472; Catalogue viewer &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
+     The book itself is StPageFlip (page-flip.browser.js, vendored). Every page
+     is its own element with its own <img>, so a page that has not loaded is
+     blank paper - it can never show the page it replaced. This block is only
+     the dialog around the book and the box the book is sized into. */
+  .cb {
+    --cb-page: 0.707;                /* 595.5 / 842.25 - the catalogue's page */
+    --cb-cols: 2;
+    --cb-chrome: 8.5rem;             /* the bar above and the controls below */
+    --cb-gut: var(--eb-space-5);
+    --cb-h: min(calc(100svh - var(--cb-chrome)),
+                calc((100vw - 2 * var(--cb-gut)) / (var(--cb-cols) * var(--cb-page))),
+                900px);
+    --cb-w: calc(var(--cb-h) * var(--cb-page));
+    width: 100vw; max-width: none; height: 100svh; max-height: none;
+    margin: 0; padding: 0; border: 0;
+    /* The scrim is the dialog itself: ::backdrop does not inherit custom
+       properties everywhere, so a token can resolve to nothing there. */
+    background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
+    color: var(--eb-fg-on-brand); overscroll-behavior: contain;
+  }
+  .cb::backdrop { background: none; }
+  .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
+  .cb-bar, .cb-nav { display: flex; align-items: center; gap: var(--eb-space-3); padding: var(--eb-space-3) var(--eb-space-5); }
+  .cb-bar { border-bottom: 1px solid var(--eb-border-on-brand); }
+  .cb-nav { justify-content: center; border-top: 1px solid var(--eb-border-on-brand); }
+  .cb-title { margin: 0; font-weight: var(--eb-fw-bold); }
+  .cb-count { margin: 0 var(--eb-space-3) 0 auto; font-size: var(--eb-text-sm); color: var(--eb-fg-on-brand-muted); }
+  .cb-x { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: inherit; cursor: pointer; }
+  .cb-x svg { width: 1.25rem; height: 1.25rem; stroke-width: 2; }
+  .cb-stage { display: grid; place-items: center; min-height: 0; padding: 0 var(--cb-gut); }
+  /* The library stretches the book to this box: two pages wide on a desktop,
+     and one below 760px, where it drops into its single-page mode. */
+  .cb-book { width: calc(var(--cb-cols) * var(--cb-w)); height: var(--cb-h); }
+  .cb-page { background: var(--eb-bg-1); overflow: hidden; }
+  .cb-page img { display: block; width: 100%; height: 100%; object-fit: fill; }
+
   /* No room for a sidebar beside the table: the menu becomes a swipeable row above the card. */
   @media (max-width: 1024px) {
     .sv-body { grid-template-columns: minmax(0, 1fr); gap: var(--eb-space-3); }
@@ -2890,6 +2962,10 @@ table { max-width: none; }
        and a wrap so they stack instead of overflowing on a narrow phone. */
     .sv-acts { flex: 1 1 100%; flex-wrap: wrap; margin-inline-start: 0; }
     .sv-acts .btn { flex: 1 1 9rem; }
+    .cb { --cb-cols: 1; --cb-chrome: 7.5rem; --cb-gut: var(--eb-space-3); }
+    .cb-bar, .cb-nav { padding: var(--eb-space-2) var(--eb-space-3); }
+    .cb-title { display: none; }      /* no room beside the count and controls */
+    .cb-count { margin-inline-start: 0; }
     .sv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
     .sv-table tbody { padding: 0.5rem 0 0.9rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1)); }

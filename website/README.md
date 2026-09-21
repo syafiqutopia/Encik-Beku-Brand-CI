@@ -85,7 +85,9 @@ website/
 │                   preview and download links
 ├── site.css        shared styles — every value a token
 ├── downloads/      the three PDFs, versioned filenames
-├── img/            hero parallax layers, service photos, PDF covers
+├── img/            hero parallax layers, service photos, PDF covers,
+│                   catalogue/ — the 34 booklet pages the preview turns through
+├── page-flip.browser.js  StPageFlip 2.0.7, vendored (MIT — page-flip.LICENSE.txt)
 ├── CLAIMS-TO-VERIFY.md   every factual claim and its source (brief §30)
 └── site-preview.html GENERATED — do not edit
 ```
@@ -125,6 +127,29 @@ catalogue is already photo-compressed and *grew* to 9.1 MB when re-rendered,
 which is why the script compares and keeps the smaller file.
 
 Send print vendors the originals in `_source/`, not these.
+
+### The catalogue preview
+
+**What we do** opens the Service Catalogue as a book you turn a page at a time,
+next to the ordinary download. It cannot embed the PDF — iOS Safari has no
+inline PDF viewer, so an `<iframe>` there is a blank box — so every page ships
+as a JPEG, built by [`tools/build-catalogue-pages.sh`](../tools/build-catalogue-pages.sh)
+from the same `_source` PDF the download is copied from.
+
+The turning is [StPageFlip](https://github.com/Nodlik/StPageFlip) 2.0.7, vendored
+unchanged as `page-flip.browser.js` (MIT, licence alongside). A first, hand-built
+engine was removed after repeated faults; the page code now only builds the 34
+page elements, sizes the box the book stretches into, wires the controls and
+keeps the page count. Two things carried over from what broke:
+
+- Every page is its own element with its own `<img>`, so a page that has not
+  loaded yet is blank paper — it can never show the page it replaced.
+- Only the pages around the one in view are fetched: about 700 KB to open the
+  book, against 3.1 MB for the PDF. Below 760px the library drops to one page.
+
+`tools/verify.mjs` fails if the page images do not match the page count in
+`services.html`: nothing names them in a `src`, so a missing one would
+otherwise surface as blank paper mid-book.
 
 ## Pricing accuracy
 
