@@ -11,3 +11,8 @@ _source/page-renders/
 
 # Generated upload bundle for the static host
 _deploy/
+.vercel
+.env*
+
+# Assembled site tree, produced by tools/build-site.sh
+_site/

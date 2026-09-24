@@ -1,0 +1,17 @@
+# Vercel uploads the project to the builder before running the build, so
+# anything that is neither part of the site nor needed to assemble it is kept
+# out. The repo is ~300MB; the site tree the build produces is ~34MB.
+#
+# tools/ stays - it holds build-site.sh, which is the build.
+_source/
+_deploy/
+_reference/
+Logo-Encik-Beku/
+_site/
+/Hero Image*
+/*.png
+/*.mp4
+/*.mov
+/*.md
+/*.command
+/*.code-workspace
