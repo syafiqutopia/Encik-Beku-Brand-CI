@@ -1,0 +1,5 @@
+{
+  "buildCommand": "bash tools/build-site.sh",
+  "outputDirectory": "_site",
+  "framework": null
+}
