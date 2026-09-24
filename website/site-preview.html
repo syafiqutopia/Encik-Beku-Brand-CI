@@ -1786,6 +1786,8 @@ table { max-width: none; }
     
     background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
     color: var(--eb-fg-on-brand); overscroll-behavior: contain;
+    
+    overflow: hidden;
   }
   .cb::backdrop { background: none; }
   .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
@@ -2926,6 +2928,12 @@ table { max-width: none; }
        properties everywhere, so a token can resolve to nothing there. */
     background: color-mix(in srgb, var(--eb-bg-brand-deep) 94%, transparent);
     color: var(--eb-fg-on-brand); overscroll-behavior: contain;
+    /* A dialog is overflow: auto by UA default, and StPageFlip puts no overflow
+       on .stf__parent - so the flipping page and its shadows, which it positions
+       outside the book's box mid-turn, made the overlay grow a scrollbar on both
+       edges while a page was being dragged. Nothing here is meant to scroll: the
+       grid is auto/1fr/auto over exactly 100svh. */
+    overflow: hidden;
   }
   .cb::backdrop { background: none; }
   .cb[open] { display: grid; grid-template-rows: auto 1fr auto; }
