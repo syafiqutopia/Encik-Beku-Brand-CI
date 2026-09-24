@@ -46,7 +46,7 @@
   .split {
     display: grid; gap: var(--eb-space-7);
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: start;
+    align-items: center;
   }
   .bigtype {
     font-size: clamp(1.75rem, 3.4vw, 2.5rem);
@@ -90,14 +90,15 @@
 
   /* ── 02 · Vision & mission — photo bleeds off the left edge ── */
   .greyband { background: var(--eb-bg-2); padding: 0; }
+  #vision.greyband {
+    background: var(--eb-bg-2) url('img/vision-hero.jpg') left top / 100% auto no-repeat;
+    aspect-ratio: 795 / 300;
+  }
   .vm {
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
+    align-items: center; height: 100%;
   }
-  /* margin:0 kills the UA default on <figure>, which otherwise insets the
-     photo from the edge it is meant to bleed off. */
-  .vm-photo { background: var(--eb-bg-3); margin: 0; }
-  .vm-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; aspect-ratio: 4 / 3; }
+  .vm-acc { grid-column: 2; }
   .vm-acc {
     display: grid; gap: var(--eb-space-4); align-content: center;
     max-width: 34rem; padding: var(--eb-space-7) var(--eb-space-6);
@@ -113,6 +114,7 @@
   .vm-acc .acc-inner p { color: var(--eb-fg-2); font-size: var(--eb-text-sm); padding-top: var(--eb-space-4); margin: 0; }
 
   /* ── 03 · Our locations — gradient panel left, zooming map right ── */
+  #locations.chapter { padding-top: 0; }
   .locations {
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: stretch;
@@ -368,7 +370,7 @@
     /* Stacked, the panel no longer runs to a viewport edge, so the
        right-alignment that kept it on the .wrap grid is dropped. */
     .loc-panel-i, .vm-acc { max-width: none; margin-inline: 0; }
-    .vm-photo img { aspect-ratio: 16 / 9; }
+    .vm-acc { grid-column: 1; }
   }
   @media (max-width: 940px) {
     .chapter[id] { scroll-margin-top: 1.25rem; }
@@ -619,10 +621,6 @@
 <!-- ══ 02 · VISION & MISSION ═════════════════════════════ -->
 <section class="chapter greyband" id="vision">
   <div class="vm">
-    <figure class="vm-photo" data-anim="img">
-      <img src="img/services/aircond.jpg" alt="An Encik Beku technician servicing a wall-mounted air conditioner" width="453" height="640" loading="lazy">
-    </figure>
-
     <!-- Panels ship expanded so the copy is present without JS;
          locations.js collapses them on init. -->
     <div class="vm-acc" data-anim="stagger">
@@ -886,8 +884,6 @@
       <button type="button" class="railnav prev" aria-label="Show previous services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg></button>
       <button type="button" class="railnav next" aria-label="Show next services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
     </div>
-
-    <p class="note">Full scope and current pricing for every service is published in <a href="services.html">What we do</a>.</p>
   </div>
 </section>
 
@@ -921,8 +917,6 @@
         <p>Dedicated sites making service inquiries faster, easier and more accessible.</p>
       </div>
     </div>
-
-    <p class="note">These figures are reproduced from the 2026 Company Profile. Response times, ratings and review counts change — confirm them before this page is published. Tracked in <code>CLAIMS-TO-VERIFY.md</code>.</p>
   </div>
 </section>
 
