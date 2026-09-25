@@ -73,7 +73,11 @@
       'doc.updated': 'Dikemas kini 20 Ogos 2026',
       'foot.tagline': 'Sumber rasmi untuk maklumat syarikat, identiti jenama dan sumber perkhidmatan Encik Beku.',
       'foot.sections': 'Bahagian',
-      'foot.contact': 'Hubungi'
+      'foot.contact': 'Hubungi',
+      'foot.tag1': 'Aircond, renovasi dan pembaikan.',
+      'foot.tag2': 'Satu panggilan, satu pasukan dipercayai.',
+      'foot.news': 'Dapatkan tawaran dan berita terkini, tanpa spam.',
+      'foot.sub': 'Langgan'
     },
     zh: {
       'nav.about': '关于我们',
@@ -128,7 +132,11 @@
       'doc.updated': '更新于 2026 年 8 月 20 日',
       'foot.tagline': 'Encik Beku 公司资讯、品牌识别与服务资源的官方来源。',
       'foot.sections': '板块',
-      'foot.contact': '联络'
+      'foot.contact': '联络',
+      'foot.tag1': '冷气、装修与维修。',
+      'foot.tag2': '一通电话，一支可靠团队。',
+      'foot.news': '获取优惠与最新消息，绝不滥发。',
+      'foot.sub': '订阅'
     }
   };
 

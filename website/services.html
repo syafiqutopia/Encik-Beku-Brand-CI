@@ -18,7 +18,7 @@
      band never flashes its Tech Blue fill between photos. */
   .sv-hero {
     position: relative; display: grid; place-items: center;
-    min-height: clamp(17rem, 30vw, 28rem); padding: var(--eb-space-8) 0; overflow: hidden;
+    min-height: clamp(13rem, 17.5vw, 20rem); padding: var(--eb-space-7) 0; overflow: hidden;
     background: var(--eb-bg-brand) center / cover no-repeat;
   }
   .sv-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -28,42 +28,42 @@
   .sv-hero-title {
     position: relative; z-index: 1;   /* above the tint */
     margin: 0; padding-inline: var(--eb-space-4); text-align: center; text-transform: uppercase;
-    font-size: clamp(2rem, 4.4vw, 3.25rem); font-weight: var(--eb-fw-black); line-height: var(--eb-leading-tight);
+    font-size: clamp(1.75rem, 2.6vw, 2.5rem); font-weight: var(--eb-fw-black); line-height: var(--eb-leading-tight);
     letter-spacing: var(--eb-tracking-tight); color: var(--eb-fg-on-brand);
   }
 
-  /* Full-bleed tint without touching <main>: the site preview merges every page's CSS into one sheet. */
-  .sv-body { padding: var(--eb-space-6) 0 var(--eb-space-9); box-shadow: 0 0 0 100vmax var(--eb-bg-tint); clip-path: inset(0 -100vmax); background: var(--eb-bg-tint); }
-
-  .sv-body { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: var(--eb-space-6); align-items: start; }
+  .sv-body {
+    width: min(62rem, 100% - var(--eb-space-6)); padding: var(--eb-space-6) 0 var(--eb-space-9);
+    display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: var(--eb-space-6); align-items: start;
+  }
 
   .sv-ico { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
   .sv-tabs { display: flex; flex-direction: column; gap: 0.125rem; }
-  .sv-menu { margin: 0 0 var(--eb-space-2); padding-inline: 0.75rem; font-size: var(--eb-text-xs); color: var(--eb-blue-700); }
+  .sv-menu { margin: 0 0 var(--eb-space-2); padding-inline: 0.75rem; font-size: 0.8125rem; color: var(--eb-fg-brand); }
   .sv-tabs button {
-    display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.6rem 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.55rem 0.75rem;
     border: 0; border-radius: var(--eb-radius-sm); background: none;
-    color: var(--eb-fg-1); font: inherit; font-size: var(--eb-text-sm); text-align: left; cursor: pointer;
+    color: var(--eb-fg-1); font: inherit; font-size: 0.8125rem; text-align: left; cursor: pointer;
   }
-  .sv-tabs button:hover { background: color-mix(in srgb, var(--eb-bg-1) 55%, transparent); }
+  .sv-tabs button:hover { background: var(--eb-bg-2); }
   .sv-tabs button[aria-pressed="true"] { background: var(--eb-bg-1); box-shadow: var(--eb-shadow-sm); }
-  .sv-tabs .sv-ico { width: 1.125rem; height: 1.125rem; }
+  .sv-tabs .sv-ico { width: 1rem; height: 1rem; }
 
-  .sv-card { background: var(--eb-bg-1); border-radius: var(--eb-radius-lg); padding: var(--eb-space-5); }
+  .sv-card { min-width: 0; }
 
-  .sv-filters { display: flex; flex-wrap: wrap; gap: var(--eb-space-3) var(--eb-space-4); margin-bottom: var(--eb-space-5); }
+  .sv-filters { display: flex; flex-wrap: wrap; gap: var(--eb-space-3) var(--eb-space-4); margin-bottom: var(--eb-space-6); }
   /* The fields are sized so the whole row still fits beside the two buttons on
      a 1280 laptop. English labels are wider than the Chinese ones, and at the
      old 16rem the buttons dropped to a line of their own in English while
      sitting on the row in Chinese. The search box takes up any slack left. */
   .sv-field { position: relative; display: flex; align-items: center; gap: var(--eb-space-4); min-width: 0; }
-  .sv-field:first-child { flex: 1 1 auto; }          /* the search box takes the slack */
+  .sv-field:first-child { flex: 1 1 12rem; }          /* the search box takes the slack */
   .sv-field:first-child input { width: 100%; }
-  .sv-field label { font-size: var(--eb-text-sm); font-weight: var(--eb-fw-bold); white-space: nowrap; }
+  .sv-field label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .sv-field input, .sv-field select {
     appearance: none; width: 10rem; min-width: 7rem; height: 2.5rem; padding: 0 1rem;
-    border: 1px solid var(--eb-border-1); border-radius: var(--eb-radius-xs);
+    border: 1px solid var(--eb-border-1); border-radius: var(--eb-radius-sm);
     background: var(--eb-bg-1); color: var(--eb-fg-1); font: inherit; font-size: var(--eb-text-sm);
   }
   .sv-field input::placeholder { color: var(--eb-fg-3); }
@@ -73,21 +73,37 @@
     position: absolute; right: 0.9rem; bottom: 1.25rem; width: 1rem; height: 1rem; transform: translateY(50%); pointer-events: none;
     stroke: var(--eb-fg-3); stroke-width: 2.2;
   }
+  .sv-field .sv-search { right: auto; left: 0.9rem; }
+  .sv-field:first-child input { padding-left: 2.5rem; }
+  /* Preview reads as a text link beside the solid Download button. */
+  .sv-acts .btn-ghost { border-color: transparent; font-weight: var(--eb-fw-bold); }
 
   .sv-table { width: 100%; min-width: 0; border-collapse: separate; border-spacing: 0; font-size: var(--eb-text-sm); line-height: 1.35; }
   .sv-table thead th {
-    padding: 0.95rem 1.25rem; background: var(--eb-bg-tint); color: var(--eb-blue-700);
-    font-size: var(--eb-text-sm); font-weight: var(--eb-fw-bold); letter-spacing: normal; text-transform: none; white-space: normal;
+    padding: 0 0.75rem 0.5rem 0; background: none; color: var(--eb-fg-2); text-align: left;
+    font-size: var(--eb-text-xs); font-weight: var(--eb-fw-bold); letter-spacing: var(--eb-tracking-wide); text-transform: uppercase; white-space: normal;
   }
-  .sv-table thead th:first-child { width: 25%; border-radius: var(--eb-radius-sm) 0 0 var(--eb-radius-sm); }
-  .sv-table thead th:nth-child(2) { width: 30%; }
-  .sv-table thead th:last-child { border-radius: 0 var(--eb-radius-sm) var(--eb-radius-sm) 0; }
+  .sv-table thead th:first-child { width: 24%; }
+  .sv-table thead th:nth-child(2) { width: 40%; padding-left: 0.75rem; }
+  .sv-table thead th:last-child { padding-left: 0.75rem; }
   .sv-table tbody tr { background: none; }
   .sv-table tbody tr :is(th, td) {
-    padding: 0.9rem 1.25rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1));
-    text-align: left; vertical-align: middle; white-space: normal; color: var(--eb-fg-1); font-weight: var(--eb-fw-medium);
+    padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--eb-bg-3);
+    text-align: left; vertical-align: top; white-space: normal; color: var(--eb-fg-1); font-weight: var(--eb-fw-medium);
   }
-  .sv-table tbody tr th { font-weight: var(--eb-fw-bold); }
+  @media (min-width: 761px) {
+    .sv-table tbody tr:first-child :is(th, td) { padding-top: 1.1rem; }
+    /* The category cell spans its group, so its bottom edge and the last row's
+       together draw the full-width line between groups. */
+    .sv-table tbody tr:last-child td, .sv-table tbody tr th { border-bottom-color: var(--eb-border-1); padding-bottom: 0.9rem; }
+  }
+  /* A short Tech Blue bar beside the name only, not the whole spanned cell. */
+  .sv-table tbody tr th {
+    padding-left: 1rem; color: var(--eb-tech-blue); font-size: var(--eb-text-base); font-weight: var(--eb-fw-black);
+    background: linear-gradient(var(--eb-tech-blue), var(--eb-tech-blue)) left 0.95rem / 3px 1.6rem no-repeat;
+  }
+  /* The variant sits on its own line under the category name, in place of a dash. */
+  .sv-var { display: block; font-weight: var(--eb-fw-medium); }
 
   .sv-acts { display: flex; align-items: center; gap: var(--eb-space-3); margin-inline-start: auto; }
 
@@ -164,7 +180,7 @@
     .sv-table, .sv-table tbody, .sv-table tr, .sv-table th, .sv-table td { display: block; width: auto; }
     .sv-table tbody { padding: 0.5rem 0 0.9rem; border-bottom: 1px solid color-mix(in srgb, var(--eb-border-1) 70%, var(--eb-bg-1)); }
     .sv-table tbody tr :is(th, td) { padding: 0; border: 0; }
-    .sv-table tbody th { padding: 0.4rem 0 0.2rem; }
+    .sv-table tbody tr th { padding: 0.4rem 0 0.2rem 1rem; background-position: left 0.45rem; }
     .sv-table tbody td:nth-last-child(2) { padding-top: 0.5rem; }
     .sv-table tbody td:last-child { color: var(--eb-fg-2); }
   }
@@ -235,6 +251,7 @@
     <div class="sv-field">
       <label for="sv-q">Service / Product</label>
       <input id="sv-q" type="search" placeholder="Search services…" autocomplete="off">
+      <svg class="sv-ico sv-search" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
     </div>
     <div class="sv-field">
       <label for="sv-type">Service Type</label>
@@ -249,7 +266,7 @@
 
   <table class="sv-table">
     <caption class="sv-vh">Encik Beku services and details</caption>
-    <thead><tr><th scope="col">Service Category</th><th scope="col">Service / Product</th><th scope="col">Details</th></tr></thead>
+    <thead><tr><th scope="col">Category</th><th scope="col">Service / Product</th><th scope="col">Details</th></tr></thead>
     <tbody data-tab="aircond">
       <tr><th scope="rowgroup" rowspan="3">Wall Mounted</th><td>Wall-Mounted Aircond Installation</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP, 3.0 HP • Includes first 6 ft of piping</td></tr>
       <tr><td>Supply + Install Aircond (Inverter)</td><td>1.0 HP, 1.5 HP, 2.0 HP, 2.5 HP • Daikin, Panasonic, Midea</td></tr>
@@ -355,12 +372,12 @@
       <tr><td>Supply + Install Adjustable Bracket</td><td>Up to 60-inch TV</td></tr>
     </tbody>
     <tbody data-tab="cctv">
-      <tr><th scope="rowgroup" rowspan="3">CCTV Package – 2-Way Audio</th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+      <tr><th scope="rowgroup" rowspan="3">CCTV Package <span class="sv-var">2-Way Audio</span></th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
       <tr><td>Supply + Install 8-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
       <tr><td>Supply + Install 16-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
     </tbody>
     <tbody data-tab="cctv">
-      <tr><th scope="rowgroup" rowspan="4">CCTV Package – 1-Way Audio</th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
+      <tr><th scope="rowgroup" rowspan="4">CCTV Package <span class="sv-var">1-Way Audio</span></th><td>Supply + Install 4-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
       <tr><td>Supply + Install 8-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
       <tr><td>Supply + Install 16-Channel CCTV</td><td>1TB Hard Disk • 22" Monitor • Audio • Hikvision / Dahua</td></tr>
       <tr><td>Additional Wiring</td><td>Additional CCTV wiring</td></tr>
@@ -376,12 +393,12 @@
       <tr><td>Supply + Install CW300</td><td>Wireless CCTV + Plug Point • Long-distance installation (&gt;40 ft)</td></tr>
     </tbody>
     <tbody data-tab="waterproofing">
-      <tr><th scope="rowgroup" rowspan="3">Toilet Waterproofing – Standard</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><th scope="rowgroup" rowspan="3">Toilet Waterproofing <span class="sv-var">Standard</span></th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
       <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
       <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
     </tbody>
     <tbody data-tab="waterproofing">
-      <tr><th scope="rowgroup" rowspan="3">Toilet Waterproofing – Premium</th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
+      <tr><th scope="rowgroup" rowspan="3">Toilet Waterproofing <span class="sv-var">Premium</span></th><td>Small Toilet</td><td>60 sq ft and below</td></tr>
       <tr><td>Medium Toilet</td><td>60–100 sq ft</td></tr>
       <tr><td>Large Toilet</td><td>Above 100 sq ft</td></tr>
     </tbody>
@@ -389,7 +406,7 @@
       <tr><th scope="rowgroup" rowspan="1">Base Cabinet</th><td>Base Cabinet + Quartz Stone Table Top</td><td>Standard 6 ft package</td></tr>
     </tbody>
     <tbody data-tab="cabinet">
-      <tr><th scope="rowgroup" rowspan="4">Base Cabinet – Add-On</th><td>Hole Opening + Sink Installation</td><td>Add-on service</td></tr>
+      <tr><th scope="rowgroup" rowspan="4">Base Cabinet <span class="sv-var">Add-On</span></th><td>Hole Opening + Sink Installation</td><td>Add-on service</td></tr>
       <tr><td>Hole Opening + Cooking Stove Installation</td><td>Add-on service</td></tr>
       <tr><td>Kitchen Hood Installation</td><td>Add-on service</td></tr>
       <tr><td>3-Tier Drawer</td><td>Add-on item</td></tr>
@@ -416,7 +433,7 @@
       <tr><td>Ceiling Height Wardrobe</td><td>Additional per-foot run</td></tr>
     </tbody>
     <tbody data-tab="painting">
-      <tr><th scope="rowgroup" rowspan="6">Interior Painting – Walls &amp; Ceiling</th><td>Condo 2–3 Bedrooms</td><td>600–900 sq ft</td></tr>
+      <tr><th scope="rowgroup" rowspan="6">Interior Painting <span class="sv-var">Walls &amp; Ceiling</span></th><td>Condo 2–3 Bedrooms</td><td>600–900 sq ft</td></tr>
       <tr><td>Condo / Single-Storey Home 3–4 Bedrooms</td><td>900–1,500 sq ft</td></tr>
       <tr><td>Large Condo / Double-Storey Home</td><td>1,500–2,200 sq ft</td></tr>
       <tr><td>Master / Medium Bedroom</td><td>Below 400 sq ft</td></tr>
@@ -428,11 +445,11 @@
       <tr><td>Furniture / Item Relocation</td><td>Moving items before painting work</td></tr>
     </tbody>
     <tbody data-tab="painting">
-      <tr><th scope="rowgroup" rowspan="2">Exterior Painting – Single Storey</th><td>High-Pressure Wash Only</td><td>Paint supplied by owner</td></tr>
+      <tr><th scope="rowgroup" rowspan="2">Exterior Painting <span class="sv-var">Single Storey</span></th><td>High-Pressure Wash Only</td><td>Paint supplied by owner</td></tr>
       <tr><td>High-Pressure Wash + Weathershield Paint</td><td>Includes ICI Dulux Weathershield</td></tr>
     </tbody>
     <tbody data-tab="painting">
-      <tr><th scope="rowgroup" rowspan="2">Exterior Painting – Double Storey</th><td>High-Pressure Wash + Scaffolding</td><td>Paint supplied by owner</td></tr>
+      <tr><th scope="rowgroup" rowspan="2">Exterior Painting <span class="sv-var">Double Storey</span></th><td>High-Pressure Wash + Scaffolding</td><td>Paint supplied by owner</td></tr>
       <tr><td>High-Pressure Wash + Weathershield Paint + Scaffolding</td><td>Includes ICI Dulux Weathershield</td></tr>
     </tbody>
     <tbody data-tab="ceiling">
@@ -548,32 +565,39 @@
 </main>
 
 <footer class="site">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <img src="../svg/logo/encik-beku-secondary-dark.svg" alt="Encik Beku">
-        <p style="max-width:38ch">The official source for Encik Beku company information, brand identity and service resources.</p>
-      </div>
-      <div>
-        <h4>Sections</h4>
-        <ul>
-          <li><a href="about.html">Who we are</a></li>
-          <li><a href="brand.html">Our brand</a></li>
-          <li><a href="services.html">What we do</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+60189294628">+6018 929 4628</a></li>
-          <li><a href="mailto:encikbekuaircondmy@gmail.com">encikbekuaircondmy@gmail.com</a></li>
-          <li><a href="https://www.serviceaircond.my">www.serviceaircond.my</a></li>
-        </ul>
-      </div>
+  <div class="wrap foot-top">
+    <div class="foot-brand">
+      <img src="../svg/logo/encik-beku-primary-dark.svg" alt="Encik Beku" width="96" height="96">
+      <p class="foot-tag"><b data-i18n="foot.tag1">Aircond, renovation and repairs.</b><br><span data-i18n="foot.tag2">One call, one trusted team.</span></p>
     </div>
-    <div class="legal">
-      Encik Beku Aircond Sdn Bhd (1561739-D) · 5, Jln Bukit Badong 26/4, Hicom Industrial Estate, 40400 Shah Alam, Selangor<br>
-      Encik Beku Aircond N9 Sdn Bhd (1611987-U) · Encik Beku Aircond Selatan Sdn Bhd (1611766-A)
+    <ul class="foot-links">
+      <li><a href="about.html" data-i18n="nav.about">Who Are We</a></li>
+      <li><a href="brand.html" data-i18n="nav.brand">Our Brand</a></li>
+      <li><a href="services.html" data-i18n="nav.services">What We Do</a></li>
+    </ul>
+    <ul class="foot-contact">
+      <li><a href="tel:+60189294628">(+60)18-929-4628</a></li>
+      <li><a href="mailto:encikbekuaircondmy@gmail.com">encikbekuaircondmy@gmail.com</a></li>
+    </ul>
+    <address class="foot-hq">HQ<br>Encik Beku Aircond Sdn. Bhd.<br>5, Jln Bukit Badong 26/4,<br>Hicom Industrial Estate, 40400<br>Shah Alam, Selangor</address>
+    <form class="foot-news" onsubmit="return false">
+      <label for="foot-email" data-i18n="foot.news">Get unspammy deals and updates.</label>
+      <div class="foot-field">
+        <input id="foot-email" type="email" placeholder="Your Email Address" autocomplete="email">
+        <button type="submit" data-i18n="foot.sub">Subscribe</button>
+      </div>
+    </form>
+  </div>
+  <div class="foot-bar">
+    <div class="wrap">
+      <span>&copy; 2026 Encik Beku. All rights reserved.</span>
+      <nav class="foot-social" aria-label="Social media">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/></svg></a>
+        <a href="https://wa.me/60189294628" aria-label="WhatsApp"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/></svg></a>
+      </nav>
     </div>
   </div>
 </footer>
