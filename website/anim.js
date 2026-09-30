@@ -9,7 +9,7 @@
  *   ease          easeOutQuart = cubic-bezier(.165, .84, .44, 1)
  *   masked lines  y:100%, stagger 0.1s, duration 1.2s, at "center 90%"
  *   block rise    yPercent:111, duration 0.8s, at "top 90%"
- *   image clip    duration ~2s (trimmed to 1.2s here — 2s on a page this
+ *   image clip    duration ~2s (trimmed to 1.6s here — 2s on a page this
  *                 dense reads as sluggish rather than considered)
  *
  * Not reproduced deliberately: Lenis smooth-scroll hijacking (it fights

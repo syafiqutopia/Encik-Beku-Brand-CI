@@ -48,6 +48,13 @@ html::-webkit-scrollbar { display: none; }
   --eb-ease-smooth: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+/* The site runs its UI transitions slower than the brand-kit tokens
+   (140/220/420ms) so hovers, accordions and tabs ease rather than snap.
+   Scoped to no-preference so tokens.css's reduced-motion zeroes still win. */
+@media (prefers-reduced-motion: no-preference) {
+  :root { --eb-dur-fast: 240ms; --eb-dur: 380ms; --eb-dur-slow: 700ms; }
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -1042,16 +1049,16 @@ body.home main { flex: 1; min-height: 0; display: flex; flex-direction: column; 
 .anim-line-i { display: block; will-change: transform; }
 .has-anim [data-anim="lines"] .anim-line-i {
   transform: translateY(110%);
-  transition: transform 1.2s var(--eb-ease-quart);
+  transition: transform 1.6s var(--eb-ease-quart);
 }
 .has-anim [data-anim="lines"].is-in .anim-line-i { transform: none; }
 
-/* Block rise — their yPercent:111 / 0.8s. */
+/* Block rise — their yPercent:111, slowed from 0.8s to 1.1s. */
 .has-anim [data-anim="rise"],
 .has-anim [data-anim="stagger"] > * {
   opacity: 0;
   transform: translateY(2rem);
-  transition: opacity 0.8s var(--eb-ease-quart), transform 0.8s var(--eb-ease-quart);
+  transition: opacity 1.1s var(--eb-ease-quart), transform 1.1s var(--eb-ease-quart);
 }
 .has-anim [data-anim="rise"].is-in,
 .has-anim [data-anim="stagger"].is-in > * {
@@ -1059,10 +1066,10 @@ body.home main { flex: 1; min-height: 0; display: flex; flex-direction: column; 
   transform: none;
 }
 
-/* Image clip reveal — their clip-path wipe, trimmed from 2s to 1.2s. */
+/* Image clip reveal — their clip-path wipe, trimmed from 2s to 1.6s. */
 .has-anim [data-anim="img"] {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s var(--eb-ease-quart);
+  transition: clip-path 1.6s var(--eb-ease-quart);
 }
 .has-anim [data-anim="img"].is-in { clip-path: inset(0 0 0 0); }
 

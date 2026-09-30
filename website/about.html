@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who We Are</title>
 <meta name="description" content="Encik Beku — an established Malaysian air conditioning and technical services company. Company overview, vision and mission, locations, services, service websites and contact details.">
-<link rel="stylesheet" href="../fonts/fonts.css?v=mu4zmonw">
-<link rel="stylesheet" href="../tokens/tokens.css?v=mu4zmonw">
-<link rel="stylesheet" href="site.css?v=mu4zmonw">
+<link rel="stylesheet" href="../fonts/fonts.css?v=muntdk5u">
+<link rel="stylesheet" href="../tokens/tokens.css?v=muntdk5u">
+<link rel="stylesheet" href="site.css?v=muntdk5u">
 <link rel="icon" href="../svg/logo/encik-beku-primary-light.svg">
 <style>
   /* ─────────────────────────────────────────────────────────────
@@ -258,7 +258,7 @@
        closer to the copy beside them. */
     position: absolute; left: -6rem; top: 50%; width: 0; height: 0;
     transform: rotate(var(--rot, 0deg));
-    transition: transform 700ms var(--eb-ease-quart);
+    transition: transform 1000ms var(--eb-ease-quart);
   }
   .wheel-chip {
     position: absolute; left: 0; top: 0;
@@ -274,7 +274,7 @@
     /* Cancels the chip's own angle, that 90deg offset and the ring's, so a
        logo stays upright wherever the arc has carried it. */
     transform: rotate(calc(0deg - var(--a) - 90deg - var(--rot, 0deg)));
-    transition: transform 700ms var(--eb-ease-quart);
+    transition: transform 1000ms var(--eb-ease-quart);
   }
   /* Bounded, not sized. The twelve logos run from 3.2:1 to square, so each is
      asked to fit the box on its own terms rather than being stretched to it. */
@@ -282,7 +282,7 @@
     max-width: var(--logo-w); max-height: var(--logo-h);
     width: auto; height: auto;
     opacity: 0; scale: 0.6;
-    transition: opacity 420ms var(--eb-ease-quart), scale 420ms var(--eb-ease-quart);
+    transition: opacity 600ms var(--eb-ease-quart), scale 600ms var(--eb-ease-quart);
   }
   /* The middle logo is the focus; its neighbours stand back 15%, theirs 25%.
      Anything further round the ring is out of the window entirely. */
@@ -336,7 +336,7 @@
   /* The copy scrolls up into place when the brand changes. The rule does not
      animate, so it reads as a fixed border the text moves behind. */
   .wheel-panel :is(h3, h4, a) {
-    animation: wp-scroll-in 520ms var(--eb-ease-quart) backwards;
+    animation: wp-scroll-in 750ms var(--eb-ease-quart) backwards;
   }
   @keyframes wp-scroll-in { from { opacity: 0; transform: translateY(0.9rem); } }
   .wp-body > *:nth-child(1) { animation-delay: 60ms; }
@@ -451,7 +451,7 @@
     line-height: 1.45; color: var(--eb-fg-on-brand);
     opacity: 0; transition: opacity var(--eb-dur) var(--eb-ease-quart);
   }
-  .svctile.is-open .svcdesc { opacity: 1; transition-delay: 160ms; }
+  .svctile.is-open .svcdesc { opacity: 1; transition-delay: 260ms; }
 
   .railnav, .wheel-nav {
     position: absolute; top: 9rem; z-index: 3;
@@ -1331,7 +1331,7 @@
   select(0);
 })();
 </script>
-<script src="anim.js?v=mu4zmonw"></script>
+<script src="anim.js?v=muntdk5u"></script>
 <script src="i18n.js?v=mt9lnepq"></script>
 <script src="locations.js?v=mt9t4jmd"></script>
 </body>
