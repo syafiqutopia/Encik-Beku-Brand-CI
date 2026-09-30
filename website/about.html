@@ -415,13 +415,14 @@
   }
   .svctile.is-open { box-shadow: var(--eb-shadow-lg); }
 
-  /* The whole card is the control. aria-labelledby keeps its accessible name
+  /* The whole card is a link to the What we do page. aria-labelledby keeps its accessible name
      to the service alone, so the photo's alt and the scope line do not get
-     read out as part of the button. */
+     read out as part of the link. */
   .svchit {
     display: flex; flex-direction: column; width: 100%;
     padding: 0; border: 0; margin: 0; cursor: pointer;
     background: none; font: inherit; color: var(--eb-fg-on-brand); text-align: left;
+    text-decoration: none;
   }
   .svchit:focus-visible { outline: 2px solid var(--eb-ink-white); outline-offset: -5px; }
   .svchit > img {
@@ -775,94 +776,94 @@
     <div class="railwrap" data-anim="rise">
       <div class="rail">
         <article class="svctile is-open">
-          <button type="button" class="svchit" aria-expanded="true" aria-controls="svc-1" aria-labelledby="svcnm-1">
+          <a href="services.html" class="svchit" aria-expanded="true" aria-controls="svc-1" aria-labelledby="svcnm-1">
             <img src="img/services/aircond.jpg" alt="A technician servicing a wall-mounted split air conditioner" width="453" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-1">Air Conditioning Solutions</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-1">Supply, installation, servicing, chemical wash and overhaul.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-2" aria-labelledby="svcnm-2">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-2" aria-labelledby="svcnm-2">
             <img src="img/services/electrical.jpg" alt="Wiring a socket box, hand tools laid out alongside" width="452" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-2">Electrical &amp; Wiring</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-2">Wiring, DB boxes, switches and 24-hour electrician callout.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-3" aria-labelledby="svcnm-3">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-3" aria-labelledby="svcnm-3">
             <img src="img/services/cctv.jpg" alt="A technician mounting a CCTV camera on a wall" width="452" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-3">CCTV Installation</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-3">HIKVision and Dahua supply and installation.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-4" aria-labelledby="svcnm-4">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-4" aria-labelledby="svcnm-4">
             <img src="img/services/plumbing.jpg" alt="A wrench on the trap under a basin" width="452" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-4">Plumbing &amp; Water Pump</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-4">Water heaters, pumps, tanks, leaks and unclogging.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-5" aria-labelledby="svcnm-5">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-5" aria-labelledby="svcnm-5">
             <img src="img/services/cabinet.jpg" alt="Fitting a kitchen wall cabinet" width="453" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-5">Cabinet Installation</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-5">Kitchen cabinets, wardrobes and quartz tops.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-6" aria-labelledby="svcnm-6">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-6" aria-labelledby="svcnm-6">
             <img src="img/services/wall-finishing.jpg" alt="Finishing an interior wall" width="453" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-6">Painting Services</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-6">Interior and exterior house painting.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-7" aria-labelledby="svcnm-7">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-7" aria-labelledby="svcnm-7">
             <img src="img/services/partition.jpg" alt="Carrying plasterboard into a stud-framed room" width="453" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-7">Plaster Ceiling &amp; Partition</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-7">Flat ceiling, L-box, cornice, LED works and partition walls.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-8" aria-labelledby="svcnm-8">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-8" aria-labelledby="svcnm-8">
             <img src="img/services/invisible-grille.jpg" alt="Fitting an invisible grille at a high-rise window" width="453" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-8">Invisible Grille Installation</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-8">Nylon and teflon grilles for cat and baby safety.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-9" aria-labelledby="svcnm-9">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-9" aria-labelledby="svcnm-9">
             <img src="img/services/wall-panel.jpg" alt="Fixing fluted timber panelling to a wall" width="453" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-9">Wall Panel &amp; Decking</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-9">Fluted and marble panels, wainscoting, SPC and vinyl decking.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
         <article class="svctile">
-          <button type="button" class="svchit" aria-expanded="false" aria-controls="svc-10" aria-labelledby="svcnm-10">
+          <a href="services.html" class="svchit" aria-expanded="false" aria-controls="svc-10" aria-labelledby="svcnm-10">
             <img src="img/services/waterproofing.jpg" alt="Applying waterproofing render to an exterior ledge" width="453" height="640" loading="lazy">
             <span class="svcplate">
               <span class="svcname" id="svcnm-10">Epoxy Flakes &amp; Waterproofing</span>
               <span class="svcfoot"><span><span class="svcdesc" id="svc-10">Toilet waterproofing and epoxy flake floors.</span></span></span>
             </span>
-          </button>
+          </a>
         </article>
       </div>
       <button type="button" class="railnav prev" aria-label="Show previous services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg></button>
