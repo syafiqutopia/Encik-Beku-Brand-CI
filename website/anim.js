@@ -78,7 +78,16 @@
   }
 
   document.querySelectorAll('[data-anim="lines"]').forEach(function (el) {
-    if (!splitLines(el)) el.removeAttribute('data-anim');
+    var text = el.textContent;
+    if (!splitLines(el)) { el.removeAttribute('data-anim'); return; }
+    // A paragraph goes back to plain text once its last line lands, so it
+    // reflows on resize like any other paragraph instead of keeping the
+    // line breaks measured at load.
+    if (el.tagName !== 'P') return;
+    var masks = el.querySelectorAll('.anim-line-i');
+    masks[masks.length - 1].addEventListener('transitionend', function () {
+      el.textContent = text;
+    }, { once: true });
   });
 
   // Stagger children of a group, capped so a long list does not crawl.
