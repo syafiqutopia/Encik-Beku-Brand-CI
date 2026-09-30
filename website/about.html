@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who We Are</title>
 <meta name="description" content="Encik Beku — an established Malaysian air conditioning and technical services company. Company overview, vision and mission, locations, services, service websites and contact details.">
-<link rel="stylesheet" href="../fonts/fonts.css?v=muntmzfe">
-<link rel="stylesheet" href="../tokens/tokens.css?v=muntmzfe">
-<link rel="stylesheet" href="site.css?v=muntmzfe">
+<link rel="stylesheet" href="../fonts/fonts.css?v=muntwjrw">
+<link rel="stylesheet" href="../tokens/tokens.css?v=muntwjrw">
+<link rel="stylesheet" href="site.css?v=muntwjrw">
 <link rel="icon" href="../svg/logo/encik-beku-primary-light.svg">
 <style>
   /* ─────────────────────────────────────────────────────────────
@@ -59,6 +59,9 @@
   }
   .bigtype.onbrand { color: var(--eb-fg-on-brand); max-width: 9ch; }
   .split .prose { font-size: var(--eb-text-sm); gap: var(--eb-space-4); }
+  /* Same pair as What we do's catalogue buttons. */
+  .about-acts { display: flex; flex-wrap: wrap; gap: var(--eb-space-3); margin-top: var(--eb-space-2); }
+  .about-acts .btn-ghost { border-color: transparent; font-weight: var(--eb-fw-bold); }
   .sec-head .bigtype { max-width: none; }
   .sec-head .svc-sub { font-size: var(--eb-text-sm); }
 
@@ -617,6 +620,10 @@
     <div class="prose">
       <p data-anim="lines">Encik Beku is an established service company in Malaysia, specializing in air conditioning services with a strong presence across Kuala Lumpur / Shah Alam (HQ), Negeri Sembilan, Johor Bahru, and Penang. The company provides complete aircond solutions, including installation, repair, maintenance, and supply for residential and commercial clients.</p>
       <p data-anim="lines">In addition to air conditioning, Encik Beku also offers various technical and renovation services under dedicated sub-brands, creating a convenient one-stop solution for homes and businesses. Supported by dedicated service websites and digital marketing, Encik Beku continues to grow as a fast, reliable, and affordable service provider in Malaysia.</p>
+      <div class="about-acts" data-anim="rise">
+        <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Company-Profile-2026-v1.0.pdf" target="_blank" rel="noopener" data-flipbook="cp"><span data-i18n="doc.preview.profile">Preview company profile</span></a>
+        <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Company-Profile-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.profile">Download company profile</span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -1143,6 +1150,30 @@
   </div>
 </footer>
 
+<!-- Company Profile viewer (flipbook.js). Outside <main> like What we do's
+     catalogue viewer: the single-file preview build lifts only <main>, and the
+     Preview link stays an ordinary link to the PDF there. -->
+<dialog class="cb" id="cp" aria-labelledby="cp-title" data-dir="img/profile" data-pages="10">
+  <div class="cb-bar">
+    <p class="cb-title" id="cp-title" data-i18n="doc.profile">Encik Beku Company Profile</p>
+    <p class="cb-count tnum" aria-live="polite">Cover · 10 pages</p>
+    <a class="btn btn-ghost btn-sm on-blue" href="downloads/Encik-Beku-Company-Profile-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.profile">Download company profile</span></a>
+    <button type="button" class="cb-x" aria-label="Close company profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="cb-stage">
+    <!-- Photographs of typeset pages, hidden from screen readers; the PDF is
+         one button away. -->
+    <div class="cb-book" aria-hidden="true"></div>
+  </div>
+  <div class="cb-nav">
+    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="-1">Previous</button>
+    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="1">Next</button>
+  </div>
+</dialog>
+
+<script src="page-flip.browser.js?v=2.0.7"></script>
+<script src="flipbook.js?v=muntwjrw"></script>
+
 <script>
 /* Service row — one card open at a time, five to a view. Touch or keyboard
    focus opens a card; a mouse may preview another without losing the pinned
@@ -1331,8 +1362,8 @@
   select(0);
 })();
 </script>
-<script src="anim.js?v=muntmzfe"></script>
-<script src="i18n.js?v=mt9lnepq"></script>
+<script src="anim.js?v=muntwjrw"></script>
+<script src="i18n.js?v=muntwjrw"></script>
 <script src="locations.js?v=mt9t4jmd"></script>
 </body>
 </html>

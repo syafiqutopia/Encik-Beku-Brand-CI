@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const v = Date.now().toString(36);
-const targets = ['site.css', 'anim.js', 'hero.js', 'fonts.css', 'tokens.css'];
+const targets = ['site.css', 'anim.js', 'hero.js', 'flipbook.js', 'i18n.js', 'fonts.css', 'tokens.css'];
 let touched = 0;
 
 for (const f of readdirSync(resolve(ROOT, 'website'))) {
