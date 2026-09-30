@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What We Do</title>
 <meta name="description" content="Encik Beku services and their details — aircond, electrical, CCTV, renovation and waterproofing.">
-<link rel="stylesheet" href="../fonts/fonts.css?v=muntgczb">
-<link rel="stylesheet" href="../tokens/tokens.css?v=muntgczb">
-<link rel="stylesheet" href="site.css?v=muntgczb">
+<link rel="stylesheet" href="../fonts/fonts.css?v=muntmzfe">
+<link rel="stylesheet" href="../tokens/tokens.css?v=muntmzfe">
+<link rel="stylesheet" href="site.css?v=muntmzfe">
 <link rel="icon" href="../svg/logo/encik-beku-primary-light.svg">
 <style>
   .sv-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -226,11 +226,11 @@
 
 <div class="sv-hero">
   <img src="img/services-hero-aircond.jpg" alt="" width="1920" height="960">
-  <p class="sv-hero-title">Aircond</p>
+  <p class="sv-hero-title" data-anim="rise">Aircond</p>
 </div>
 
 <div class="wrap sv-body">
-  <div class="sv-tabs" role="group" aria-labelledby="sv-menu">
+  <div class="sv-tabs" role="group" aria-labelledby="sv-menu" data-anim="stagger">
     <p class="sv-menu" id="sv-menu">Services</p>
     <button type="button" data-tab="aircond" aria-pressed="true"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-aircond"/></svg>Aircond</button>
     <button type="button" data-tab="wiring" aria-pressed="false"><svg class="sv-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#sv-electrical"/></svg>Wiring</button>
@@ -247,7 +247,7 @@
   </div>
 
   <div class="sv-card">
-  <div class="sv-filters">
+  <div class="sv-filters" data-anim="rise">
     <div class="sv-field">
       <label for="sv-q">Service / Product</label>
       <input id="sv-q" type="search" placeholder="Search services…" autocomplete="off">
@@ -264,7 +264,7 @@
     </div>
   </div>
 
-  <table class="sv-table">
+  <table class="sv-table" data-anim="rise">
     <caption class="sv-vh">Encik Beku services and details</caption>
     <thead><tr><th scope="col">Category</th><th scope="col">Service / Product</th><th scope="col">Details</th></tr></thead>
     <tbody data-tab="aircond">
@@ -680,6 +680,9 @@
       heroTitle.textContent = b.textContent.trim();
       fillTypes();
       render();
+      // Ease the new rows in rather than swapping them in one frame.
+      var table = document.querySelector('.sv-table');
+      if (table.animate && !still.matches) table.animate([{ opacity: 0, transform: 'translateY(0.75rem)' }, { opacity: 1, transform: 'none' }], { duration: 500, easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)' });
     });
   });
   q.addEventListener('input', render);
@@ -780,7 +783,7 @@
   dlg.addEventListener('close', function () { document.documentElement.style.overflow = ''; });
 })();
 </script>
-<script src="anim.js?v=muntgczb"></script>
+<script src="anim.js?v=muntmzfe"></script>
 <script src="i18n.js"></script>
 </body>
 </html>
