@@ -59,9 +59,13 @@
   }
   .bigtype.onbrand { color: var(--eb-fg-on-brand); max-width: 9ch; }
   .split .prose { font-size: var(--eb-text-sm); gap: var(--eb-space-4); }
-  /* Same pair as What we do's catalogue buttons. */
-  .about-acts { display: flex; flex-wrap: wrap; gap: var(--eb-space-3); margin-top: var(--eb-space-2); }
+  /* Same pair and place as What we do's catalogue buttons: top right, just
+     under the banner. The section's top padding shrinks to that page's gap. */
+  #about.chapter { padding-top: var(--eb-space-6); }
+  .about-acts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--eb-space-3); margin-bottom: var(--eb-space-6); }
   .about-acts .btn-ghost { border-color: transparent; font-weight: var(--eb-fw-bold); }
+  /* On a phone the pair shares the row, as What we do's does. */
+  @media (max-width: 760px) { .about-acts .btn { flex: 1 1 9rem; } }
   .sec-head .bigtype { max-width: none; }
   .sec-head .svc-sub { font-size: var(--eb-text-sm); }
 
@@ -615,15 +619,15 @@
 
 <!-- ══ 01 · ABOUT ════════════════════════════════════════ -->
 <section class="chapter" id="about">
+  <div class="wrap about-acts" data-anim="rise">
+    <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Company-Profile-2026-v1.0.pdf" target="_blank" rel="noopener" data-flipbook="cp"><span data-i18n="doc.preview.profile">Preview company profile</span></a>
+    <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Company-Profile-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.profile">Download company profile</span></a>
+  </div>
   <div class="wrap split">
     <h2 class="bigtype" data-anim="lines">About Encik Beku</h2>
     <div class="prose">
       <p data-anim="lines">Encik Beku is an established service company in Malaysia, specializing in air conditioning services with a strong presence across Kuala Lumpur / Shah Alam (HQ), Negeri Sembilan, Johor Bahru, and Penang. The company provides complete aircond solutions, including installation, repair, maintenance, and supply for residential and commercial clients.</p>
       <p data-anim="lines">In addition to air conditioning, Encik Beku also offers various technical and renovation services under dedicated sub-brands, creating a convenient one-stop solution for homes and businesses. Supported by dedicated service websites and digital marketing, Encik Beku continues to grow as a fast, reliable, and affordable service provider in Malaysia.</p>
-      <div class="about-acts" data-anim="rise">
-        <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Company-Profile-2026-v1.0.pdf" target="_blank" rel="noopener" data-flipbook="cp"><span data-i18n="doc.preview.profile">Preview company profile</span></a>
-        <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Company-Profile-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg><span data-i18n="doc.download.profile">Download company profile</span></a>
-      </div>
     </div>
   </div>
 </section>
