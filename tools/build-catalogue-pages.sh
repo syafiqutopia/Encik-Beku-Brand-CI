@@ -1,6 +1,6 @@
 #!/bin/bash
-# The flip-book page images: the Service Catalogue (What we do) and the
-# Company Profile (Who we are).
+# The flip-book page images: the Service Catalogue (What we do), the Company
+# Profile (Who we are) and the Brand Guidelines (Our brand).
 #
 # Each booklet ships whole as a PDF to download, but the preview on the page
 # turns through it a page at a time, so every page also ships as a JPEG.
@@ -25,9 +25,11 @@ BIN="$(mktemp -d)/pdfrender"
 swiftc -O -o "$BIN" tools/render-pdf.swift
 mkdir -p "$RAW"
 
-# book <source pdf stem> <output dir>
+# book <source pdf stem> <output dir> [width]
+# The guidelines are A4 LANDSCAPE, drawn about 1.4x wider than a portrait page
+# in the same box, so they get 1200px to stay as sharp.
 book() {
-  local stem=$1 out=$2 i=0
+  local stem=$1 out=$2 width=${3:-850} i=0
   mkdir -p "$out"
   "$BIN" "_source/$stem.pdf" "$RAW" 2.0 >/dev/null
 
@@ -36,7 +38,7 @@ book() {
   rm -f "$out"/p*.jpg
   for f in "$RAW/$stem"-p*.png; do
     i=$((i + 1))
-    sips --resampleWidth 850 -s format jpeg -s formatOptions 70 \
+    sips --resampleWidth "$width" -s format jpeg -s formatOptions 70 \
          "$f" --out "$out/$(printf 'p%02d.jpg' "$i")" >/dev/null
   done
 
@@ -48,3 +50,4 @@ book() {
 printf 'flip-book pages:\n'
 book encik-beku-catalogue-2026        website/img/catalogue
 book encik-beku-company-profile-2026  website/img/profile
+book encik-beku-brand-guidelines-2026 website/img/guidelines 1200

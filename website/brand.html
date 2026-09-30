@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Our Brand</title>
 <meta name="description" content="The Encik Beku brand system — logo story, logo rules, colour palette, typography, tone of voice and the official brand asset library.">
-<link rel="stylesheet" href="../fonts/fonts.css?v=muntwjrw">
-<link rel="stylesheet" href="../tokens/tokens.css?v=muntwjrw">
-<link rel="stylesheet" href="site.css?v=muntwjrw">
+<link rel="stylesheet" href="../fonts/fonts.css?v=munug2hn">
+<link rel="stylesheet" href="../tokens/tokens.css?v=munug2hn">
+<link rel="stylesheet" href="site.css?v=munug2hn">
 <link rel="icon" href="../svg/logo/encik-beku-primary-light.svg">
 <style>
   .brandnav-bar {
@@ -56,6 +56,18 @@
     <div class="eyebrow">Our brand</div>
     <h1 data-anim="lines">The identity behind Encik Beku</h1>
     <p class="lede">The online version of the Encik Beku brand guidelines. Understand the brand, then take the approved assets you need — each one downloads on its own.</p>
+    <article class="dlcard" style="margin-top:var(--eb-space-6)" data-anim="rise">
+      <div class="cover"><img src="img/covers/brand-guidelines.jpg" alt="" width="420" height="296"></div>
+      <div class="body">
+        <h3>Encik Beku Brand Guidelines</h3>
+        <p>Brand overview, logo system, clear space, minimum sizes, misuse, colour system and typography.</p>
+        <div class="specs"><span><b>PDF</b></span><span>22 pages</span><span>English</span><span>3.6 MB</span><span><b>v1.0</b></span><span>Updated 20 August 2026</span></div>
+        <div class="acts">
+          <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Brand-Guidelines-2026-v1.0.pdf" target="_blank" rel="noopener" data-flipbook="bg">Preview PDF</a>
+          <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Brand-Guidelines-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>Download PDF</a>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -388,7 +400,7 @@
         <h4>Design tokens</h4>
         <p class="muted small">The whole palette, type scale, spacing, radii and shadows as ready-to-use code — the same values this site is built from.</p>
         <div class="dl-links" style="margin-top:var(--eb-space-3)">
-          <a href="../tokens/tokens.css?v=muntwjrw" download>tokens.css</a>
+          <a href="../tokens/tokens.css?v=munug2hn" download>tokens.css</a>
           <a href="../code/tokens/tokens.ts" download>tokens.ts</a>
           <a href="../code/tokens/tailwind.preset.ts" download>tailwind.preset.ts</a>
         </div>
@@ -413,18 +425,6 @@
       </div>
     </div>
 
-    <article class="dlcard" style="margin-top:var(--eb-space-5)">
-      <div class="cover"><img src="img/covers/brand-guidelines.jpg" alt="" width="420" height="296"></div>
-      <div class="body">
-        <h3>Encik Beku Brand Guidelines</h3>
-        <p>Brand overview, logo system, clear space, minimum sizes, misuse, colour system and typography.</p>
-        <div class="specs"><span><b>PDF</b></span><span>22 pages</span><span>English</span><span>3.6 MB</span><span><b>v1.0</b></span><span>Updated 20 August 2026</span></div>
-        <div class="acts">
-          <a class="btn btn-ghost btn-sm" href="downloads/Encik-Beku-Brand-Guidelines-2026-v1.0.pdf" target="_blank" rel="noopener">Preview PDF</a>
-          <a class="btn btn-primary btn-sm" href="downloads/Encik-Beku-Brand-Guidelines-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>Download PDF</a>
-        </div>
-      </div>
-    </article>
   </div>
 </section>
 
@@ -468,7 +468,31 @@
   </div>
 </footer>
 
-<script src="anim.js?v=muntwjrw"></script>
-<script src="i18n.js?v=muntwjrw"></script>
+<!-- Brand Guidelines viewer (flipbook.js). A4 landscape, hence data-w/h and
+     --cb-page. Outside <main> like the other viewers: the single-file preview
+     build lifts only <main>, and Preview stays a link to the PDF there. -->
+<dialog class="cb" id="bg" aria-labelledby="bg-title" data-dir="img/guidelines" data-pages="22" data-w="1200" data-h="848" style="--cb-page: 1.415">
+  <div class="cb-bar">
+    <p class="cb-title" id="bg-title">Encik Beku Brand Guidelines</p>
+    <p class="cb-count tnum" aria-live="polite">Cover · 22 pages</p>
+    <a class="btn btn-ghost btn-sm on-blue" href="downloads/Encik-Beku-Brand-Guidelines-2026-v1.0.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>Download PDF</a>
+    <button type="button" class="cb-x" aria-label="Close brand guidelines"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="cb-stage">
+    <!-- Photographs of typeset pages, hidden from screen readers; this page is
+         the same guidelines marked up, and the PDF is one button away. -->
+    <div class="cb-book" aria-hidden="true"></div>
+  </div>
+  <div class="cb-nav">
+    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="-1">Previous</button>
+    <button type="button" class="btn btn-ghost btn-sm on-blue" data-step="1">Next</button>
+  </div>
+</dialog>
+
+<script src="page-flip.browser.js?v=2.0.7"></script>
+<script src="flipbook.js?v=munug2hn"></script>
+
+<script src="anim.js?v=munug2hn"></script>
+<script src="i18n.js?v=munug2hn"></script>
 </body>
 </html>

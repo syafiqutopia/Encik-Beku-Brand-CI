@@ -1,6 +1,8 @@
 /* ── Flip-book viewer ─────────────────────────────────────────────
-   Shared by the Service Catalogue (What we do) and the Company Profile (Who
-   we are). Each book is a <dialog class="cb" data-dir data-pages>; the link
+   Shared by the Service Catalogue (What we do), the Company Profile (Who
+   we are) and the Brand Guidelines (Our brand). Each book is a <dialog
+   class="cb" data-dir data-pages>, plus data-w/data-h for a page that is not
+   A4 portrait (the CSS reads the same ratio from --cb-page); the link
    that opens it carries data-flipbook="<dialog id>" and points at the PDF, so
    without this script or StPageFlip it simply opens the PDF.
 
@@ -15,6 +17,8 @@
 
   function setUp(opener, dlg) {
     var PAGES = Number(dlg.dataset.pages), dir = dlg.dataset.dir;
+    var W = Number(dlg.dataset.w) || 595, H = Number(dlg.dataset.h) || 842;
+    var maxW = W > H ? 1273 : 900;         // the long side tops out at 1273 either way
     var book = dlg.querySelector('.cb-book'), count = dlg.querySelector('.cb-count');
     var still = window.matchMedia('(prefers-reduced-motion: reduce)');
     var pages = [], flip = null, flipping = false;
@@ -51,8 +55,9 @@
     }
     function build() {
       flip = new St.PageFlip(book, {
-        width: 595, height: 842, size: 'stretch',
-        minWidth: 300, maxWidth: 900, minHeight: 300, maxHeight: 1273,
+        width: W, height: H, size: 'stretch',
+        minWidth: 300, maxWidth: maxW, minHeight: Math.round(300 * Math.min(1, H / W)),
+        maxHeight: Math.round(maxW * H / W),
         showCover: true, usePortrait: true, autoSize: false,
         flippingTime: 600, maxShadowOpacity: 0.35, mobileScrollSupport: false,
         useMouseEvents: !still.matches         // no drag-to-turn when motion is off
