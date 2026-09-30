@@ -686,6 +686,10 @@
   type.addEventListener('change', render);
   fillTypes();
   render();
+
+  // services.html#cctv etc. opens on that tab - the Who we are cards link here.
+  var start = tabs.filter(function (b) { return '#' + b.dataset.tab === location.hash; })[0];
+  if (start) start.click();
 })();
 
 /* ── Catalogue viewer ─────────────────────────────────────────────
