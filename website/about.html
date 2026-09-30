@@ -106,11 +106,11 @@
     max-width: 34rem; padding: var(--eb-space-7) var(--eb-space-6);
   }
   .vm-acc h3 {
-    font-size: var(--eb-text-2xl); font-weight: var(--eb-fw-black);
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem); font-weight: var(--eb-fw-black);
     letter-spacing: var(--eb-tracking-tight); text-transform: uppercase;
     color: var(--eb-tech-blue); margin: 0 0 var(--eb-space-3);
   }
-  .vm-acc p { font-weight: var(--eb-fw-medium); color: var(--eb-fg-1); margin: 0; max-width: 46ch; }
+  .vm-acc p { font-size: var(--eb-text-sm); font-weight: var(--eb-fw-medium); color: var(--eb-fg-1); margin: 0; max-width: 46ch; }
 
   /* ── 03 · Our locations — gradient panel left, zooming map right ── */
   #locations.chapter { padding-top: 0; }
@@ -130,7 +130,7 @@
     padding: var(--eb-space-8) var(--eb-space-6);
     display: grid; gap: var(--eb-space-5); align-content: center;
   }
-  .loc-lede { color: var(--eb-fg-on-brand-muted); font-size: var(--eb-text-xs); max-width: 40ch; }
+  .loc-lede { color: var(--eb-fg-on-brand-muted); font-size: var(--eb-text-sm); max-width: 40ch; }
 
   .loclist { display: grid; }
   .loc-head {
@@ -240,9 +240,9 @@
   }
 
   .wheel-title {
-    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
     font-weight: var(--eb-fw-black); text-transform: uppercase;
-    line-height: 1.1; letter-spacing: var(--eb-tracking-tight);
+    line-height: var(--eb-leading-tight); letter-spacing: var(--eb-tracking-tight);
     color: var(--eb-fg-brand);
     max-width: 14ch;   /* holds the break at ONE BRAND, / MANY SOLUTIONS */
   }
@@ -494,9 +494,9 @@
     gap: var(--eb-space-9) var(--eb-space-7);
   }
   .why-title {
-    font-size: clamp(2rem, 4.4vw, 3.25rem);
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
     font-weight: var(--eb-fw-black); text-transform: uppercase;
-    line-height: 1.02; letter-spacing: var(--eb-tracking-tight);
+    line-height: var(--eb-leading-tight); letter-spacing: var(--eb-tracking-tight);
     color: var(--eb-fg-on-brand);
     max-width: 9ch;   /* holds the break at WHY / CHOOSE US */
   }
